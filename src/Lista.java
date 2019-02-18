@@ -9,16 +9,16 @@ public class Lista<T> implements Iterable<T>{
 
     // Clase interna para representar los nodos de nuestras listas.
     private class Nodo{
-	
-	public T elemento;
-	public Nodo siguiente;
-	public Nodo anterior;
-	
-	public Nodo(T elemento){
-	    siguiente=null;
+    
+    public T elemento;
+    public Nodo siguiente;
+    public Nodo anterior;
+    
+    public Nodo(T elemento){
+        siguiente=null;
         anterior=null;
         this.elemento=elemento;
-	}
+    }
     }
 
     // Clase para iterar la lista.
@@ -27,19 +27,21 @@ public class Lista<T> implements Iterable<T>{
     public Nodo actual;
 
     @Override
-	public boolean hasNext(){
-	    if(actual==null){
+    public boolean hasNext(){
+        if(actual==null){
             if(cabeza!=null)
                 return true;
             return false;
         }
         return actual.siguiente!=null;
-	}
-	
+    }
+    
     @Override
-	public T next() throws NoSuchElementException{
+    public T next() throws NoSuchElementException{
         if(actual!=null){
             actual=actual.siguiente;
+            if(actual==null)
+                throw new NoSuchElementException();
             return actual.elemento;
         }
         if(cabeza!=null){
@@ -55,7 +57,7 @@ public class Lista<T> implements Iterable<T>{
     private int longitud;
     
     public Lista(){
-	   longitud=0;
+       longitud=0;
     }
 
     public Lista(T[] arreglo){
@@ -151,25 +153,51 @@ public class Lista<T> implements Iterable<T>{
         }
     }
 
-//    public boolean contiene(T t){
-	// Aquí va su código.
-//  }
+    public boolean contiene(T t){
+        Iterator<T> iterador=this.iterator();
+
+        for(T elemento:this){
+            if(t.equals(elemento))
+                return true;
+        }
+        return false;
+
+    }
 
      public int getLongitud(){
         return longitud;
     }
 
-//    public boolean elimina(T t){
-	// Aquí va su código.
-//    }
+    public boolean elimina(T t){
+        Iterator iterador=this.iterator();
+
+        for(T elemento:this){
+            if(elemento.equals(t)){
+
+            }
+        }
+
+        return false;
+    }
 
     public void limpia(){
         cabeza=null;
     }
 
-//    public T get(int indx){
-	// Aquí va su código.
-//    }
+    public T get(int indx) throws IndexOutOfBoundsException{
+        if(indx<0 || indx>longitud)
+            throw new IndexOutOfBoundsException();
+
+        int contador=0;
+
+        for(T elemento:this){
+            if(contador==indx)
+                return elemento;
+            contador++;
+        }
+        return null;
+
+    }
  
     public void inserta(int indx, T t) throws IndexOutOfBoundsException{
         if(indx<0 || indx>longitud)
@@ -186,7 +214,7 @@ public class Lista<T> implements Iterable<T>{
 
             int contador=1;
 
-            while(contador<indx-1){
+            while(contador<indx){
                 posicion=posicion.siguiente;
                 contador++;
             }
@@ -204,26 +232,26 @@ public class Lista<T> implements Iterable<T>{
     }
 
 //    public Object[] toArray(){
-	// Aquí va su código.
+    // Aquí va su código.
 //    }
 
 //    public Lista<T> reversa(){
-	// Aquí va su código.
+    // Aquí va su código. IDEA IMPORTANTE: Se puede hacer con el método agregaInicio()
 //    }
 
 
 //    public Lista<T> copia(){
-	// Aquí va su código.
+    // Aquí va su código.
 //    }
     
 //    @Override
     //    public String toString(){
-       	// Aquí va su código.
+        // Aquí va su código.
 //    }
 
 //    @Override
 //    public boolean equals(Object o){
-      	// Aquí va su código.
+        // Aquí va su código.
 //    }
     
     @Override
@@ -240,9 +268,19 @@ public class Lista<T> implements Iterable<T>{
 
         System.out.println(milista.getLongitud());
 
-        //System.out.println(milista.getUltimo());
-            System.out.print(iterador.next()+",");
-            System.out.print(iterador.next());
-        System.out.println();
+        milista.agregaInicio(1);
+
+        milista.agregaFinal(2);
+
+        milista.inserta(1,3);
+
+        System.out.println(milista.get(0));
+
+        while(iterador.hasNext())
+            iterador.next();
+
+        for(Integer elemento:milista)
+            System.out.print(elemento+",");
+        //System.out.println();
     }
 }
