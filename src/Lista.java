@@ -24,7 +24,7 @@ public class Lista<T> implements Iterable<T>{
     // Clase para iterar la lista.
     private class Iterador implements Iterator<T>{
 
-    public Nodo actual;
+    private Nodo actual;
 
     @Override
     public boolean hasNext(){
@@ -61,29 +61,7 @@ public class Lista<T> implements Iterable<T>{
     }
 
     public Lista(T[] arreglo){
-        Nodo siguientes=null;
-        Nodo anteriores=null;
 
-        for(int i=0;i<arreglo.length;i++){
-            Nodo nuevo=new Nodo(arreglo[i]);
-            
-            if(i<arreglo.length-1)
-                siguientes=new Nodo(arreglo[i++]);
-
-            if(i==0){
-                cabeza=nuevo;
-                cabeza.siguiente=siguientes;
-            } if(i==arreglo.length-1){
-                ultimo=nuevo;
-                ultimo.anterior=anteriores;
-            }else{
-                nuevo.siguiente=siguientes;
-                nuevo.anterior=anteriores;
-                if(i<arreglo.length-1)
-                    nuevo.siguiente=new Nodo(arreglo[i++]);
-            }
-            anteriores=nuevo;
-        }
     }
     
     public T getPrimero(){
@@ -100,10 +78,9 @@ public class Lista<T> implements Iterable<T>{
         if(longitud!=0){
             eliminado=cabeza.elemento;
             cabeza=cabeza.siguiente;
-            if(cabeza!=null){
+
+            if(cabeza!=null)
                 cabeza.anterior=null;
-                return cabeza.elemento;
-            }
         }
         return eliminado;
     }
@@ -169,11 +146,25 @@ public class Lista<T> implements Iterable<T>{
     }
 
     public boolean elimina(T t){
-        Iterator iterador=this.iterator();
 
-        for(T elemento:this){
-            if(elemento.equals(t)){
+        if(t!=null){
+            Nodo actual=cabeza;
+            int contador=0;
 
+            if(actual.elemento.equals(t)){
+                this.eliminaPrimero();
+                return true;
+            }
+
+            while(contador<longitud){
+                if(actual.elemento.equals(t)){
+                    actual.anterior.siguiente=actual.siguiente;
+                    actual.siguiente=actual.anterior;
+                    longitud--;
+                    return true;
+                }
+                actual=actual.siguiente;
+                contador++;
             }
         }
 
@@ -212,6 +203,11 @@ public class Lista<T> implements Iterable<T>{
                 return;
             }
 
+            if(indx==longitud){
+                this.agregaFinal(t);
+                return;
+            }
+
             int contador=1;
 
             while(contador<indx){
@@ -243,11 +239,28 @@ public class Lista<T> implements Iterable<T>{
 //    public Lista<T> copia(){
     // Aquí va su código.
 //    }
-    
-//    @Override
-    //    public String toString(){
-        // Aquí va su código.
-//    }
+    @Override
+    public String toString(){
+        //Iterator<T> iterador=this.iterator();
+        String lista="";
+
+        if(longitud==0){
+            lista="[]";
+            return lista;
+        }
+
+        lista="[";
+
+        for(T elemento:this){
+            if(elemento==ultimo.elemento){
+                lista+=elemento+"]";
+                continue;
+            }
+            lista+=elemento+", ";
+        }
+
+        return lista;
+    }
 
 //    @Override
 //    public boolean equals(Object o){
@@ -272,15 +285,20 @@ public class Lista<T> implements Iterable<T>{
 
         milista.agregaFinal(2);
 
-        milista.inserta(1,3);
+        milista.agregaFinal(3);
 
-        System.out.println(milista.get(0));
+        milista.inserta(3,9);
 
-        while(iterador.hasNext())
-            iterador.next();
+        milista.inserta(4,2);
 
-        for(Integer elemento:milista)
-            System.out.print(elemento+",");
-        //System.out.println();
+        milista.inserta(5,5);
+
+        milista.inserta(6,8);
+
+        System.out.println(milista.getUltimo());
+
+        System.out.println(milista.elimina(11));
+
+        System.out.println( milista.toString());
     }
 }
