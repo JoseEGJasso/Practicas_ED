@@ -9,11 +9,11 @@ public class Lista<T> implements Iterable<T>{
 
     // Clase interna para representar los nodos de nuestras listas.
     private class Nodo{
-    
+
     public T elemento;
     public Nodo siguiente;
     public Nodo anterior;
-    
+
     public Nodo(T elemento){
         siguiente=null;
         anterior=null;
@@ -35,7 +35,7 @@ public class Lista<T> implements Iterable<T>{
         }
         return actual.siguiente!=null;
     }
-    
+
     @Override
     public T next() throws NoSuchElementException{
         if(actual!=null){
@@ -55,15 +55,26 @@ public class Lista<T> implements Iterable<T>{
     private Nodo cabeza;
     private Nodo ultimo;
     private int longitud;
-    
+
     public Lista(){
        longitud=0;
     }
 
     public Lista(T[] arreglo){
 
+      if(arreglo.length > 0){
+
+
+      for(int i=0; i < arreglo.length; i++){
+
+      this.agregaFinal(arreglo[i]);
+
+       }
+
+     }
+
     }
-    
+
     public T getPrimero(){
         return cabeza.elemento;
     }
@@ -101,7 +112,7 @@ public class Lista<T> implements Iterable<T>{
     }
 
     public void agregaInicio(T t){
-        if(t!=null){            
+        if(t!=null){
             Nodo nuevaCabeza=new Nodo(t);
             if(longitud==0)
                 cabeza=ultimo=nuevaCabeza;
@@ -189,7 +200,7 @@ public class Lista<T> implements Iterable<T>{
         return null;
 
     }
- 
+
     public void inserta(int indx, T t) throws IndexOutOfBoundsException{
         if(indx<0 || indx>longitud)
             throw new IndexOutOfBoundsException();
@@ -214,7 +225,7 @@ public class Lista<T> implements Iterable<T>{
                 posicion=posicion.siguiente;
                 contador++;
             }
-            
+
             nuevoElemento.siguiente=posicion.siguiente;
             nuevoElemento.anterior=posicion;
             posicion.siguiente=nuevoElemento;
@@ -227,9 +238,23 @@ public class Lista<T> implements Iterable<T>{
         longitud++;
     }
 
-//    public Object[] toArray(){
-    // Aquí va su código.
-//    }
+   public Object[] toArray(){
+
+   Object[] listaEnArreglo = new Object[this.getLongitud()];
+
+   int contador=0;
+
+    for(T elemento: this){
+
+    listaEnArreglo[contador] = elemento;
+    contador ++;
+
+     }
+
+    return listaEnArreglo;
+
+
+   }
 
 //    public Lista<T> reversa(){
     // Aquí va su código. IDEA IMPORTANTE: Se puede hacer con el método agregaInicio()
@@ -266,7 +291,7 @@ public class Lista<T> implements Iterable<T>{
 //    public boolean equals(Object o){
         // Aquí va su código.
 //    }
-    
+
     @Override
     public Iterator<T> iterator(){
         return new Iterador();
@@ -275,13 +300,32 @@ public class Lista<T> implements Iterable<T>{
     public static void main(String[] args) {
         Integer[] arreglo= {1,2,3,4,5};
 
+
+
         Lista<Integer> milista=new Lista<Integer>();
 
         Iterator<Integer> iterador=milista.iterator();
 
-        System.out.println(milista.getLongitud());
+        //System.out.println(milista.getLongitud());
 
-        milista.agregaInicio(1);
+        Lista<Integer> arregloLista = new Lista<Integer>(arreglo);
+
+        System.out.println(arregloLista.getPrimero());
+
+        System.out.println(arregloLista.getUltimo());
+
+
+
+        for(Object elemento: arregloLista.toArray()){
+
+          System.out.println(elemento);
+
+        }
+
+
+
+
+        /*milista.agregaInicio(1);
 
         milista.agregaFinal(2);
 
@@ -293,12 +337,12 @@ public class Lista<T> implements Iterable<T>{
 
         milista.inserta(5,5);
 
-        milista.inserta(6,8);
+        milista.inserta(6,8);*/
 
-        System.out.println(milista.getUltimo());
+        //System.out.println(milista.getUltimo());
 
-        System.out.println(milista.elimina(11));
+        //System.out.println(milista.elimina(11));
 
-        System.out.println( milista.toString());
+        //System.out.println( milista.toString());
     }
 }
