@@ -261,9 +261,15 @@ public class Lista<T> implements Iterable<T>{
 //    }
 
 
-//    public Lista<T> copia(){
-    // Aquí va su código.
-//    }
+    public Lista<T> copia(){
+
+    Lista<T> listaCopia = new Lista<>();
+
+    listaCopia = this;
+
+    return listaCopia;
+
+    }
     @Override
     public String toString(){
         //Iterator<T> iterador=this.iterator();
@@ -316,7 +322,7 @@ public class Lista<T> implements Iterable<T>{
 
 
 
-        for(Object elemento: arregloLista.toArray()){
+        for(Integer elemento: arregloLista.copia()){
 
           System.out.println(elemento);
 
