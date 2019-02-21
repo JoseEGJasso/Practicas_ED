@@ -45,9 +45,10 @@ public class Lista<T> implements Iterable<T>{
             return actual.elemento;
         }
         if(cabeza!=null){
-            actual=cabeza;
-            return cabeza.elemento;
+           actual=cabeza;
+           return cabeza.elemento;
         }
+
         throw new NoSuchElementException();
     }
     }
@@ -62,17 +63,11 @@ public class Lista<T> implements Iterable<T>{
 
     public Lista(T[] arreglo){
 
-      if(arreglo.length > 0){
-
-
-      for(int i=0; i < arreglo.length; i++){
-
-      this.agregaFinal(arreglo[i]);
-
-       }
-
-     }
-
+        if(arreglo.length > 0){
+            for(int i=0; i < arreglo.length; i++)
+                this.agregaFinal(arreglo[i]);
+        }
+        longitud=arreglo.length;
     }
 
     public T getPrimero(){
@@ -92,6 +87,8 @@ public class Lista<T> implements Iterable<T>{
 
             if(cabeza!=null)
                 cabeza.anterior=null;
+
+            longitud--;
         }
         return eliminado;
     }
@@ -177,6 +174,7 @@ public class Lista<T> implements Iterable<T>{
                 actual=actual.siguiente;
                 contador++;
             }
+            longitud--;
         }
 
         return false;
@@ -184,6 +182,7 @@ public class Lista<T> implements Iterable<T>{
 
     public void limpia(){
         cabeza=null;
+        longitud=0;
     }
 
     public T get(int indx) throws IndexOutOfBoundsException{
@@ -238,41 +237,43 @@ public class Lista<T> implements Iterable<T>{
         longitud++;
     }
 
-   public Object[] toArray(){
+    public Object[] toArray(){
+        Object[] listaEnArreglo = new Object[this.getLongitud()];
+        int contador=0;
 
-   Object[] listaEnArreglo = new Object[this.getLongitud()];
+        for(T elemento: this){
 
-   int contador=0;
+            listaEnArreglo[contador] = elemento;
+            contador ++;
+        }
 
-    for(T elemento: this){
-
-    listaEnArreglo[contador] = elemento;
-    contador ++;
-
-     }
-
-    return listaEnArreglo;
-
-
+        return listaEnArreglo;
    }
 
-//    public Lista<T> reversa(){
+    public Lista<T> reversa(){
     // Aquí va su código. IDEA IMPORTANTE: Se puede hacer con el método agregaInicio()
-//    }
+        Lista<T> reversaLista=new Lista<T>();
+
+        for(T elemento:this)
+            reversaLista.agregaInicio(elemento);
+
+        return reversaLista;
+    }
 
 
     public Lista<T> copia(){
+        Lista<T> listaCopia = new Lista<>();
 
-    Lista<T> listaCopia = new Lista<>();
+        for(T elemento:this)
+            listaCopia.agregaFinal(elemento);
 
-    listaCopia = this;
-
-    return listaCopia;
+        return listaCopia;
 
     }
+
     @Override
     public String toString(){
-        //Iterator<T> iterador=this.iterator();
+        
         String lista="";
 
         if(longitud==0){
@@ -293,10 +294,30 @@ public class Lista<T> implements Iterable<T>{
         return lista;
     }
 
-//    @Override
-//    public boolean equals(Object o){
-        // Aquí va su código.
-//    }
+    @Override
+    public boolean equals(Object o){
+        boolean estado=false;
+
+        if(o instanceof Lista){
+            Lista comparado=(Lista) o;
+
+            if(comparado.getLongitud()!=this.getLongitud())
+                return estado;
+
+            Nodo actual=cabeza;
+
+            for(Object elemento:comparado){
+                if(elemento.equals(actual.elemento)){
+                    estado=true;
+                    actual=actual.siguiente;
+                    continue;
+                }
+                estado=false;
+                actual=actual.siguiente;
+            }
+        }
+        return estado;
+    }
 
     @Override
     public Iterator<T> iterator(){
@@ -304,7 +325,7 @@ public class Lista<T> implements Iterable<T>{
     }
 
     public static void main(String[] args) {
-        Integer[] arreglo= {1,2,3,4,5};
+        Integer[] arreglo= {1,2,3,4,5,6,7,8,9,10};
 
 
 
@@ -320,35 +341,22 @@ public class Lista<T> implements Iterable<T>{
 
         System.out.println(arregloLista.getUltimo());
 
+        Lista<Integer> arreglokk= arregloLista.copia();
 
 
-        for(Integer elemento: arregloLista.copia()){
+        for(Integer elemento: arreglokk){
 
-          System.out.println(elemento);
+          System.out.print(elemento+",");
 
         }
 
+        System.out.println(arreglokk.getPrimero());
 
+        System.out.println(arreglokk.equals(arregloLista));
 
+        Object objeto="hola";
+        String hola="hola";
 
-        /*milista.agregaInicio(1);
-
-        milista.agregaFinal(2);
-
-        milista.agregaFinal(3);
-
-        milista.inserta(3,9);
-
-        milista.inserta(4,2);
-
-        milista.inserta(5,5);
-
-        milista.inserta(6,8);*/
-
-        //System.out.println(milista.getUltimo());
-
-        //System.out.println(milista.elimina(11));
-
-        //System.out.println( milista.toString());
+        System.out.println(objeto.equals(hola));
     }
 }
