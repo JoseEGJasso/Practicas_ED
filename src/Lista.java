@@ -18,21 +18,21 @@ import java.util.NoSuchElementException;
     */
     private class Nodo{
 
-    public T elemento;
-    public Nodo siguiente;
-    public Nodo anterior;
+        public T elemento;
+        public Nodo siguiente;
+        public Nodo anterior;
 
 
-   /**
-    * Constructor de Nodo.
-    * @param elemento
-    *
-    */
-    public Nodo(T elemento){
-        siguiente=null;
-        anterior=null;
-        this.elemento=elemento;
-     }
+       /**
+        * Constructor de Nodo.
+        * @param elemento
+        *
+        */
+        public Nodo(T elemento){
+            siguiente=null;
+            anterior=null;
+            this.elemento=elemento;
+        }
     }
 
 
@@ -44,40 +44,41 @@ import java.util.NoSuchElementException;
     */
     private class Iterador implements Iterator<T>{
 
-    private Nodo actual;
+        private Nodo actual;
 
-   /**
-    * Implementacion del método hasNext.
-    * @return boolean
-    */
-    @Override
-    public boolean hasNext(){
-        if(actual==null){
-            if(cabeza!=null)
-                return true;
-            return false;
+       /**
+        * Implementacion del método hasNext.
+        * @return boolean
+        */
+        @Override
+        public boolean hasNext(){
+            if(actual==null){
+                if(cabeza!=null)
+                    return true;
+                return false;
+            }
+            return actual.siguiente!=null;
         }
-        return actual.siguiente!=null;
+       /**
+        * Implementacion del método next.
+        * @return elemento
+        *
+        */
+        @Override
+        public T next() throws NoSuchElementException{
+            if(actual!=null){
+                actual=actual.siguiente;
+                if(actual==null)
+                    throw new NoSuchElementException();
+                return actual.elemento;
+            }
+            if(cabeza!=null){
+                actual=cabeza;
+                return cabeza.elemento;
+            }
+            throw new NoSuchElementException();
+        }
     }
-   /**
-    * Implementacion del método next.
-    * @return elemento
-    *
-    */
-    @Override
-    public T next() throws NoSuchElementException{
-        if(actual!=null){
-            actual=actual.siguiente;
-            if(actual==null)
-                throw new NoSuchElementException();
-            return actual.elemento;
-        }
-        if(cabeza!=null){
-            actual=cabeza;
-            return cabeza.elemento;
-        }
-        throw new NoSuchElementException();
-     }
 
 
     private Nodo cabeza;
@@ -86,7 +87,6 @@ import java.util.NoSuchElementException;
 
    /**
     * Constructor de una lista vacía.
-    *
     *
     */
     public Lista(){
@@ -100,16 +100,10 @@ import java.util.NoSuchElementException;
     */
     public Lista(T[] arreglo){
 
-      if(arreglo.length > 0){
-
-
-      for(int i=0; i < arreglo.length; i++){
-
-      this.agregaFinal(arreglo[i]);
-
-       }
-
-     }
+        if(arreglo.length > 0){
+            for(int i=0; i < arreglo.length; i++)
+                this.agregaFinal(arreglo[i]);
+        }
 
     }
    /**
@@ -345,22 +339,17 @@ import java.util.NoSuchElementException;
    * @return listaEnArreglo
    *
    */
-   public Object[] toArray(){
+    public Object[] toArray(){
+        Object[] listaEnArreglo = new Object[this.getLongitud()];
 
-   Object[] listaEnArreglo = new Object[this.getLongitud()];
+        int contador=0;
 
-   int contador=0;
+        for(T elemento: this){
+            listaEnArreglo[contador] = elemento;
+            contador ++;
+        }
 
-    for(T elemento: this){
-
-    listaEnArreglo[contador] = elemento;
-    contador ++;
-
-     }
-
-    return listaEnArreglo;
-
-
+        return listaEnArreglo;
    }
 
    /**
@@ -375,7 +364,7 @@ import java.util.NoSuchElementException;
           for(T elemento:this)
               reversaLista.agregaInicio(elemento);
 
-     return reversaLista;
+    return reversaLista;
     }
 
    /**
@@ -385,13 +374,12 @@ import java.util.NoSuchElementException;
     */
     public Lista<T> copia(){
 
-    Lista<T> listaCopia = new Lista<>();
+        Lista<T> listaCopia = new Lista<>();
 
-    for(T elemento:this)
-        listaCopia.agregaFinal(elemento);
+        for(T elemento:this)
+            listaCopia.agregaFinal(elemento);
 
-    return listaCopia;
-
+        return listaCopia;
     }
 
    /**
@@ -416,6 +404,7 @@ import java.util.NoSuchElementException;
                 lista+=elemento+"]";
                 continue;
             }
+
             lista+=elemento+", ";
         }
 
@@ -446,11 +435,11 @@ import java.util.NoSuchElementException;
                       estado=true;
                       actual=actual.siguiente;
                       continue;
-                  }
-                  estado=false;
-                  actual=actual.siguiente;
-              }
-          }
+                }
+                estado=false;
+                actual=actual.siguiente;
+            }
+        }
     return estado;
 
     }
@@ -459,32 +448,4 @@ import java.util.NoSuchElementException;
     public Iterator<T> iterator(){
         return new Iterador();
     }
-
-    public static void main(String[] args) {
-        Integer[] arreglo= {1,2,3,4,5};
-
-
-
-        Lista<Integer> milista=new Lista<Integer>();
-
-        Iterator<Integer> iterador=milista.iterator();
-
-
-
-        Lista<Integer> arregloLista = new Lista<Integer>(arreglo);
-
-        System.out.println(arregloLista.getPrimero());
-
-        System.out.println(arregloLista.getUltimo());
-
-
-
-        for(Integer elemento: arregloLista.copia()){
-
-          System.out.println(elemento);
-
-        }
-    }
-  }
-
- }
+}
