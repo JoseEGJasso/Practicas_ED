@@ -103,6 +103,7 @@ import java.util.NoSuchElementException;
         if(arreglo.length > 0){
             for(int i=0; i < arreglo.length; i++)
                 this.agregaFinal(arreglo[i]);
+            longitud=arreglo.length;
         }
 
     }
@@ -137,6 +138,7 @@ import java.util.NoSuchElementException;
 
             if(cabeza!=null)
                 cabeza.anterior=null;
+            longitud--;
         }
         return eliminado;
     }
@@ -447,5 +449,16 @@ import java.util.NoSuchElementException;
     @Override
     public Iterator<T> iterator(){
         return new Iterador();
+    }
+
+    public static void main(String[] args) {
+        Integer[] arreglo={1,2,3,4,5,6,7,8,9,10};
+        Lista<Integer> lista =new Lista<>(arreglo);
+
+        //lista.eliminaPrimero();
+        lista.elimina(0);
+        lista.eliminaPrimero();
+        lista.eliminaUltimo();
+        System.out.print(lista.getLongitud());
     }
 }
