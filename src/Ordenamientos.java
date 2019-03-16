@@ -1,3 +1,4 @@
+import java.util.Iterator;
 /**
  * Clase con varios métodos para ordenar arreglos y listas.
  */
@@ -40,26 +41,78 @@ public class Ordenamientos{
     //regresa una lista
     public static <T extends Comparable<T>> Lista<T> mergeSort(Lista<T> l){
 
-        Lista<T> lista1=new Lista<>();
-        Lista<T> lista2=new Lista<>();
+      Lista<T> l1 = new Lista<T>();
+      Lista<T> l2 = new Lista<T>();
 
-        if(l.getLongitud()==0 || l.getLongitud()==1)
-            return l.copia();
+      if(l.getLongitud() == 0 || l.getLongitud() == 1)
+           return l.copia();
 
-        for(int i=0;i<(l.getLongitud()-1)/2;i++){
-            lista1.agregaFinal(l.get(i));
-        }
 
-        for(int i=((l.getLongitud()-1)/2)+1;i<l.getLongitud();i++){
-            lista2.agregaFinal(l.get(i));
-        }
+     for(int i=0;i<l.getLongitud()/2;i++){
+        l1.agregaFinal(l.get(i));
+      }
 
-        lista1=mergeSort(lista1);
-        lista2=mergeSort(lista2);
-        //mezcla(lista1,lista2);
 
-        return l;
+      for(int j=l.getLongitud()/2;j<l.getLongitud();j++){
+        l2.agregaFinal(l.get(j));
+      }
+
+      l1 = mergeSort(l1);
+      l2 = mergeSort(l2);
+
+      return merge(l1,l2);
     }
+
+    private static <T extends Comparable<T>> Lista<T> merge(Lista<T> l,Lista<T> L){
+
+    Lista<T> listaAuxiliar = new Lista<T>();
+
+    Iterator<T> iter1 = l.iterator();
+    Iterator<T> iter2 = L.iterator();
+
+    T aux1 = null;
+    T aux2 = null;
+
+
+    while(iter1.hasNext() && iter2.hasNext()){
+
+      if(aux1 == null)
+       aux1=iter1.next();
+      if(aux2 == null)
+       aux2=iter2.next();
+
+      if(aux1.compareTo(aux2) <= 0){
+        listaAuxiliar.agregaFinal(aux1);
+        aux1 = null;
+       }
+      else{
+        listaAuxiliar.agregaFinal(aux2);
+        aux2 =null;
+       }
+
+    }
+
+   if(!iter1.hasNext()){
+     listaAuxiliar.agregaFinal(aux2);
+   }
+   if(!iter2.hasNext()){
+     listaAuxiliar.agregaFinal(aux1);
+   }
+
+   while(iter1.hasNext()){
+
+     aux1=iter1.next();
+     listaAuxiliar.agregaFinal(aux1);
+    }
+
+    while(iter2.hasNext()){
+
+     aux2=iter2.next();
+     listaAuxiliar.agregaFinal(aux2);
+    }
+
+    return listaAuxiliar;
+   }
 
     public static <T extends Comparable<T>> int busquedaBinaria(T[] a, T elemento){
         return busquedaBinaria(a,0,a.length,elemento);
@@ -80,10 +133,10 @@ public class Ordenamientos{
         }
         return -1;
     }
-    
+
     public static <T extends Comparable<T>> void bubbleSort(T[] a){
     }
-    
+
     public static <T extends Comparable<T>> void selectionSort(T[] a){
         int min=0;
         T aux=null;
@@ -100,9 +153,9 @@ public class Ordenamientos{
             a[min]=a[j];
             a[j]=aux;
 
-        }   
+        }
     }
-        
+
     public static void main(String args[]){
         Integer[] arreglo={6,1,5,10,9,2,2,2,8,7};
 
@@ -113,5 +166,5 @@ public class Ordenamientos{
        // }
 
         System.out.println(Ordenamientos.busquedaBinaria(arreglo,7));
-    }    
+    }
 }

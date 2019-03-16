@@ -7,19 +7,19 @@ import java.util.Iterator;
 public class Pila<T> implements Iterable<T>{
 
     private Lista<T> pila;
-    
 
-    public Pila(){   
+
+    public Pila(){
         pila = new Lista<>();
-      
+
     }
-    
+
     public Pila(Lista<T> l){
-	 
+
         pila = new Lista<>();
 
         for(int i=0; i<l.getLongtud();i++)
-            pila.agregaPrimero(l.get(i));    
+            pila.agregaPrimero(l.get(i));
 
     }
 
@@ -32,12 +32,12 @@ public class Pila<T> implements Iterable<T>{
         return pila.esVacia();
     }
 
-    public T mira() throw EmptyStackException{
+    public T mira(){
 
         if(!pila.esVacia())
             return pila.getPrimero();
         throw new EmptyStackException();
-	
+
     }
 
     public T saca(){
