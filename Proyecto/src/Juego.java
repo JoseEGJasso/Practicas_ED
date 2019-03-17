@@ -68,16 +68,15 @@ public class Juego{
 
 	}
 
-	public boolean matar(String nombre){
+	public boolean lobosAsesinan(String nombre){
 
 		 for(Personajes personaje: registro){
        if(personaje.getNombre() == nombre){
          if(!personaje.estaVivo() || personaje.estaProtegido())
            break;
          if(personaje.estaVivo() && !personaje.estaProtegido()){
-           personaje.cambiaEstado(false);//Mata al personaje
-           muerto=personaje.getNombre();
-           return true; //Es decir que si lo mató
+           personaje.cambiaEstado(false);//Matron al personaje
+					 return true; //Es decir que si lo mató
            }
         }
      }
@@ -102,26 +101,50 @@ public class Juego{
     return false;
 	}
 
-	public String verPersonaje(String nombre,boolean estado){
-    return "a";
+	public String verPersonaje(String nombre){
+
+		for(Personajes personaje: registro){
+			if(!personaje.estaVivo()){
+				break;
+			}
+			else{
+				if(personaje.getNombre() == nombre)
+					return personaje.getNombre();
+			}
+
+		}
+    return "NOT FOUND CHARACTER";
 	}
 
-	/*El método recibe el estado del cazador
-    Si el cazador está muerto, entonces decide matar a
-    alguien, es decir llama a matar */
- 	public boolean muerteCazador(String nombreDeObjetivo){
+	/*
+     Este método únicamente revisa si el cazador ha muerto
+		 de ser así , disparará el método objetivoCazador
+	 */
+ 	public boolean muerteCazador(){
 
-     for(Personajes personaje: registro){
-       if(personaje.getNombre() == "CAZADOR"){
-         if(!personaje.estaVivo()){
-           return matar(nombreDeObjetivo); //Lo mató o no lo mató
-         }
-       }
-     }
+			 for(Personajes personaje: registro){
+				 if(personaje.getPersonaje() == "Cazador" && !personaje.estaVivo())
+				 return true;
+			 }
 
-     return false;//No lo mató
-
+		return false;
  	}
+  //Básicamente este método recibe a muerteCazador como booleano
+	public boolean objetivoCazador(boolean cazadorMuerto, String objetivo){
+
+			 for(Personajes personaje: registro){
+				 if(personaje.getNombre() == objetivo){
+					 if(!personaje.estaVivo()){
+						 break;
+					 }else{
+						 personaje.cambiaEstado(false);
+						 return true;//Lo mató
+					 }
+				 }
+			 }
+
+		return false;//Es decir que ya estaba muerto
+	}
 
 	/* Este método es una variante de matar pero utilizada en el día, es decir
     que únicamente se salva de que lo linchen el TONTO_DE_LA_ALDEA;
@@ -140,6 +163,7 @@ public class Juego{
         }
         else{
           personaje.cambiaEstado(false);//Es decir mata al personaje
+					return true;//
         }
       }
     }
@@ -163,14 +187,78 @@ public class Juego{
 	}
 
 	public String determinarGanador(Lista<Personajes> vivos){
-    return "xDxdXDdX";
+
+   	int contAldea=0;
+		int contLobos=0;
+		int contFlautista=0;
+
+
+		for(Personajes personaje: vivos){
+			//Es posible que sea un poco redundante verificar que un personaje está
+			//vivo en una lista de vivos, pero es sólo para depurar cualquier error
+			if(!personaje.estaVivo())
+				break;
+
+			if(personaje.getTipo() == TipoDePersonaje.ALDEANOS)
+				contAldea++;
+			if(personaje.getTipo() == TipoDePersonaje.LOBOS)
+				contLobos++;
+
+			//Esta verificación de que el flautista siga con vida es por que
+			//puede llegar el caso en el que el contador aumente y el flautista
+			//esté muerto.Por lo que podría llegar a ganar el Flautista estando
+			//muerto.
+			if(personaje.getPersonaje() == "Flautista" && !personaje.estaVivo())
+				break;
+			if(personaje.estaEncantado())
+				contFlautista++;
+		}
+
+
+		// La condición del contador del flautista, es decir el -2
+		// es contando al mismo flautista y a cualquier otro personaje
+		if(contLobos == 0 && contFlautista<vivos.getLongitud()-2)
+			return "¡GANAN LOS ALDEANOS!";
+		if(contAldea == 0 && contFlautista<vivos.getLongitud()-2)
+		  return "¡GANA LA JAURÍA DE LOBOS!";
+		if(contFlautista==vivos.getLongitud()-1)
+			return "¡EL FLAUTISTA LO HA HECHO DE NUEVO!";
+
+
+		return "xDxdXDdX";
+
 	}
 
-	public void usarPosicionVenenosa(String nombre){
+	public boolean usarPocionVenenosa(String nombreDeObjetivo){
 
+		for(Personajes personaje: registro){
+			if(personaje.getNombre() == nombreDeObjetivo){
+				if(!personaje.estaVivo()){
+					break;
+				}else{
+				 	personaje.cambiaEstado(false);
+					return true;//Lo acaba de matar la bruja
+				}
+			}
+		}
+
+		return false; //Es decir ya está bien frío el compa
 	}
 
-	public void usarPosicionResurreccíon(String nombre){
+	public boolean usarPocionResurreccíon(String nombre){
+
+		for(Personajes personaje:registro){
+			if(personaje.getNombre() == nombre){
+				if(personaje.estaVivo()){
+					break;
+				}else{
+					personaje.cambiaEstado(true);
+					return true; //Revivió al personaje
+				}
+			}
+		}
+
+		return false;//No lo revivie
 
 	}
   /**
