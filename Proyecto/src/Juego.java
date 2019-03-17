@@ -245,7 +245,7 @@ public class Juego{
 		return false; //Es decir ya está bien frío el compa
 	}
 
-	public boolean usarPocionResurreccíon(String nombre){
+	public boolean usarPocionResurreccion(String nombre){
 
 		for(Personajes personaje:registro){
 			if(personaje.getNombre() == nombre){
