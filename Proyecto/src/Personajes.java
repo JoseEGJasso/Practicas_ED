@@ -16,13 +16,36 @@ public class Personajes{
 	private boolean encantado=false;
 	private boolean protegido=false;
 
-	public Personajes(String nombre){
+	public Personajes(String nombre,String personajeAsignar){
 		this.nombre=nombre;
+		setPersonaje(personajeAsignar);
 	}
 
 	public String getNombre(){
 		String a="";
 		return a;
+	}
+
+	public String getPersonaje(){
+		if(personaje==Personaje.ALDEANO)
+			return "Aldeano";
+		if(personaje==Personaje.BRUJA)
+			return "Bruja";
+		if(personaje==Personaje.LOBO)
+			return "Lobo";
+		if(personaje==Personaje.FLAUTISTA)
+			return "Flautista";
+		if(personaje==Personaje.VIDENTE)
+			return "Vidente";
+		if(personaje==Personaje.NIÑA_PEQUEÑA)
+			return "Niña pequeña";
+		if(personaje==Personaje.PROTECTOR)
+			return "Protector";
+		if(personaje==Personaje.TONTO_DE_LA_ALDEA)
+			return "Tonto de la aldea";	
+		if(personaje==Personaje.CAZADOR)
+			return "Cazador";
+		return "Predeterminado";
 	}
 
 	public boolean estaEncantado(){
@@ -83,6 +106,9 @@ public class Personajes{
 				personaje=Personaje.TONTO_DE_LA_ALDEA;
 				tipo=TipoDePersonaje.ALDEANOS;
 				break;
+			case "PROTECTOR":
+				personaje=Personaje.PROTECTOR;
+				tipo=TipoDePersonaje.ALDEANOS;
 			default:
 				personaje=Personaje.PREDETERMINADO;
 				tipo=TipoDePersonaje.PREDETERMINADO;
