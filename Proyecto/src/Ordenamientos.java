@@ -1,6 +1,11 @@
+package proyecto1;
+
 import java.util.Iterator;
 /**
+ * @author Jose Jasso
+ * @author Diego Dozal
  * Clase con varios métodos para ordenar arreglos y listas.
+ *
  */
 public class Ordenamientos{
 
@@ -33,7 +38,6 @@ public class Ordenamientos{
         return i;
     }
 
-    //regresa una lista
     public static <T extends Comparable<T>> Lista<T> mergeSort(Lista<T> l){
 
       Lista<T> l1 = new Lista<T>();
@@ -130,6 +134,21 @@ public class Ordenamientos{
     }
 
     public static <T extends Comparable<T>> void bubbleSort(T[] a){
+    	int longitud=a.length;
+
+    	for(int j=0;j<a.length;j++){
+    		for(int i=0;i<longitud;i++){
+    			if(i==a.length-1)
+    				break;
+    			if(a[i].compareTo(a[i+1])>=0){
+    				T aux=(T) a[i];
+
+    				a[i]=a[i+1];
+    				a[i+1]=aux;
+    			}
+    		}
+    		longitud--;
+    	}
     }
 
     public static <T extends Comparable<T>> void selectionSort(T[] a){
@@ -149,17 +168,5 @@ public class Ordenamientos{
             a[j]=aux;
 
         }
-    }
-
-    public static void main(String args[]){
-        Integer[] arreglo={6,1,5,10,9,2,2,2,8,7};
-
-        Ordenamientos.quickSort(arreglo,0,arreglo.length);
-
-       // for (Integer e:arreglo) {
-         //   System.out.print(e+",");
-       // }
-
-        System.out.println(Ordenamientos.busquedaBinaria(arreglo,7));
     }
 }

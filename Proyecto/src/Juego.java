@@ -8,6 +8,27 @@ public class Juego{
 
 	public Juego(String[] nombres){
     registro=new Lista<>(jugadoresRandom(nombres));
+    Personajes[] jugadoresAsignados=jugadoresRandom(nombres);
+    Lista<Personajes> jugadoresDeNoche=new Lista<>();
+    int lobos=0;
+
+    for (int i=0;lobos<1;i++) {
+      if(!jugadoresAsignados[i].getPersonaje().equals("Tonto de la aldea") && !jugadoresAsignados[i].getPersonaje().equals("Cazador") && !jugadoresAsignados[i].getPersonaje().equals("Niña pequeña")){
+        if(jugadoresAsignados[i].getPersonaje().equals("Lobo"))
+          lobos++;
+        jugadoresDeNoche.agregaFinal(jugadoresAsignados[i]);
+      }
+    }
+
+    Personajes[] noches=new Personajes[jugadoresDeNoche.getLongitud()];
+
+    for (int i=0;i<jugadoresDeNoche.toArray().length;i++) {
+      noches[i]=(Personajes)jugadoresDeNoche.toArray()[i];
+    }
+
+    Ordenamientos.quickSort(noches);
+
+    noche=new Lista<>(noches);
 	}
 
 	private Personajes[] jugadoresRandom(String[] nombres){

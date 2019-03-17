@@ -452,50 +452,8 @@ import java.util.NoSuchElementException;
 
     }
 
-    public void intercambiaElemento(int indx,int indx2){
-        if(indx<0 || indx>longitud || indx2<0 || indx2>longitud)
-            throw new IndexOutOfBoundsException();
-
-        if(indx==indx2)
-            return;
-
-        Nodo posicion=cabeza;
-        Nodo posicion2=cabeza;
-        int contador=0;
-
-        while(contador<indx){
-            posicion=posicion.siguiente;
-            contador++;
-        }
-        
-        contador=0;
-
-        while(contador<indx2){
-            posicion2=posicion2.siguiente;
-            contador++;
-        }
-
-        T aux=posicion.elemento;
-        posicion.elemento=posicion2.elemento;
-        posicion2.elemento=aux;
-    }
-
     @Override
     public Iterator<T> iterator(){
         return new Iterador();
-    }
-
-    public static void main(String[] args) {
-        Integer[] arreglo={1,2,3,4,5,6,7,8,9,10};
-        Lista<Integer> lista =new Lista<>(arreglo);
-
-        //lista.eliminaPrimero();
-        lista.intercambiaElemento(0,2);
-        System.out.println(lista.getPrimero());
-        System.out.println(lista.getUltimo());
-        //lista.eliminaPrimero();
-        //lista.eliminaUltimo();
-
-        System.out.print(lista.toString());
     }
 }

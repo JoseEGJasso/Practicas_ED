@@ -5,13 +5,14 @@ package proyecto1;
  *
  *
  */
-public class Personajes{
+public class Personajes implements Comparable<Personajes>{
 
 	enum Personaje {ALDEANO,LOBO,BRUJA,FLAUTISTA,VIDENTE,NIÑA_PEQUEÑA,PROTECTOR,TONTO_DE_LA_ALDEA,CAZADOR,PREDETERMINADO};
 	enum TipoDePersonaje {ALDEANOS,LOBOS,FLAUTISTA,PREDETERMINADO};
 	private final String nombre;
 	private Personaje personaje;
 	private TipoDePersonaje tipo;
+	private int orden=-1;
 	private boolean estado=true;
 	private boolean encantado=false;
 	private boolean protegido=false;
@@ -81,14 +82,17 @@ public class Personajes{
 			case "LOBO":
 				personaje=Personaje.LOBO;
 				tipo=TipoDePersonaje.LOBOS;
+				orden=2;
 				break;
 			case "BRUJA":
 				personaje=Personaje.BRUJA;
 				tipo=TipoDePersonaje.ALDEANOS;
+				orden=3;
 				break;
 			case "FLAUTISTA":
 				personaje=Personaje.FLAUTISTA;
 				tipo=TipoDePersonaje.FLAUTISTA;
+				orden=4;
 				break;
 			case "NIÑA PEQUEÑA":
 				personaje=Personaje.NIÑA_PEQUEÑA;
@@ -97,6 +101,7 @@ public class Personajes{
 			case "VIDENTE":
 				personaje=Personaje.VIDENTE;
 				tipo=TipoDePersonaje.ALDEANOS;
+				orden=0;
 				break;
 			case "CAZADOR":
 				personaje=Personaje.CAZADOR;
@@ -109,6 +114,7 @@ public class Personajes{
 			case "PROTECTOR":
 				personaje=Personaje.PROTECTOR;
 				tipo=TipoDePersonaje.ALDEANOS;
+				orden=1;
 			default:
 				personaje=Personaje.PREDETERMINADO;
 				tipo=TipoDePersonaje.PREDETERMINADO;
@@ -116,71 +122,13 @@ public class Personajes{
 		}
 	}
 
-}
-
-/*class Aldeano extends Personajes{
-
-	public Aldeano(String nombre){
-		this.nombre=nombre;
-	}
-}
-
-class Bruja extends Personajes{
-
-	private boolean pocionMuerte=true;
-	private boolean pocionVida=true;
-
-	public Bruja(String nombre){
-		this.nombre=nombre;
+	@Override
+	public int compareTo(Personajes o){
+		if(orden<o.orden)
+			return -1;
+		if(orden>o.orden)
+			return 1;
+		return 0;
 	}
 
-	public void usarPocionMuerte(){
-		pocionMuerte=false;
-	}
-
-	public void usarPocionVida(){
-		poscionMuerte=false;
-	}
-
-
 }
-
-class Vidente extends Personajes{
-
-	public Vidente(String nombre){
-		this.nombre=nombre;
-	}
-}
-
-class NiñaPequeña extends Personajes{
-
-}
-
-class Protector extends Personajes{
-
-}
-
-class TontoDeLaAldea extends Personajes{
-
-}
-
-class Cazador extends Personajes{
-
-
-
-}
-
-class Lobo extends Personajes{
-
-	public Lobo(String nombre){
-		this.nombre=nombre;
-	}
-
-	public void usarPocionMuerte(){
-
-	}
-}
-
-class Flautista extends Personajes{
-
-}*/
