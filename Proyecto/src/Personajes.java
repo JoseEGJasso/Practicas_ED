@@ -49,6 +49,16 @@ public class Personajes implements Comparable<Personajes>{
 		return "Predeterminado";
 	}
 
+	public String getTipo(){
+		if(tipo==TipoDePersonaje.ALDEANOS)
+			return "Aldeanos";
+		if(tipo==TipoDePersonaje.LOBOS)
+			return "Lobos";
+		if(tipo==TipoDePersonaje.FLAUTISTA)
+			return "Flautista";
+		return "Predeterminado";
+	}
+
 	public boolean estaEncantado(){
 		return encantado;
 	}

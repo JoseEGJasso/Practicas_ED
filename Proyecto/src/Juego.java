@@ -70,13 +70,13 @@ public class Juego{
 
 	public boolean lobosAsesinan(String nombre){
 
-		 for(Personajes personaje: registro){
-       if(personaje.getNombre() == nombre){
+	for(Personajes personaje: registro){
+       if(personaje.getNombre().equals(nombre)){
          if(!personaje.estaVivo() || personaje.estaProtegido())
            break;
          if(personaje.estaVivo() && !personaje.estaProtegido()){
-           personaje.cambiaEstado(false);//Matron al personaje
-					 return true; //Es decir que si lo mató
+            personaje.cambiaEstado(false);//Matron al personaje
+			return true; //Es decir que si lo mató
            }
         }
      }
@@ -87,7 +87,7 @@ public class Juego{
 	public boolean proteger(String nombre){//Revisar si vale la pena que regrese booleano
 
     for(Personajes personaje: registro){
-      if(personaje.getNombre() == nombre){
+      if(personaje.getNombre().equals(nombre)){
         if(!personaje.estaVivo() || personaje.estaProtegido())
          break;
         if(personaje.estaVivo() && !personaje.estaProtegido()){
@@ -104,12 +104,13 @@ public class Juego{
 	public String verPersonaje(String nombre){
 
 		for(Personajes personaje: registro){
-			if(!personaje.estaVivo()){
-				break;
-			}
-			else{
-				if(personaje.getNombre() == nombre)
-					return personaje.getNombre();
+			if(personaje.getNombre().equals(nombre)){
+				if(!personaje.estaVivo()){
+					break;
+				}
+				else{
+					return "Nombre: "+personaje.getNombre()+"Personaje: "+personaje.getTipo();
+				}
 			}
 
 		}
@@ -123,7 +124,7 @@ public class Juego{
  	public boolean muerteCazador(){
 
 			 for(Personajes personaje: registro){
-				 if(personaje.getPersonaje() == "Cazador" && !personaje.estaVivo())
+				 if(personaje.getPersonaje().equals("Cazador") && !personaje.estaVivo())
 				 return true;
 			 }
 
@@ -133,7 +134,7 @@ public class Juego{
 	public boolean objetivoCazador(boolean cazadorMuerto, String objetivo){
 
 			 for(Personajes personaje: registro){
-				 if(personaje.getNombre() == objetivo){
+				 if(personaje.getNombre().equals(objetivo)){
 					 if(!personaje.estaVivo()){
 						 break;
 					 }else{
@@ -155,7 +156,7 @@ public class Juego{
 	public boolean linchar(String nombre){
 
     for(Personajes personaje: registro){
-      if(personaje.getNombre()== nombre){
+      if(personaje.getNombre().equals(nombre)){
         if(!personaje.estaVivo() || personaje.getPersonaje().equals("Tonto de la aldea")){
           break;
           //Aún no sé si vale la pena poner esta linea, por que no sabemos si es
@@ -174,7 +175,7 @@ public class Juego{
 	public void encantar(String nombreEncantado,String nombreEncantado2){
 
     for(Personajes personaje: registro){
-      if(personaje.getNombre() == nombreEncantado){
+      if(personaje.getNombre().equals(nombreEncantado)){
         if(!personaje.estaVivo() || personaje.estaEncantado() || personaje.getPersonaje().equals("Flautista")){
           break;
         }
@@ -184,33 +185,53 @@ public class Juego{
       }
     }
 
+    for(Personajes personaje: registro){
+      if(personaje.getNombre().equals(nombreEncantado2)){
+        if(!personaje.estaVivo() || personaje.estaEncantado() || personaje.getPersonaje().equals("Flautista")){
+          break;
+        }
+        else{
+          personaje.cambiaEncantado(true); //Es decir que ya lo encantó
+        }
+      }
+    }
+
+
 	}
 
 	public String determinarGanador(Lista<Personajes> vivos){
 
-   	int contAldea=0;
+   		int contAldea=0;
 		int contLobos=0;
 		int contFlautista=0;
+		boolean flautistaVivo=true;
 
 
 		for(Personajes personaje: vivos){
 			//Es posible que sea un poco redundante verificar que un personaje está
 			//vivo en una lista de vivos, pero es sólo para depurar cualquier error
 			if(!personaje.estaVivo())
-				break;
+				continue;
 
-			if(personaje.getTipo() == TipoDePersonaje.ALDEANOS)
+			if(personaje.getTipo().equals("Aldeanos")){
 				contAldea++;
-			if(personaje.getTipo() == TipoDePersonaje.LOBOS)
+				continue;
+			}
+			if(personaje.getTipo().equals("Lobos")){
 				contLobos++;
+				continue;
+			}
 
 			//Esta verificación de que el flautista siga con vida es por que
 			//puede llegar el caso en el que el contador aumente y el flautista
 			//esté muerto.Por lo que podría llegar a ganar el Flautista estando
 			//muerto.
-			if(personaje.getPersonaje() == "Flautista" && !personaje.estaVivo())
-				break;
-			if(personaje.estaEncantado())
+			if(personaje.getPersonaje().equals("Flautista") && !personaje.estaVivo()){
+				flautistaVivo=false;
+				contFlautista=0;
+				continue;
+			}
+			if(personaje.estaEncantado() && flautistaVivo)
 				contFlautista++;
 		}
 
@@ -232,7 +253,7 @@ public class Juego{
 	public boolean usarPocionVenenosa(String nombreDeObjetivo){
 
 		for(Personajes personaje: registro){
-			if(personaje.getNombre() == nombreDeObjetivo){
+			if(personaje.getNombre().equals(nombreDeObjetivo)){
 				if(!personaje.estaVivo()){
 					break;
 				}else{
@@ -245,10 +266,10 @@ public class Juego{
 		return false; //Es decir ya está bien frío el compa
 	}
 
-	public boolean usarPocionResurreccion(String nombre){
+	public boolean usarPocionResurreccion(String nombreDeObjetivo){
 
 		for(Personajes personaje:registro){
-			if(personaje.getNombre() == nombre){
+			if(personaje.getNombre().equals(nombreDeObjetivo)){
 				if(personaje.estaVivo()){
 					break;
 				}else{
