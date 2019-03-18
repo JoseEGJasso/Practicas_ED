@@ -67,26 +67,37 @@ public class Ordenamientos{
       */
     public static <T extends Comparable<T>> Lista<T> mergeSort(Lista<T> l){
 
-      Lista<T> l1 = new Lista<T>();
-      Lista<T> l2 = new Lista<T>();
 
-      if(l.getLongitud() == 0 || l.getLongitud() == 1)
-        return l.copia();
+           Lista<T> derecha = new Lista<T>();
+           Lista<T> izquierda = new Lista<T>();
 
+          if(l.getLongitud() < 2 ){
+             return l.copia();
+          }
 
-     for(int i=0;i<l.getLongitud()/2;i++){
-        l1.agregaFinal(l.get(i));
-      }
+          if(l.getLongitud()%2 != 0){
 
+              for(int i=0;i<(l.getLongitud()-1)/2;i++){
+                 derecha.agregaFinal(l.get(i));
 
-      for(int j=l.getLongitud()/2;j<l.getLongitud();j++){
-        l2.agregaFinal(l.get(j));
-      }
+               }
+               for(int j=((l.getLongitud()-1)/2)+1;j<l.getLongitud();j++){
+                 izquierda.agregaInicio(l.get(j));
+               }
+            }
+            else{
+              for(int i=0;i<l.getLongitud()/2;i++){
+                 derecha.agregaFinal(l.get(i));
+               }
+               for(int j=l.getLongitud()/2;j<l.getLongitud();j++){
+                 izquierda.agregaFinal(l.get(j));
+               }
+            }
 
-      l1 = mergeSort(l1);
-      l2 = mergeSort(l2);
+          derecha = mergeSort(derecha);
+          izquierda = mergeSort(izquierda);
 
-      return merge(l1,l2);
+          return merge(derecha,izquierda);
     }
 
     /**
@@ -333,6 +344,17 @@ public class Ordenamientos{
         return arreglo;
     }
 
+    private static Integer[] generaArreglosIntegerOrdenado(int n){
+
+      Integer[] arreglo=new Integer[n];
+
+      for(int i=0;i<arreglo.length;i++){
+        arreglo[i]=i+1;
+      }
+
+      return arreglo;
+    }
+
     public static void main(String args[]){
         Integer[] arreglo={6,1,5,10,9,2,2,2,8,7};
 
@@ -375,6 +397,19 @@ public class Ordenamientos{
         System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(100000)));
 
         System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(300000)));
+
+        System.out.println("BUSQUEDA BINARIA.(tiempo calculado en segundos para # elementos > 10000 y en milisegundos para <=10000)");
+
+
+        System.out.println("Tiempo de ejecución con 100 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(100),90));
+
+        System.out.println("Tiempo de ejecución con 1000 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(1000),900));
+
+        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(10000),9000));
+
+        System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(100000),90000));
+
+        System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(300000),290000));
 
         //Haz lo mismo con mergeSort y busqueda binaria(crea el método tiempoMergeSort y tiempoBusquedaBinaria, checa los otros para guiarte es casi lo mismo), también comenta lo que falta
     }
