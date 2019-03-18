@@ -122,13 +122,14 @@ public class Cola<T> implements Iterable<T>{
             Iterator iterComparado = this.iterator();
 
                while(iterObjeto.hasNext() && iterComparado.hasNext()){
-                 if(iterObjeto.next().equals(iterComparado.next())){
+                if(iterObjeto.next().equals(iterComparado.next())){
                     estado=true;
-                    break;}
-                else{
+                }else{
                     estado=false;
                 }
                }
+               if(iterObjeto.hasNext() || iterComparado.hasNext())
+                estado=false;
              }
        return estado;
     }
@@ -141,18 +142,5 @@ public class Cola<T> implements Iterable<T>{
     @Override
     public Iterator<T> iterator(){
         return cola.iterator();
-    }
-
-
-
-    public static void main(String[] args) {
-      Integer[] arreglo={1,2,3,4,5,6};
-      Cola<Integer> cola=new Cola<>(arreglo);
-      Cola<Integer> cola1=new Cola<>(arreglo);
-
-        System.out.print(cola.toString());
-
-        System.out.println(cola.esVacia());
-        System.out.println(cola.equals(cola1));
     }
 }

@@ -13,8 +13,6 @@ public class Pila<T> implements Iterable<T>{
 
     /**
      * Constructor vacío de pilas
-     *
-     *
      */
     public Pila(){
 
@@ -120,25 +118,34 @@ public class Pila<T> implements Iterable<T>{
      * contrario regresa false;
      *
      * @param o;
-     * @param estado;
+     * @return estado;
      */
     @Override
     public boolean equals(Object o){
+
       boolean estado=false;
 
        if(o instanceof Pila){
            Pila comparado = (Pila)o;
            Iterator iterObjeto = comparado.iterator();
            Iterator iterComparado = this.iterator();
+           Object actual;
+           Object actual1;
 
           while(iterObjeto.hasNext() && iterComparado.hasNext()){
-            if(iterObjeto.next().equals(iterComparado.next())){
+            actual=iterObjeto.next();
+            actual1=iterComparado.next();
+
+            if(actual.equals(actual1)){
                estado=true;
-               break;}
-           else{
-               estado=false;
+            }else{
+               return false;
            }
           }
+          if(iterObjeto.hasNext())
+            return false;
+          if(iterComparado.hasNext())
+            return false;
         }
       return estado;
     }
@@ -151,24 +158,5 @@ public class Pila<T> implements Iterable<T>{
     @Override
     public Iterator<T> iterator(){
         return pila.iterator();
-    }
-
-    public static void main(String[] args) {
-      Integer[] arreglo={1,2,3,4,5,6};
-      Integer[] arreglo1={1,2,3,4,5,7};
-      Lista<Integer> lista=new Lista<>(arreglo);
-      Pila<Integer> pila=new Pila<>(arreglo);
-      Pila<Integer> pila2=new Pila<>(arreglo1);
-
-        Integer ori=100;
-
-        System.out.print(pila.toString());
-        System.out.println();
-        pila.mete(ori);
-        System.out.println(pila.mira());
-        System.out.println(pila.getClass().getName());
-        System.out.println(pila.esVacia());
-
-        System.out.println(pila.equals(pila2));
     }
 }

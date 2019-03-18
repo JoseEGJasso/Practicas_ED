@@ -3,6 +3,8 @@ import java.util.Iterator;
 
 /**
  * Clase con varios métodos para ordenar arreglos y listas.
+ * @author González Jasso José Eduardo
+ * @author Dozal Magnani Diego
  */
 public class Ordenamientos{
 
@@ -161,11 +163,26 @@ public class Ordenamientos{
       return listaAuxiliar;
 
     }
-
+    /**
+     * Método que busca un elemento dentro de un arreglo. Si el elemento se encuentra
+     * dentro del arreglo regresa un int que representa su posicion en el arreglo, en
+     * caso de que el elemento no exista dentro del arreglo regresa un -1
+     * @param a;
+     * @param elemento;
+     * @return int;
+     */
     public static <T extends Comparable<T>> int busquedaBinaria(T[] a, T elemento){
         return busquedaBinaria(a,0,a.length,elemento);
     }
-
+    /**
+     * Método auxiliar de busquedaBinaria que realiza las particiones del arreglo recursivamente
+     * hasta encontrar o no enconntrar el elemento buscado
+     * @param a;
+     * @param inicio;
+     * @param fin;
+     * @param elemento;
+     * @return int;
+     */
     private static <T extends Comparable<T>> int busquedaBinaria(T[] a,int inicio,int fin, T elemento){
         if(fin>inicio){
             int medio=(inicio+fin)/2;
@@ -320,7 +337,7 @@ public class Ordenamientos{
 
     /**
      * Método auxiliar que genera y regresa un número aleatorio
-     * contenido en el intervalo [1,999999].
+     * contenido en el intervalo [0,999999].
      *
      * @return (int)(Math.random()*999999);
      */
@@ -345,7 +362,11 @@ public class Ordenamientos{
 
         return arreglo;
     }
-
+    /**
+     * Método auxiiar que genera arreglos de tipo entero ordenados
+     * @param n;
+     * @return Integer[];
+     */
     private static Integer[] generaArreglosIntegerOrdenado(int n){
 
       Integer[] arreglo=new Integer[n];
@@ -369,9 +390,9 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(10000)));
 
-        //System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(100000)));
+        System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(100000)));
 
-        //RECOMENDACION: No ejecutar el tiempo de ejecución con 300000 elementos, llega a durar más de 10 min.
+        //RECOMENDACION: No ejecutar el tiempo de ejecución con 300000 elementos, llega a durar más de 5 min.
         //System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(300000)));
 
         System.out.println("BUBBLE SORT.(tiempo calculado en segundos para # elementos > 10000 y en milisegundos para <=10000");
@@ -382,11 +403,12 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(10000)));
 
-        //RECOMENDACION: No ejecutar la siguiente linea, pues llega a tardar hasta 20 min.
+        //RECOMENDACION: No ejecutar la siguiente linea, pues llega a tardar más 10 min.
         //System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(100000)));
 
         //RECOMENDACION: No ejecutar la siguiente linea, pues llega a tardar hasta 18 horas.
         //System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(300000)));
+
 
         System.out.println("QUICK SORT.(tiempo calculado en segundos para # elementos > 10000 y en milisegundos para <=10000");
 
@@ -400,8 +422,8 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(300000)));
 
+        
         System.out.println("BUSQUEDA BINARIA.(tiempo calculado en segundos para # elementos > 10000 y en milisegundos para <=10000)");
-
 
         System.out.println("Tiempo de ejecución con 100 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(100),90));
 
@@ -413,6 +435,5 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(300000),290000));
 
-        //Haz lo mismo con mergeSort y busqueda binaria(crea el método tiempoMergeSort y tiempoBusquedaBinaria, checa los otros para guiarte es casi lo mismo), también comenta lo que falta
     }
 }
