@@ -1,3 +1,5 @@
+package proyecto1;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -240,22 +242,26 @@ import java.util.NoSuchElementException;
 
         if(t!=null){
             Nodo actual=cabeza;
-            int contador=0;
+            Nodo opcion=ultimo;
 
             if(actual.elemento.equals(t)){
                 this.eliminaPrimero();
                 return true;
             }
 
-            while(contador<longitud){
+            if(opcion.elemento.equals(t)){
+                this.eliminaUltimo();
+                return true;
+            }
+
+            while(actual!=null){
                 if(actual.elemento.equals(t)){
                     actual.anterior.siguiente=actual.siguiente;
-                    actual.siguiente=actual.anterior;
+                    actual.siguiente.anterior=actual.anterior;
                     longitud--;
                     return true;
                 }
                 actual=actual.siguiente;
-                contador++;
             }
         }
 
@@ -267,6 +273,7 @@ import java.util.NoSuchElementException;
     */
     public void limpia(){
         cabeza=null;
+        longitud=0;
     }
 
    /**
@@ -449,16 +456,5 @@ import java.util.NoSuchElementException;
     @Override
     public Iterator<T> iterator(){
         return new Iterador();
-    }
-
-    public static void main(String[] args) {
-        Integer[] arreglo={1,2,3,4,5,6,7,8,9,10};
-        Lista<Integer> lista =new Lista<>(arreglo);
-
-        //lista.eliminaPrimero();
-        lista.elimina(0);
-        lista.eliminaPrimero();
-        lista.eliminaUltimo();
-        System.out.print(lista.getLongitud());
     }
 }

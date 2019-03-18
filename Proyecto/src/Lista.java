@@ -273,6 +273,7 @@ import java.util.NoSuchElementException;
     */
     public void limpia(){
         cabeza=null;
+        longitud=0;
     }
 
    /**
