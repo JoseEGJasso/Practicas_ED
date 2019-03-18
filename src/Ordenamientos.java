@@ -1,4 +1,6 @@
 import java.util.Iterator;
+
+
 /**
  * Clase con varios métodos para ordenar arreglos y listas.
  */
@@ -68,36 +70,36 @@ public class Ordenamientos{
     public static <T extends Comparable<T>> Lista<T> mergeSort(Lista<T> l){
 
 
-           Lista<T> derecha = new Lista<T>();
-           Lista<T> izquierda = new Lista<T>();
+           Lista<T> derecha = new Lista<>();
+           Lista<T> izquierda = new Lista<>();
 
           if(l.getLongitud() < 2 ){
              return l.copia();
           }
 
-          if(l.getLongitud()%2 != 0){
+          if(l.getLongitud() < 2 ){
+             return l.copia();
+          }
 
-              for(int i=0;i<(l.getLongitud()-1)/2;i++){
-                 derecha.agregaFinal(l.get(i));
+          int mitad = l.getLongitud()/2;
+          int contador=0;
 
-               }
-               for(int j=((l.getLongitud()-1)/2)+1;j<l.getLongitud();j++){
-                 izquierda.agregaInicio(l.get(j));
-               }
-            }
-            else{
-              for(int i=0;i<l.getLongitud()/2;i++){
-                 derecha.agregaFinal(l.get(i));
-               }
-               for(int j=l.getLongitud()/2;j<l.getLongitud();j++){
-                 izquierda.agregaFinal(l.get(j));
-               }
-            }
+         for(T elemento: l){
+
+           if(contador < mitad){
+             izquierda.agregaFinal(elemento);
+           }else{
+             derecha.agregaFinal(elemento);
+           }
+
+           contador++;
+          }
 
           derecha = mergeSort(derecha);
           izquierda = mergeSort(izquierda);
 
-          return merge(derecha,izquierda);
+          return Ordenamientos.merge(derecha,izquierda);
+
     }
 
     /**

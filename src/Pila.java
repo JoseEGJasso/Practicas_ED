@@ -8,18 +8,18 @@ public class Pila<T> implements Iterable<T>{
 
     private Lista<T> pila;
 
-    public Pila(){  
+    public Pila(){
 
         pila = new Lista<>();
-      
+
     }
-    
+
     public Pila(Lista<T> l){
-	 
+
         pila = new Lista<>();
 
         for(int i=0; i<l.getLongitud();i++)
-            pila.agregaInicio(l.get(i));    
+            pila.agregaInicio(l.get(i));
 
     }
 
@@ -44,7 +44,7 @@ public class Pila<T> implements Iterable<T>{
         if(!this.esVacia())
             return pila.getPrimero();
         throw new EmptyStackException();
-	
+
     }
 
     public T saca(){
@@ -69,22 +69,23 @@ public class Pila<T> implements Iterable<T>{
 
     @Override
     public boolean equals(Object o){
-     boolean estado=false;
+      boolean estado=false;
 
-      if(o instanceof Pila){
-          Pila comparado=(Pila) o;
+       if(o instanceof Pila){
+           Pila comparado = (Pila)o;
+           Iterator iterObjeto = comparado.iterator();
+           Iterator iterComparado = this.iterator();
 
-//          for(Object elemento:comparado){
-//            if(elemento.equals(actual.elemento)){
-//                estado=true;
-//                actual=actual.siguiente;
-//                continue;
-//            }
-//            estado=false;
-//            actual=actual.siguiente;
-//        }
-//        }
-        return estado;
+          while(iterObjeto.hasNext() && iterComparado.hasNext()){
+            if(iterObjeto.next().equals(iterComparado.next())){
+               estado=true;
+               break;}
+           else{
+               estado=false;
+           }
+          }
+        }
+      return estado;
     }
 
     @Override
@@ -93,9 +94,11 @@ public class Pila<T> implements Iterable<T>{
     }
 
     public static void main(String[] args) {
-        Integer[] arreglo={1,2,3,4,5,6};
-        Lista<Integer> lista=new Lista<>(arreglo);
-        Pila<Integer> pila=new Pila<>(arreglo);
+      Integer[] arreglo={1,2,3,4,5,6};
+      Integer[] arreglo1={1,2,3,4,5,7};
+      Lista<Integer> lista=new Lista<>(arreglo);
+      Pila<Integer> pila=new Pila<>(arreglo);
+      Pila<Integer> pila2=new Pila<>(arreglo1);
 
         Integer ori=100;
 
@@ -105,5 +108,7 @@ public class Pila<T> implements Iterable<T>{
         System.out.println(pila.mira());
         System.out.println(pila.getClass().getName());
         System.out.println(pila.esVacia());
+
+        System.out.println(pila.equals(pila2));
     }
 }
