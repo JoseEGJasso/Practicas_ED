@@ -143,7 +143,8 @@ public class Personajes implements Comparable<Personajes>{
 
   /**
 	 * Método Setter de las variables personaje y tipo. Dependiendo de la cadena "personajeAsignar", determina el tipo
-	 * y personaje tomando valores de los atributos eum de Personaje y TipoDePersonaje.
+	 * y personaje tomando valores de los atributos eum de Personaje y TipoDePersonaje.Asimismo establece el orden del
+	 * personaje que será empleado para determinar el orden de jugadores que despiertan en la noche.
 	 *
 	 * @param personajeAsignar;
 	 */
@@ -199,7 +200,7 @@ public class Personajes implements Comparable<Personajes>{
 	/**
 	 * Implementacion del método compareTo para poder comparar entre objetos de tipo personaje.
 	 *
-	 * @param o; 
+	 * @param o;
 	 */
 	@Override
 	public int compareTo(Personajes o){

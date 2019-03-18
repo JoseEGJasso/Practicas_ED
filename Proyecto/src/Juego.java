@@ -2,17 +2,34 @@ package proyecto1;
 
 import java.util.Scanner;
 
+/**
+ * Clase Juego. En esta clase se desarrolla la mayoría de la lógica del juego.
+ * Utilizando la clase Personaje creamos a los distintos y posibles personajes
+ * del juego Lobos de CASTONEGRO y las habilidades que conllevan. Como también
+ * el desarrollo de la noche y el registro de los jugadores.
+ *
+ * @author González Jasso José Eduardo
+ * @author Dozal Magnani Diego
+ *
+ */
 public class Juego{
 
-	private Lista<Personajes> noche;
-	private Lista<Personajes> registro;
-	private Lista<Personajes> muertos;
-	private Lista<Personajes> encantados;
-	private String protegido;
-	private boolean pocionVenenosa;
-	private boolean pocionResurreccion;
-	private boolean disparo;
+	// Atributos de la clase
+	private Lista<Personajes> noche; // Lista de personajes que guarda a los personajes vivos que se despiertan en la noche
+	private Lista<Personajes> registro;// Lista de todos los personajes del juego. Nos facilita el acceso a los estados de cada jugador
+	private Lista<Personajes> muertos;// Lista de personajes muertos, que se usará para obtener el resultado de los personajes muertos en cada ronda
+	private Lista<Personajes> encantados;//Lista de personajes encantados, para determinar si el FLAUTISTA ha ganado.
+	private String protegido;//Cadena que guarda al último jugador protegido, para que no pueda ser protegido dos veces seguidas
+	private boolean pocionVenenosa; //Atributo propia del personaje BRUJA, guarda si tiene o no la pocion venenosa.
+	private boolean pocionResurreccion; //Atributo propia del personaje BRUJA, guarda si tiene o no la pocion de resurreccion.
+	private boolean disparo;//Atributo propio del personaje CAZADOR, guarda si tiene o no un disparo al momento de morir.
 
+	/**
+	 * Constructor de Juego. Recibe una cadena de nombres, la cual representa los nombre de los jugadores.
+	 * Ordena a los personajes dependiendo de la variable orden asociada en Personajes.
+	 *
+	 * @param nombres
+	 */
 	public Juego(String[] nombres){
 		Personajes[] jugadoresAsignados=jugadoresRandom(nombres);
 		Lista<Personajes> jugadoresDeNoche=new Lista<>();
@@ -44,6 +61,14 @@ public class Juego{
 		noche=new Lista<>(noches);
 	}
 
+	/**
+	 * Método para asignar de forma aleatoria el personaje de que tendrá cada jugador. Hay una cantidad limitada
+	 * de personajes especiales. Después de que éstos hayan sido asignados, se asignan lobos y aldeanos, donde la
+	 * cantidad de los lobos es 1/2 de la cantidad de aldeanos sin habilidades.
+	 *
+	 * @param nombres;
+	 * @return salida;
+	 */
 	public Personajes[] jugadoresRandom(String[] nombres){
 		String[] personajesU={"vidente","protector","niña pequeña","bruja","flautista","tonto de la aldea","cazador"};
 		Personajes[] salida=new Personajes[nombres.length];
@@ -78,6 +103,13 @@ public class Juego{
 
 	}
 
+	/**
+	 * Método que modela el orden en el que despiertan los jugadores en la noche. Itera sobre la lista noche, de personajes
+ 	 * aún con vida y que tienen que despertar y, dependiendo del personaje, Se ejecuta una serie de System.out.printlns para
+ 	 * guiar al narrador con cada habilidad de cada personaje, pidiendo que ingrese nombre según sea el caso del personaje.
+	 *
+	 *
+	 */
 	public void despertarJugadores(){
 		Scanner sc=new Scanner(System.in);
 		String elegido;
@@ -180,6 +212,14 @@ public class Juego{
 
 	}
 
+	/**
+	 * Método que modela lo que ocurre cuando los perosnajes lobos deciden matar a un personaje en la noche. En
+	 * este método ya está considerado cuando un personaje está protegido. Cuando un perosnaje es asisesinado,
+	 * modificamos la lista de muertos, agregando al último personaje asisesinado.Regresa un booleano para confirmar
+	 * la muerte del personaje
+	 * @param nombre
+   * @return boolena;
+	 */
 	public boolean lobosAsesinan(String nombre){
 
 		for(Personajes personaje: registro){
@@ -200,6 +240,15 @@ public class Juego{
 	    return false;
   	}
 
+	/**
+	 * Método qu modela la habilidad de proteger propia del PROTECTOR. Primero verifica que el peronajes no haya sido
+	 * protegido. Luego que el personaje esté vivo o no esté protegido, en caso contrario regresa false junto con un mensaje.
+	 * Finalmente al pasar estos filtros, se cambia la variable protegido a true. Finalmente regresa un boolean para confirmar
+	 * si fue o no protegido.
+	 *
+	 * @param nombre;
+	 * @return boolean.
+	 */
 	public boolean proteger(String nombre){
 
 		if(protegido==null || !nombre.equals(protegido)){
@@ -225,6 +274,14 @@ public class Juego{
     	return false;
 	}
 
+	/**
+	 * Método que modela la habilidad de ver la carta de un jugador propia de la VIDENTE. Primero verifica que el jugador
+	 * esté vivo, en caso contrario se sale del ciclo que itera a registro.Si el personaje está vivo, envía un mensaje y
+	 * luego regresa un booleano para confirmar la acción.
+	 *
+	 * @param nombre;
+	 * @return boolean;
+	 */
 	public boolean verPersonaje(String nombre){
 
 		for(Personajes personaje: registro){
@@ -242,11 +299,14 @@ public class Juego{
     	return false;
 	}
 
-	/*
-     Este método únicamente revisa si el cazador ha muerto
-		 de ser así , disparará el método objetivoCazador
+  /**
+	 * Método que revisa continuamente el estadod de cazador. En caso de que el
+	 * cazador esté muerto, regresa true para confirmar la muerte del cazador y cambia
+	 * el estado de disparo para modelar que ya usó su disparo el jugador.
+	 *
+	 * @return boolen;
 	 */
- 	public boolean muerteCazador(){
+	public boolean muerteCazador(){
 
  		if(disparo==true){
 			for(Personajes personaje: registro){
