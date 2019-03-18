@@ -1,32 +1,54 @@
 package proyecto1;
 
 /**
- *
- *
+ * Clase Personajes, en la que usaremos variables enum en vez de clases internas con los nombre de cada
+ * personaje, de esta forma optimizamos el guardado de Personaje y TipoDePersonaje para cada jugador.
+ * @author González Jasso José Eduardo
+ * @author Dozal Magnani Diego
  *
  */
 public class Personajes implements Comparable<Personajes>{
 
+	//Atributos de la clase
 	enum Personaje {ALDEANO,LOBO,BRUJA,FLAUTISTA,VIDENTE,NIÑA_PEQUEÑA,PROTECTOR,TONTO_DE_LA_ALDEA,CAZADOR,PREDETERMINADO};
 	enum TipoDePersonaje {ALDEANOS,LOBOS,FLAUTISTA,PREDETERMINADO};
 	private final String nombre;
 	private Personaje personaje;
 	private TipoDePersonaje tipo;
-	private int orden=-1;
-	private boolean estado=true;
+	private int orden=-1; //Variable utilizada en la clase Juego para establecer los personajes de cada jugador de forma aleatoria
+	private boolean estado=true;//Variable para representar si un personaje está vivo: true=vivo/false=muerto
 	private boolean encantado=false;
 	private boolean protegido=false;
 
+  /**
+	 * Constructor de Personaje, recibe dos cadenas de caracterter.La primera recibe el nombre del jugador,
+	 * La segunda el personaje que se le asignará de forma aleatoria en la clase Juego, que dependiendo de la cadena
+	 * se le será modificado con el métdoo setPersonaje las variables enum Personaje y TipoDePersonaje.
+	 *
+	 * @param nombre,personajeAsignar;
+	 *
+	 */
 	public Personajes(String nombre,String personajeAsignar){
 		this.nombre=nombre;
 		setPersonaje(personajeAsignar);
 	}
 
+	/**
+	 * Método Getter de nomnbre. Devuelve el nombre del jugador.
+	 *
+	 * @return a;
+	 */
 	public String getNombre(){
 		String a="";
 		return a;
 	}
 
+	/**
+	 * Método Getter de Personaje. Dependiendo de la variable enum que el personaje tenga , se regresa
+	 * una cadeana con el nombre del personaje.
+	 *
+	 * @return cadena de personajeL;
+	 */
 	public String getPersonaje(){
 		if(personaje==Personaje.ALDEANO)
 			return "Aldeano";
@@ -43,12 +65,18 @@ public class Personajes implements Comparable<Personajes>{
 		if(personaje==Personaje.PROTECTOR)
 			return "Protector";
 		if(personaje==Personaje.TONTO_DE_LA_ALDEA)
-			return "Tonto de la aldea";	
+			return "Tonto de la aldea";
 		if(personaje==Personaje.CAZADOR)
 			return "Cazador";
 		return "Predeterminado";
 	}
 
+	/**
+	 * Método Getter de TipoDePersonaje. Retorna el tipo como cadena dependiendo de la variable
+	 * enum TipoDePersonaje.
+	 *
+	 * @return cadena de tipo de personaje;
+	 */
 	public String getTipo(){
 		if(tipo==TipoDePersonaje.ALDEANOS)
 			return "Aldeanos";
@@ -59,30 +87,66 @@ public class Personajes implements Comparable<Personajes>{
 		return "Predeterminado";
 	}
 
+	/**
+	 * Método Getter del booleano encantado.
+	 *
+	 * @return encatado;
+	 */
 	public boolean estaEncantado(){
 		return encantado;
 	}
 
+	/**
+	 * Método Getter del booleano protegido.
+	 *
+	 * @return protegido;
+	 */
 	public boolean estaProtegido(){
 		return protegido;
 	}
 
+	/**
+	 * Método Getter del estado.
+	 *
+	 * @return estado;
+	 */
 	public boolean estaVivo(){
 		return estado;
 	}
 
+	/**
+	 * Método Setter de estado.
+	 *
+	 * @param estado;
+	 */
 	public void cambiaEstado(boolean estado){
 		this.estado=estado;
 	}
 
+	/**
+	 * Método Setter de encatado.
+	 *
+	 * @param encantado;
+	 */
 	public void cambiaEncantado(boolean encantado){
 		this.encantado=encantado;
 	}
 
+	/**
+	 * Método Setter de protegido
+	 *
+	 * @param protegido;
+	 */
 	public void cambiaProtegido(boolean protegido){
 		this.protegido=protegido;
 	}
 
+  /**
+	 * Método Setter de las variables personaje y tipo. Dependiendo de la cadena "personajeAsignar", determina el tipo
+	 * y personaje tomando valores de los atributos eum de Personaje y TipoDePersonaje.
+	 *
+	 * @param personajeAsignar;
+	 */
 	public void setPersonaje(String personajeAsignar){
 		switch(personajeAsignar.toUpperCase()){
 			case "ALDEANO":
@@ -132,6 +196,11 @@ public class Personajes implements Comparable<Personajes>{
 		}
 	}
 
+	/**
+	 * Implementacion del método compareTo para poder comparar entre objetos de tipo personaje.
+	 *
+	 * @param o; 
+	 */
 	@Override
 	public int compareTo(Personajes o){
 		if(orden<o.orden)
