@@ -4,10 +4,24 @@ import java.util.Iterator;
  */
 public class Ordenamientos{
 
+    /**
+     * Método auxiliar que llama al método quickSort recursivo.
+     *
+     * @param a; un arreglo de tipo genérico que será ordenado
+     *
+     */
     public static <T extends Comparable<T>> void quickSort(T[] a){
         quickSort(a,0,a.length);
     }
-
+    /**
+     * Implementacion del algoritmo de ordenamiento quickSort
+     * recursivamente. Recibe tre parámentros : arreglo a ordenar
+     * el inicio y fin. Los dos anteriores parámetros sirven para
+     * establecer el pivote y asimiismo, llama al método auxiliar
+     * particion.
+     *
+     * @param a,inicio,fin;
+     */
     private static <T extends Comparable<T>> void quickSort(T[] a,int inicio,int fin){
         if (fin<=inicio)
             return;
@@ -15,6 +29,15 @@ public class Ordenamientos{
         quickSort(a,inicio,indicePivote);
         quickSort(a,indicePivote+1,fin);
     }
+
+    /**
+     * Método auxiliar para quickSort. Sirve para establecer la particion
+     * que se considerará al momento de determinar el pivote en el arreglo
+     * a ordenar.
+     *
+     * @param a,inicio,fin;
+     * @return i; el índice del pivote en el arreglo
+     */
     private static <T extends Comparable<T>> int particion(T[] a,int inicio,int fin){
         T pivote=(T)a[inicio];
         T aux=null;
@@ -33,6 +56,15 @@ public class Ordenamientos{
         return i;
     }
 
+    /**
+      * Implementacion del algoritmo de ordenamiento mergeSort recursivamente
+      * Recibe una lista como parámetro para después partirla en listas de longitud
+      * 1 ó 0. Después utiliza el método auxiliar merge para ordenar las listas y finalmente
+      * retornar la lista ordenada.
+      *
+      * @param l; lista a ordenar
+      * @return merge(l1,l2); lista ordenada con ayuda del método merge
+      */
     public static <T extends Comparable<T>> Lista<T> mergeSort(Lista<T> l){
 
       Lista<T> l1 = new Lista<T>();
@@ -57,56 +89,65 @@ public class Ordenamientos{
       return merge(l1,l2);
     }
 
-    private static <T extends Comparable<T>> Lista<T> merge(Lista<T> l,Lista<T> L){
+    /**
+     * Implementacion del método auxiliar merge que "mezcla" los elementos
+     * de dos listas ordenadas para después, retornar la lista ordenada a
+     * mergeSort.
+     *
+     * @param l,L; Dos listas ordenadas
+     * @return listaAuxiliar. La lista ordenada
+     */
+     private static <T extends Comparable<T>> Lista<T> merge(Lista<T> l,Lista<T> L){
 
-    Lista<T> listaAuxiliar = new Lista<T>();
+     Lista<T> listaAuxiliar = new Lista<T>();
 
-    Iterator<T> iter1 = l.iterator();
-    Iterator<T> iter2 = L.iterator();
+     int indexOfl=0; //índice de lista l
+     int indexOfL=0; //índice de lista L
 
-    T aux1 = null;
-    T aux2 = null;
+     int longOfl = l.getLongitud();
+     int longOfL = L.getLongitud();
 
+      if(longOfl > longOfL){
 
-    while(iter1.hasNext() && iter2.hasNext()){
-
-      if(aux1 == null)
-       aux1=iter1.next();
-      if(aux2 == null)
-       aux2=iter2.next();
-
-      if(aux1.compareTo(aux2) <= 0){
-        listaAuxiliar.agregaFinal(aux1);
-        aux1 = null;
+       while(indexOfl < longOfl){
+         if(l.get(indexOfl).compareTo(L.get(indexOfL)) >= 0){
+           listaAuxiliar.agregaFinal(L.get(indexOfL));
+           indexOfL++;
+         }
+         else{
+           listaAuxiliar.agregaFinal(l.get(indexOfl));
+           indexOfl++;
+         }
        }
+
+      int restOfL = indexOfL;
+      while(restOfL < longOfL){
+        listaAuxiliar.agregaFinal(L.get(restOfL));
+        restOfL++;
+        }
+      }
       else{
-        listaAuxiliar.agregaFinal(aux2);
-        aux2 =null;
+        while(indexOfL < longOfL){
+          if(L.get(indexOfL).compareTo(l.get(indexOfl)) >= 0){
+            listaAuxiliar.agregaFinal(l.get(indexOfl));
+            indexOfl++;
+          }
+          else{
+            listaAuxiliar.agregaFinal(L.get(indexOfL));
+            indexOfL++;
+          }
+        }
+
+        int restOfl = indexOfl;
+        while(restOfl < longOfl){
+         listaAuxiliar.agregaFinal(l.get(restOfl));
+         restOfl++;
        }
+     }
+
+      return listaAuxiliar;
 
     }
-
-   if(!iter1.hasNext()){
-     listaAuxiliar.agregaFinal(aux2);
-   }
-   if(!iter2.hasNext()){
-     listaAuxiliar.agregaFinal(aux1);
-   }
-
-   while(iter1.hasNext()){
-
-     aux1=iter1.next();
-     listaAuxiliar.agregaFinal(aux1);
-    }
-
-    while(iter2.hasNext()){
-
-     aux2=iter2.next();
-     listaAuxiliar.agregaFinal(aux2);
-    }
-
-    return listaAuxiliar;
-   }
 
     public static <T extends Comparable<T>> int busquedaBinaria(T[] a, T elemento){
         return busquedaBinaria(a,0,a.length,elemento);
@@ -128,6 +169,13 @@ public class Ordenamientos{
         return -1;
     }
 
+    /**
+     * Implementacion del algoritmo de ordenamiento bubbleSort
+     * ordena el arreglo "encapsulando" el elemento mayor hacia
+     * la derecha del arreglo.
+     *
+     * @param a; arreglo a ordenar
+     */
     public static <T extends Comparable<T>> void bubbleSort(T[] a){
         int longitud=a.length;
 
@@ -146,6 +194,14 @@ public class Ordenamientos{
         }
     }
 
+    /**
+     * Implementacion del algoritmo de ordenamiento selectionSort.
+     * Se establece un mínimo en el arreglo de entre todos los elementos
+     * de éste, después se establece otro mínimo que será comparado se
+     * itera este proceso hasta que el arreglo quede ordenado.
+     *
+     * @param a; arreglo a ordenar
+     */
     public static <T extends Comparable<T>> void selectionSort(T[] a){
         int min=0;
         T aux=null;
@@ -164,12 +220,6 @@ public class Ordenamientos{
         }
     }
 
-    public static int numerosIntRandom(){
-
-        return (int)(Math.random()*999999);
-    }
-
-
     /**
      * Método que calcula el tiempo de ejecución del algoritmo
      * Selection Sort. Si la longitud del arreglo recibido es menor
@@ -183,7 +233,7 @@ public class Ordenamientos{
 
         selectionSort(a);
 
-        long despues=System.currentTimeMillis();        
+        long despues=System.currentTimeMillis();
 
         if(a.length<=10000)
             return (despues-ahora);
@@ -198,7 +248,7 @@ public class Ordenamientos{
      * o igual a 10000, calcula el tiempo de ejecución en milisegundos,
      * en caso contrario en segundos.
      * @param a; arreglo a ordenar
-     * @return long; representa el tiempo de ejecución calculado     
+     * @return long; representa el tiempo de ejecución calculado
      */
     public static <T extends Comparable<T>> long tiempoBubbleSort(T[] a){
         long ahora=System.currentTimeMillis();
@@ -213,7 +263,14 @@ public class Ordenamientos{
         return (despues-ahora)/1000;
     }
 
-
+    /**
+     * Método que calcula el tiempo de ejecución del algoritmo
+     * quickSort. Si la longitud del arreglo recibido es menor
+     * o igual a 10000, calcula el tiempo de ejecución en milisegundos,
+     * en caso contrario en segundos.
+     * @param a; arreglo a ordenar
+     * @return long; representa el tiempo de ejecución calculado
+     */
     public static <T extends Comparable<T>> long tiempoQuickSort(T[] a){
         long ahora=System.currentTimeMillis();
 
@@ -227,7 +284,45 @@ public class Ordenamientos{
         return (despues-ahora);
     }
 
+    /**
+     * Método que calcula el tiempo de ejecución del algoritmo
+     * busquedaBinaria. Si la longitud del arreglo recibido es menor
+     * o igual a 10000, calcula el tiempo de ejecución en milisegundos,
+     * en caso contrario en segundos.
+     * @param a; arreglo a ordenar
+     * @return long; representa el tiempo de ejecución calculado
+     */
+    public static <T extends Comparable<T>> long tiempoBusquedaBinaria(T[] a, T elemento){
+      long ahora=System.currentTimeMillis();
 
+      busquedaBinaria(a,elemento);
+
+      long despues=System.currentTimeMillis();
+
+      if(a.length<=10000)
+        return (despues-ahora);
+
+      return(despues-ahora);
+    }
+
+    /**
+     * Método auxiliar que genera y regresa un número aleatorio
+     * contenido en el intervalo [1,999999].
+     *
+     * @return (int)(Math.random()*999999);
+     */
+    public static int numerosIntRandom(){
+
+        return (int)(Math.random()*999999);
+    }
+
+    /**
+     * Implementacion de método auxiliar que genera un arreglo de dimensión
+     * "n" de números enteros aleatorios utilizando el método auxiliar
+     *
+     * @param n;
+     * @return arreglo;
+     */
     private static Integer[] generaArreglosInteger(int n){
         Integer[] arreglo=new Integer[n];
 
@@ -248,8 +343,8 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 1000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(1000)));
 
-        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(10000)));        
-        
+        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(10000)));
+
         //System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoSelectionSort(Ordenamientos.generaArreglosInteger(100000)));
 
         //RECOMENDACION: No ejecutar el tiempo de ejecución con 300000 elementos, llega a durar más de 10 min.
@@ -261,8 +356,8 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 1000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(1000)));
 
-        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(10000)));           
-        
+        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(10000)));
+
         //RECOMENDACION: No ejecutar la siguiente linea, pues llega a tardar hasta 20 min.
         //System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoBubbleSort(Ordenamientos.generaArreglosInteger(100000)));
 
@@ -275,7 +370,7 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 1000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(1000)));
 
-        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(10000)));        
+        System.out.println("Tiempo de ejecución con 10000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(10000)));
 
         System.out.println("Tiempo de ejecución con 100000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(100000)));
 
