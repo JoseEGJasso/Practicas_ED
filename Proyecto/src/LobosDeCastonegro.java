@@ -1,16 +1,20 @@
 package proyecto1;
 
 import java.util.Scanner;
-import proyecto1.Juego;
 
 /**
- *
- *
- *
+ * Clase que modela una herramienta para el narrador del juego Los lobos de castonegro
+ * @author Gonzalez Jasso Jose Eduardo
+ * @author Dozal Magnani Diego
  */
 
  public class LobosDeCastonegro{
-
+ 	/**
+ 	 * Método auxiliar que verifica que los datos introducidos en el arreglo
+ 	 * cumplen con las condiciones indicadas
+ 	 * @param nombres;
+ 	 * @return boolean;
+ 	 */
   	private static boolean nombresIguales(String[] nombres){
   		if(nombres==null)
   			return true;
@@ -26,7 +30,11 @@ import proyecto1.Juego;
   		}
   		return false;
   	}
-
+  	/**
+  	 * Método principal donde se llaman todos los métodos
+  	 * de Juego que se necesiten para la ejecución correcta del Juego
+  	 * @param args;
+  	 */
  	public static void main(String[] args) {
 
  		Scanner sc=new Scanner(System.in);

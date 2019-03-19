@@ -9,18 +9,17 @@ package proyecto1;
  */
 public class Personajes implements Comparable<Personajes>{
 
-	//Atributos de la clase
 	enum Personaje {ALDEANO,LOBO,BRUJA,FLAUTISTA,VIDENTE,NIÑA_PEQUEÑA,PROTECTOR,TONTO_DE_LA_ALDEA,CAZADOR,PREDETERMINADO};
 	enum TipoDePersonaje {ALDEANOS,LOBOS,FLAUTISTA,PREDETERMINADO};
 	private final String nombre;
 	private Personaje personaje;
 	private TipoDePersonaje tipo;
-	private int orden=-1; //Variable utilizada en la clase Juego para establecer los personajes de cada jugador de forma aleatoria
-	private boolean estado=true;//Variable para representar si un personaje está vivo: true=vivo/false=muerto
+	private int orden=-1;
+	private boolean estado=true;
 	private boolean encantado=false;
 	private boolean protegido=false;
 
-  /**
+ 	/**
 	 * Constructor de Personaje, recibe dos cadenas de caracterter.La primera recibe el nombre del jugador,
 	 * La segunda el personaje que se le asignará de forma aleatoria en la clase Juego, que dependiendo de la cadena
 	 * se le será modificado con el métdoo setPersonaje las variables enum Personaje y TipoDePersonaje.
@@ -30,7 +29,7 @@ public class Personajes implements Comparable<Personajes>{
 	 */
 	public Personajes(String nombre,String personajeAsignar){
 		this.nombre=nombre;
-		setPersonaje(personajeAsignar);
+		this.setPersonaje(personajeAsignar);
 	}
 
 	/**
@@ -39,8 +38,7 @@ public class Personajes implements Comparable<Personajes>{
 	 * @return a;
 	 */
 	public String getNombre(){
-		String a="";
-		return a;
+		return nombre;
 	}
 
 	/**
@@ -65,12 +63,11 @@ public class Personajes implements Comparable<Personajes>{
 		if(personaje==Personaje.PROTECTOR)
 			return "Protector";
 		if(personaje==Personaje.TONTO_DE_LA_ALDEA)
-			return "Tonto de la aldea";
+			return "Tonto de la aldea";	
 		if(personaje==Personaje.CAZADOR)
 			return "Cazador";
 		return "Predeterminado";
 	}
-
 	/**
 	 * Método Getter de TipoDePersonaje. Retorna el tipo como cadena dependiendo de la variable
 	 * enum TipoDePersonaje.
@@ -86,7 +83,6 @@ public class Personajes implements Comparable<Personajes>{
 			return "Flautista";
 		return "Predeterminado";
 	}
-
 	/**
 	 * Método Getter del booleano encantado.
 	 *
@@ -95,7 +91,6 @@ public class Personajes implements Comparable<Personajes>{
 	public boolean estaEncantado(){
 		return encantado;
 	}
-
 	/**
 	 * Método Getter del booleano protegido.
 	 *
@@ -104,7 +99,6 @@ public class Personajes implements Comparable<Personajes>{
 	public boolean estaProtegido(){
 		return protegido;
 	}
-
 	/**
 	 * Método Getter del estado.
 	 *
@@ -113,7 +107,6 @@ public class Personajes implements Comparable<Personajes>{
 	public boolean estaVivo(){
 		return estado;
 	}
-
 	/**
 	 * Método Setter de estado.
 	 *
@@ -122,7 +115,6 @@ public class Personajes implements Comparable<Personajes>{
 	public void cambiaEstado(boolean estado){
 		this.estado=estado;
 	}
-
 	/**
 	 * Método Setter de encatado.
 	 *
@@ -131,7 +123,6 @@ public class Personajes implements Comparable<Personajes>{
 	public void cambiaEncantado(boolean encantado){
 		this.encantado=encantado;
 	}
-
 	/**
 	 * Método Setter de protegido
 	 *
@@ -140,7 +131,6 @@ public class Personajes implements Comparable<Personajes>{
 	public void cambiaProtegido(boolean protegido){
 		this.protegido=protegido;
 	}
-
   /**
 	 * Método Setter de las variables personaje y tipo. Dependiendo de la cadena "personajeAsignar", determina el tipo
 	 * y personaje tomando valores de los atributos eum de Personaje y TipoDePersonaje.Asimismo establece el orden del
@@ -190,6 +180,7 @@ public class Personajes implements Comparable<Personajes>{
 				personaje=Personaje.PROTECTOR;
 				tipo=TipoDePersonaje.ALDEANOS;
 				orden=1;
+				break;
 			default:
 				personaje=Personaje.PREDETERMINADO;
 				tipo=TipoDePersonaje.PREDETERMINADO;
@@ -197,11 +188,6 @@ public class Personajes implements Comparable<Personajes>{
 		}
 	}
 
-	/**
-	 * Implementacion del método compareTo para poder comparar entre objetos de tipo personaje.
-	 *
-	 * @param o;
-	 */
 	@Override
 	public int compareTo(Personajes o){
 		if(orden<o.orden)
