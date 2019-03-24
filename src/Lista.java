@@ -1,4 +1,3 @@
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -113,7 +112,9 @@ import java.util.NoSuchElementException;
     * @return cabeza.elemento
     */
     public T getPrimero(){
-        return cabeza.elemento;
+        if(longitud!=0)
+            return cabeza.elemento;
+        throw new NoSuchElementException();
     }
 
    /**
@@ -121,7 +122,9 @@ import java.util.NoSuchElementException;
     * @return ultimo.elemento
     */
     public T getUltimo(){
-        return ultimo.elemento;
+        if(longitud!=0)
+            return ultimo.elemento;
+        throw new NoSuchElementException();
     }
 
    /**
@@ -133,15 +136,19 @@ import java.util.NoSuchElementException;
     public T eliminaPrimero(){
         T eliminado=null;
 
-        if(longitud!=0){
-            eliminado=cabeza.elemento;
-            cabeza=cabeza.siguiente;
+        if(cabeza!=null){
+            if(longitud!=0){
+                eliminado=cabeza.elemento;
+                cabeza=cabeza.siguiente;
 
-            if(cabeza!=null)
-                cabeza.anterior=null;
-            longitud--;
+                if(cabeza!=null){
+                    cabeza.anterior=null;
+                    longitud--;
+                }
+            }
+            return eliminado;
         }
-        return eliminado;
+        throw new NoSuchElementException();
     }
    /**
     * Método que elimina el último nodo de una lista y
@@ -152,16 +159,21 @@ import java.util.NoSuchElementException;
     public T eliminaUltimo(){
         T eliminado=null;
 
-        if(longitud!=0){
-            if(longitud==1){
-                cabeza=ultimo=null;
-                return eliminado;
+        if(cabeza!=null){
+            if(longitud!=0){
+    	    eliminado=ultimo.elemento;
+                if(longitud==1){
+                    cabeza=ultimo=null;
+                	longitud--;
+                    return eliminado;
+                }
+                ultimo=ultimo.anterior;
+                ultimo.siguiente=null;
+                longitud--;
             }
-            ultimo=ultimo.anterior;
-            ultimo.siguiente=null;
-            longitud--;
+            return eliminado;
         }
-        return eliminado;
+        throw new NoSuchElementException();
     }
 
    /**
@@ -196,9 +208,8 @@ import java.util.NoSuchElementException;
                 ultimo.siguiente=nuevoRabo;
                 nuevoRabo.anterior=ultimo;
                 ultimo=nuevoRabo;
-            } else {
-                cabeza=nuevoRabo;
-                ultimo=nuevoRabo;
+            } if(cabeza==null) {
+                cabeza=ultimo=nuevoRabo;
             }
             longitud++;
         }
@@ -261,9 +272,8 @@ import java.util.NoSuchElementException;
                     return true;
                 }
                 actual=actual.siguiente;
-            }
+            }        
         }
-
         return false;
     }
    /**
@@ -271,9 +281,7 @@ import java.util.NoSuchElementException;
     *
     */
     public void limpia(){
-        for (int i=0;i<this.getLongitud();i++) {
-            this.eliminaUltimo();
-        }
+        cabeza=null;
         longitud=0;
     }
 
@@ -429,6 +437,9 @@ import java.util.NoSuchElementException;
     */
     @Override
     public boolean equals(Object o){
+
+      if(o==null)  
+        return false;
 
       boolean estado=false;
 

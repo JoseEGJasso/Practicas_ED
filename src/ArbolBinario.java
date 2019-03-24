@@ -9,19 +9,19 @@ public abstract class ArbolBinario<T>{
 
     protected class Vertice{
 
-    public T elemento;
-    public Vertice izquierdo;
-    public Vertice derecho;
-    public Vertice padre;
+	public T elemento;
+	public Vertice izquierdo;
+	public Vertice derecho;
+	public Vertice padre;
 
-    /**
+	/**
      * Constructor de vértices que asigna el elemento recibido
      * al vértice creado
      * @param elemento; elemento a asignar
      */
-    public Vertice(T elemento){
-        this.elemento=elemento;
-    }
+	public Vertice(T elemento){
+	    this.elemento=elemento;
+	}
     }
 
     protected Vertice raiz;
@@ -43,7 +43,7 @@ public abstract class ArbolBinario<T>{
      */
     public ArbolBinario(T[] arreglo){
         if (arreglo.length!=0) {            
-            for(int i=1;i<arreglo.length;i++)
+            for(int i=0;i<arreglo.length;i++)
                 agrega(arreglo[i]);
         }
     }
@@ -77,21 +77,25 @@ public abstract class ArbolBinario<T>{
         Cola<Vertice> procesar=new Cola<>();
         Vertice actual=raiz;
 
-        if(actual!=null){
-            procesar.mete(actual);
+        if(actual==null){
+            return;
         }
+
+        procesar.mete(actual);
 
         while(!procesar.esVacia()){
             funcion.accept(actual.elemento);
 
             procesar.saca();
 
-            if(actual.izquierdo!=null)
+            if(actual.izquierdo!=null){
                 procesar.mete(actual.izquierdo);
-            if(actual.derecho!=null)
+            }
+            if(actual.derecho!=null){
                 procesar.mete(actual.derecho);
-
-            actual=procesar.mira();
+            }
+            if(!procesar.esVacia())
+                actual=procesar.mira();
         }
     }
     /**
