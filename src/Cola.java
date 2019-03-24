@@ -52,7 +52,7 @@ public class Cola<T> implements Iterable<T>{
     public boolean esVacia(){
         try{
             cola.getPrimero();
-        }catch (NullPointerException e) {
+        }catch (NoSuchElementException e) {
             return true;
         }
         return false;
@@ -114,10 +114,18 @@ public class Cola<T> implements Iterable<T>{
     @Override
     public boolean equals(Object o){
 
+      if(o==null)  
+        return false;
+
       boolean estado=false;
 
       if(o instanceof Cola){
+
             Cola comparado = (Cola)o;
+
+            if(this.esVacia() || comparado.esVacia())
+                return false;
+
             Iterator iterObjeto = comparado.iterator();
             Iterator iterComparado = this.iterator();
 
