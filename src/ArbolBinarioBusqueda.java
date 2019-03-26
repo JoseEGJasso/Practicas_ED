@@ -80,9 +80,103 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         return false;
     }
 
+    private Vertice mayorDerecho(Vertice u){
+        Vertice actual=u.izquierdo;
+
+        while(actual.derecho!=null){
+            actual=actual.derecho;
+        }
+
+        return actual;
+    }
+
     @Override
     public boolean elimina(T elemento){
-        return true;
+        if(elemento!=null){
+            if(raiz!=null){
+                Cola<Vertice> procesar=new Cola<>();
+                Vertice actual=raiz;
+
+                procesar.mete(actual);
+
+                while(!procesar.esVacia()){
+                    if(actual.elemento.equals(elemento)){
+                        if(actual.derecho==null && actual.izquierdo==null){
+                            if(actual.padre!=null){
+                                if(actual.padre.izquierdo!=null){
+                                    if(actual.padre.izquierdo.elemento.equals(actual.elemento))
+                                        actual.padre.izquierdo=null;
+                                }else if(actual.padre.derecho!=null)
+                                    actual.padre.derecho=null;
+                                actual.padre=null;
+                            }else
+                                raiz=null;
+                        } else if(actual.derecho!=null && actual.izquierdo==null){
+                            if(actual.padre!=null){
+                                actual.derecho.padre=actual.padre;
+
+                                if(actual.padre.izquierdo!=null){
+                                    if(actual.padre.izquierdo.elemento.equals(actual.elemento))
+                                        actual.padre.izquierdo=actual.derecho;
+                                }else if(actual.padre.derecho!=null)
+                                    actual.padre.derecho=actual.derecho;            
+                            } else{
+                                actual.derecho.padre=null;
+                                raiz=actual.derecho;
+                            }
+                        } else if(actual.izquierdo!=null && actual.derecho==null){
+                            if(actual.padre!=null){
+                                actual.izquierdo.padre=actual.padre;
+
+                                if(actual.padre.izquierdo!=null){
+                                    if(actual.padre.izquierdo.elemento.equals(actual.elemento))
+                                        actual.padre.izquierdo=actual.derecho;
+                                }else if(actual.padre.derecho!=null)
+                                    actual.padre.derecho=actual.derecho;            
+                            } else{
+                                actual.izquierdo.padre=null;
+                                raiz=actual.izquierdo;
+                            }
+                        } else{
+                            Vertice intercambio=mayorDerecho(actual);
+                            T auxEle=actual.elemento;
+
+                            actual.elemento=intercambio.elemento;
+                            intercambio.elemento=auxEle;
+
+                            if(intercambio.izquierdo!=null){
+                                intercambio.izquierdo.padre=intercambio.padre;
+
+                                if(intercambio.padre.izquierdo.elemento.equals(intercambio.elemento))
+                                    intercambio.padre.izquierdo=intercambio.izquierdo;
+                                else
+                                    intercambio.padre.derecho=intercambio.izquierdo; 
+                            } else{
+
+                                if(intercambio.padre.izquierdo.elemento.equals(intercambio.elemento))
+                                    intercambio.padre.izquierdo=null;
+                                else
+                                    intercambio.padre.derecho=null; 
+                            }
+                        }                    
+                        elementos--;
+                        return true;
+                    }
+
+                    procesar.saca();
+
+                    if(actual.izquierdo!=null){
+                        procesar.mete(actual.izquierdo);
+                    }
+                    if(actual.derecho!=null){
+                        procesar.mete(actual.derecho);
+                    }
+                    if(!procesar.esVacia())
+                        actual=procesar.mira();
+                }
+            }  
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -91,11 +185,11 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
 
         ArbolBinarioBusqueda<Integer> arbol=new ArbolBinarioBusqueda<>(a);
         arbol.bfs(l);
-        System.out.println();
+        System.out.println(arbol.elimina(4));
         arbol.dfs(1,l);
-        System.out.println();
+        System.out.println(arbol.elimina(8));
         arbol.dfs(2,l);
-        System.out.println();
+        System.out.println(arbol.elimina(10));
         arbol.dfs(3,l);
         System.out.println("\n"+arbol.getElementos());
     }
