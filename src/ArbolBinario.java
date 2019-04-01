@@ -170,4 +170,81 @@ public abstract class ArbolBinario<T>{
     public int getElementos(){
         return elementos;
     }
+
+    
+    protected void giraIzquierdo(Vertice u){
+        if(u==null)
+            return;
+
+        if(u.derecho==null)
+            return;
+
+        if(u.padre!=null){
+            u.padre.derecho=u.derecho;
+            u.derecho.padre=u.padre;
+            u.padre=u.derecho;
+            if(u.padre.izquierdo!=null){
+                Vertice aux=u.padre.izquierdo;
+
+                u.derecho=aux;
+                u.derecho.padre=u;
+            }else{
+                u.derecho=null;
+            }
+            u.padre.izquierdo=u;
+        } else{
+            u.derecho.padre=null;
+            u.padre=u.derecho;
+            if(u.derecho.izquierdo!=null){
+                Vertice aux=u.derecho.izquierdo;
+
+                u.derecho=aux;
+                u.derecho.padre=u;
+            } else{
+                u.derecho=null;
+            }
+            u.padre.izquierdo=u;
+
+            raiz=u.padre;
+        }
+
+    }
+
+    protected void giraDerecha(Vertice u){
+        if(u==null)
+            return;
+
+        if(u.izquierdo==null)
+            return;
+
+        if(u.padre!=null){
+            u.padre.izquierdo=u.izquierdo;
+            u.izquierdo.padre=u.padre;
+            u.padre=u.izquierdo;
+            if(u.padre.derecho!=null){
+                Vertice aux=u.padre.derecho;
+
+                u.izquierdo=aux;
+                u.izquierdo.padre=u;
+            }else{
+                u.izquierdo=null;
+            }
+            u.padre.derecho=u;
+        } else{
+            u.izquierdo.padre=null;
+            u.padre=u.izquierdo;
+            if(u.izquierdo.derecho!=null){
+                Vertice aux=u.izquierdo.derecho;
+
+                u.izquierdo=aux;
+                u.izquierdo.padre=u;
+            } else{
+                u.izquierdo=null;
+            }
+            u.padre.derecho=u;
+
+            raiz=u.padre;
+        }
+
+    }
 }
