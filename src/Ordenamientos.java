@@ -422,7 +422,7 @@ public class Ordenamientos{
 
         System.out.println("Tiempo de ejecución con 300000 elementos: "+Ordenamientos.tiempoQuickSort(Ordenamientos.generaArreglosInteger(300000)));
 
-        
+
         System.out.println("BUSQUEDA BINARIA.(tiempo calculado en segundos para # elementos > 10000 y en milisegundos para <=10000)");
 
         System.out.println("Tiempo de ejecución con 100 elementos: "+Ordenamientos.tiempoBusquedaBinaria(Ordenamientos.generaArreglosIntegerOrdenado(100),90));
