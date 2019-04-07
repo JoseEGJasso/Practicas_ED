@@ -173,6 +173,7 @@ public abstract class ArbolBinario<T>{
 
 
     protected void giraIzquierdo(Vertice u){
+
         if(u==null)
             return;
 
@@ -180,59 +181,36 @@ public abstract class ArbolBinario<T>{
             return;
 
         if(u.padre!=null){
+            if(u.padre.izquierdo!=null){
+                if(u.padre.izquierdo.elemento.equals(u.elemento))
+                    u.padre.izquierdo=u.derecho;
+            }else
+                u.padre.derecho=u.derecho;
+            u.derecho.padre=u.padre;
+            u.padre=u.derecho;
+            if(u.padre.izquierdo!=null){
+                Vertice aux=u.padre.izquierdo;
 
-        if(u.padre.izquierdo == u){
-
-            Vertice aux = u.derecho.izquierdo;
-
-            u.padre.izquierdo = u.derecho;
-            u.derecho.padre = u.padre;
-            u.padre = u.derecho;
-            u.padre.izquierdo = u;
-
-            if(aux != null ){
-              u.derecho = aux;
-              aux.padre = u;
+                u.derecho=aux;
+                u.derecho.padre=u;
+            }else{
+                u.derecho=null;
             }
-            else{
-              u.derecho = null;
+            u.padre.izquierdo=u;
+        } else{
+            u.derecho.padre=null;
+            u.padre=u.derecho;
+            if(u.derecho.izquierdo!=null){
+                Vertice aux=u.derecho.izquierdo;
+
+                u.derecho=aux;
+                u.derecho.padre=u;
+            } else{
+                u.derecho=null;
             }
-          }
-          if(u.padre.derecho == u){
+            u.padre.izquierdo=u;
 
-            Vertice aux = u.izquierdo.derecho;
-
-            u.padre.derecho = u.izquierdo;
-            u.izquierdo.padre = u.padre;
-            u.padre = u.izquierdo;
-            u.padre.derecho = u;
-
-            if(aux != null ){
-              u.izquierdo = aux;
-              aux.padre = u;
-            }
-            else{
-              u.izquierdo = null;
-            }
-          }
-        }
-        else{
-
-            Vertice aux = u.derecho.izquierdo;
-
-            u.padre = u.derecho;
-            u.padre.izquierdo = u;
-
-            if( aux != null){
-              u.derecho = aux;
-              aux.padre = u;
-            }
-            else{
-              u.derecho = null;
-            }
-            u.padre.padre = null;
-            raiz = u.padre;
-
+            raiz=u.padre;
         }
 
     }
@@ -241,11 +219,17 @@ public abstract class ArbolBinario<T>{
         if(u==null)
             return;
 
-        if(u.izquierdo==null)
+        if(u.izquierdo==null){
             return;
+        }
 
         if(u.padre!=null){
-            u.padre.izquierdo=u.izquierdo;
+
+            if(u.padre.izquierdo!=null){
+                if(u.padre.izquierdo.elemento.equals(u.elemento))
+                    u.padre.izquierdo=u.izquierdo;
+            }else
+                u.padre.derecho=u.izquierdo;
             u.izquierdo.padre=u.padre;
             u.padre=u.izquierdo;
             if(u.padre.derecho!=null){
@@ -260,18 +244,18 @@ public abstract class ArbolBinario<T>{
         } else{
             u.izquierdo.padre=null;
             u.padre=u.izquierdo;
-            if(u.izquierdo.derecho!=null){
+            if(u.padre.derecho!=null){
                 Vertice aux=u.izquierdo.derecho;
 
                 u.izquierdo=aux;
                 u.izquierdo.padre=u;
+
             } else{
                 u.izquierdo=null;
             }
             u.padre.derecho=u;
 
-            raiz=u.padre;
+            this.raiz=u.padre;
         }
-
     }
 }
