@@ -42,7 +42,7 @@ public abstract class ArbolBinario<T>{
      * @param arreglo; arreglo del cual se va a crear un arbol binario
      */
     public ArbolBinario(T[] arreglo){
-        if (arreglo.length!=0) {            
+        if (arreglo.length!=0) {
             for(int i=0;i<arreglo.length;i++)
                 agrega(arreglo[i]);
         }
@@ -124,7 +124,7 @@ public abstract class ArbolBinario<T>{
             auxPost(raiz,funcion);
             break;
             default:
-            throw new IllegalArgumentException("Sólo puedes ingresar un número entre 1 y 3!");  
+            throw new IllegalArgumentException("Sólo puedes ingresar un número entre 1 y 3!");
         }
     }
     /**
@@ -171,7 +171,7 @@ public abstract class ArbolBinario<T>{
         return elementos;
     }
 
-    
+
     protected void giraIzquierdo(Vertice u){
         if(u==null)
             return;
@@ -180,32 +180,59 @@ public abstract class ArbolBinario<T>{
             return;
 
         if(u.padre!=null){
-            u.padre.derecho=u.derecho;
-            u.derecho.padre=u.padre;
-            u.padre=u.derecho;
-            if(u.padre.izquierdo!=null){
-                Vertice aux=u.padre.izquierdo;
 
-                u.derecho=aux;
-                u.derecho.padre=u;
-            }else{
-                u.derecho=null;
+        if(u.padre.izquierdo == u){
+
+            Vertice aux = u.derecho.izquierdo;
+
+            u.padre.izquierdo = u.derecho;
+            u.derecho.padre = u.padre;
+            u.padre = u.derecho;
+            u.padre.izquierdo = u;
+
+            if(aux != null ){
+              u.derecho = aux;
+              aux.padre = u;
             }
-            u.padre.izquierdo=u;
-        } else{
-            u.derecho.padre=null;
-            u.padre=u.derecho;
-            if(u.derecho.izquierdo!=null){
-                Vertice aux=u.derecho.izquierdo;
-
-                u.derecho=aux;
-                u.derecho.padre=u;
-            } else{
-                u.derecho=null;
+            else{
+              u.derecho = null;
             }
-            u.padre.izquierdo=u;
+          }
+          if(u.padre.derecho == u){
 
-            raiz=u.padre;
+            Vertice aux = u.izquierdo.derecho;
+
+            u.padre.derecho = u.izquierdo;
+            u.izquierdo.padre = u.padre;
+            u.padre = u.izquierdo;
+            u.padre.derecho = u;
+
+            if(aux != null ){
+              u.izquierdo = aux;
+              aux.padre = u;
+            }
+            else{
+              u.izquierdo = null;
+            }
+          }
+        }
+        else{
+
+            Vertice aux = u.derecho.izquierdo;
+
+            u.padre = u.derecho;
+            u.padre.izquierdo = u;
+
+            if( aux != null){
+              u.derecho = aux;
+              aux.padre = u;
+            }
+            else{
+              u.derecho = null;
+            }
+            u.padre.padre = null;
+            raiz = u.padre;
+
         }
 
     }
