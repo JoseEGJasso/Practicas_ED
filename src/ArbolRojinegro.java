@@ -129,7 +129,6 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
 
     }
 
-    ///Auxiliar para buscar el T�o
     private Vertice buscaTio(Vertice v){
 
         if(v.padre.padre!=null){
@@ -148,6 +147,24 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
             }
         }
 
+        return null;
+    }
+
+    private Vertice buscaHermano(Vertice v){
+        if(v.padre!=null){
+            if(v.padre.izquierdo!=null){
+                if (v.padre.izquierdo.elemento.equals(v.elemento)){
+                    if (v.padre.derecho!=null)
+                        return v.padre.derecho;
+                }
+            }
+
+            if (v.padre.derecho!=null) {
+                if(v.padre.derecho.elemento.equals(v.elemento)){
+                    return v.padre.izquierdo;
+                }
+            }
+        }
         return null;
     }
 
@@ -213,8 +230,121 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
     }
 
     @Override
+    //esta mal
     public boolean elimina(T elemento){
+        if (elemento == null)
+            return false;
+
+        if (raiz == null)
+            return false;
+
+        if (buscaVertice(elemento) == null) {
+            return false;
+        }
+
+        Vertice actual = buscaVertice(elemento);
+
+        elementos--;
+
+        if (actual.derecho != null && actual.izquierdo != null) {
+            Vertice intercambio = mayorDerecho(actual);
+            T auxEle = actual.elemento;
+
+            actual.elemento = intercambio.elemento;
+            intercambio.elemento = auxEle;
+
+            actual = intercambio;
+
+        }
+        if (actual.derecho == null && actual.izquierdo == null) {
+            Vertice fantasma=new VerticeRojinegro(null);
+
+            fantasma.padre=actual;
+            actual.izquierdo=fantasma;
+        }
+        if (actual.derecho != null && actual.izquierdo == null) {
+            if (actual.padre != null) {
+                actual.derecho.padre = actual.padre;
+
+                if (actual.padre.izquierdo != null) {
+                    if (actual.padre.izquierdo.elemento.equals(actual.elemento))
+                        actual.padre.izquierdo = actual.derecho;
+                }
+                if (actual.padre.derecho != null)
+                    actual.padre.derecho = actual.derecho;
+            } else {
+                actual.derecho.padre = null;
+                raiz = actual.derecho;
+            }
+        }
+        if (actual.izquierdo != null && actual.derecho == null) {
+            if (actual.padre != null) {
+                actual.izquierdo.padre = actual.padre;
+
+                if (actual.padre.izquierdo != null) {
+                    if (actual.padre.izquierdo.elemento.equals(actual.elemento))
+                        actual.padre.izquierdo = actual.izquierdo;
+                }
+                if (actual.padre.derecho != null)
+                    actual.padre.derecho = actual.izquierdo;
+            } else {
+                actual.izquierdo.padre = null;
+                raiz = actual.izquierdo;
+            }
+        }
+
+        if(getColor(actual)==Color.ROJO)
+            return true;
+
+        if (actual.izquierdo!=null) {
+            if (getColor(actual.izquierdo)==Color.ROJO)
+                setColor(actual.izquierdo, Color.NEGRO);
+            return true;
+        } if(actual.derecho!=null){
+            if (getColor(actual.derecho)==Color.ROJO)
+                setColor(actual.derecho, Color.NEGRO);
+            return true;
+        }
+
+        if (getColor(actual)==Color.NEGRO) {
+            if(actual.derecho!=null){
+                if(getColor(actual.derecho)==Color.NEGRO)
+                    rebalanceaEliminar(actual.derecho);
+            }else{
+                if(getColor(actual.izquierdo)==Color.NEGRO)
+                    rebalanceaEliminar(actual.izquierdo);
+            }
+        }
+
+        // if(actual.derecho!=null){
+        //     if(actual.derecho.elemento.equals(null)){
+        //         actual.derecho.padre=null;
+        //     }
+                
+        // }
+
         return true;
+    }
+
+    private void rebalanceaEliminar(Vertice u){
+        if(u.padre==null)
+            return;
+
+        if(buscaHermano(u)!=null){
+            if(getColor(buscaHermano(u))==Color.ROJO)
+                casoDosRebalanceaElimina(u);
+        }
+    }
+
+    private void casoDosRebalanceaElimina(Vertice u){
+        setColor(u.padre, Color.ROJO);
+
+        setColor(buscaHermano(u), Color.NEGRO);
+
+        if (u.elemento.equals(u.padre.izquierdo.elemento))
+            this.giraIzquierdo(u.padre);
+        else
+            this.giraDerecha(u.padre);
     }
 
     public static void main(String[] args) {
