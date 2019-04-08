@@ -1,3 +1,5 @@
+import ArbolBinario.Vertice;
+
 /**
  * Implementaci�n de �rboles rojinegros.
  */
@@ -22,6 +24,8 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
     }
 
     protected Color getColor(Vertice v){
+        if(v==null)
+            return Color.NEGRO;
         if(v instanceof ArbolRojinegro.VerticeRojinegro){
             VerticeRojinegro vrj=(VerticeRojinegro)v;
 
@@ -31,6 +35,10 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
     }
 
     protected void setColor(Vertice v, Color c){
+        if(v==null || c==null){
+            return;
+        }
+
         if(v instanceof ArbolRojinegro.VerticeRojinegro){        
             VerticeRojinegro vrj=(VerticeRojinegro)v;
 
@@ -330,10 +338,13 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
         if(u.padre==null)
             return;
 
-        if(buscaHermano(u)!=null){
-            if(getColor(buscaHermano(u))==Color.ROJO)
-                casoDosRebalanceaElimina(u);
-        }
+        if(getColor(buscaHermano(u))==Color.ROJO)
+            casoDosRebalanceaElimina(u);
+
+        if(getColor(u.padre)==Color.NEGRO && getColor(buscaHermano(u))==Color.NEGRO){
+            if (getColor(buscaHermano(u).derecho)==Color.NEGRO && getColor(buscarHermano(u).izquierdo==Color.NEGRO))
+                casoTresRebalanceaElimina(u);
+        } 
     }
 
     private void casoDosRebalanceaElimina(Vertice u){
@@ -345,7 +356,10 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
             this.giraIzquierdo(u.padre);
         else
             this.giraDerecha(u.padre);
+        
+        //Falta actualizar el hermano para que vuelva  aser el hermano de v|    
     }
+
 
     public static void main(String[] args) {
         Integer[] arbol={15,20,28,26};
