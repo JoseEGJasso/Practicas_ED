@@ -87,13 +87,10 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         }
         if (actual.derecho == null && actual.izquierdo == null) {
             if (actual.padre != null) {
-                if (actual.padre.izquierdo != null) {
-                    if (actual.padre.izquierdo.elemento.equals(actual.elemento))
-                        actual.padre.izquierdo = null;
-                }if (actual.padre.derecho != null){
-                    if (actual.padre.derecho.elemento.equals(actual.elemento))
-                        actual.padre.derecho = null;
-                }
+                if (actual.padre.izquierdo==actual)
+                    actual.padre.izquierdo = null;
+                else
+                    actual.padre.derecho = null;
             } else
                 raiz = null;
         }
@@ -101,11 +98,9 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             if (actual.padre != null) {
                 actual.derecho.padre = actual.padre;
 
-                if (actual.padre.izquierdo != null) {
-                    if (actual.padre.izquierdo.elemento.equals(actual.elemento))
-                        actual.padre.izquierdo = actual.derecho;
-                }
-                if (actual.padre.derecho != null)
+                if (actual.padre.izquierdo==actual)
+                    actual.padre.izquierdo = actual.derecho;
+                else
                     actual.padre.derecho = actual.derecho;
             } else {
                 actual.derecho.padre = null;
@@ -116,19 +111,15 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             if (actual.padre != null) {
                 actual.izquierdo.padre = actual.padre;
 
-                if (actual.padre.izquierdo != null) {
-                    if (actual.padre.izquierdo.elemento.equals(actual.elemento))
+                    if (actual.padre.izquierdo==actual)
                         actual.padre.izquierdo = actual.izquierdo;
-                }
-                if (actual.padre.derecho != null)
-                    actual.padre.derecho = actual.izquierdo;
+                    else
+                        actual.padre.derecho = actual.izquierdo;
             } else {
                 actual.izquierdo.padre = null;
                 raiz = actual.izquierdo;
             }
         }
-
-        System.out.println("\n"+actual.derecho.elemento);
 
         return true;
     }
@@ -168,16 +159,15 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
     }
 
     public static void main(String[] args) {
-        Integer[] a={10,12};
+        Integer[] a={311,87,524,65,211,480,666,444};
         Consumer<Integer> l=t -> {
             System.out.print(t+", ");
         };
 
         ArbolBinarioBusqueda<Integer> arbol=new ArbolBinarioBusqueda<>(a);
+        // arbol.giraDerecha(arbol.raiz.derecho);
+        System.out.println(arbol.elimina(311));
         arbol.bfs(l);
-        System.out.println(arbol.elimina(10));
-        arbol.bfs(l);
-        // System.out.println(arbol.elimina(4));
         // System.out.println(arbol.elimina(5));
         // arbol.bfs(l);
     }

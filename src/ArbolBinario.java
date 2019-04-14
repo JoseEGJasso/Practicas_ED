@@ -42,7 +42,7 @@ public abstract class ArbolBinario<T>{
      * @param arreglo; arreglo del cual se va a crear un arbol binario
      */
     public ArbolBinario(T[] arreglo){
-        if (arreglo.length!=0) {
+        if (arreglo.length!=0) {            
             for(int i=0;i<arreglo.length;i++)
                 agrega(arreglo[i]);
         }
@@ -124,7 +124,7 @@ public abstract class ArbolBinario<T>{
             auxPost(raiz,funcion);
             break;
             default:
-            throw new IllegalArgumentException("Sólo puedes ingresar un número entre 1 y 3!");
+            throw new IllegalArgumentException("Sólo puedes ingresar un número entre 1 y 3!");  
         }
     }
     /**
@@ -171,7 +171,6 @@ public abstract class ArbolBinario<T>{
         return elementos;
     }
 
-
     protected void giraIzquierdo(Vertice u){
 
         if(u==null)
@@ -181,13 +180,14 @@ public abstract class ArbolBinario<T>{
             return;
 
         if(u.padre!=null){
-            if(u.padre.izquierdo!=null){
-                if(u.padre.izquierdo.elemento.equals(u.elemento))
-                    u.padre.izquierdo=u.derecho;
-            }else
+            if(u.padre.izquierdo==u)
+                u.padre.izquierdo=u.derecho;
+            else
                 u.padre.derecho=u.derecho;
+
             u.derecho.padre=u.padre;
             u.padre=u.derecho;
+
             if(u.padre.izquierdo!=null){
                 Vertice aux=u.padre.izquierdo;
 
@@ -216,6 +216,7 @@ public abstract class ArbolBinario<T>{
     }
 
     protected void giraDerecha(Vertice u){
+
         if(u==null)
             return;
 
@@ -225,13 +226,15 @@ public abstract class ArbolBinario<T>{
 
         if(u.padre!=null){
 
-            if(u.padre.izquierdo!=null){
-                if(u.padre.izquierdo.elemento.equals(u.elemento))
-                    u.padre.izquierdo=u.izquierdo;
-            }else
+            if(u.padre.izquierdo==u)
+                u.padre.izquierdo=u.izquierdo;
+            else
                 u.padre.derecho=u.izquierdo;
+
             u.izquierdo.padre=u.padre;
             u.padre=u.izquierdo;
+
+            
             if(u.padre.derecho!=null){
                 Vertice aux=u.padre.derecho;
 
@@ -240,7 +243,9 @@ public abstract class ArbolBinario<T>{
             }else{
                 u.izquierdo=null;
             }
+
             u.padre.derecho=u;
+
         } else{
             u.izquierdo.padre=null;
             u.padre=u.izquierdo;
@@ -257,5 +262,6 @@ public abstract class ArbolBinario<T>{
 
             this.raiz=u.padre;
         }
+
     }
 }
