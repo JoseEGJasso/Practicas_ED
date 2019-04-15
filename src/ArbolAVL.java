@@ -231,7 +231,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T>{
     }
 
     public static void main(String[] args) {
-        Integer[] avl={10,3,20,21,9,2,11,12,22,1};
+        Integer[] avl={11,2,20,10,12,22,23,9};
         ArbolAVL<Integer> arbolAvl=new ArbolAVL<>(avl);
 
         arbolAvl.elimina(1);
