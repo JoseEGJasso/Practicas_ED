@@ -10,25 +10,34 @@ public class Palabra implements Comparable<Palabra>{
   public Palabra(String palabra){
 
     this.palabra = palabra;
-    recurrencia = 0
+    recurrencia = 1;
   }
 
-  public int  getTF(Palabra palabra){
-    return palabra.recurrencia;
+  public int getRecurrencia(){
+    return recurrencia;
   }
 
-  public String getPalabra(Palabra palabra){
-    return palabra.palabra;
+  public String getPalabra(){
+    return palabra;
   }
 
-  public void aumentarRecurrencia(Palabra palabra){
+  public void aumentarRecurrencia(){
     recurrencia ++;
   }
 
   @Override
-  public int compareTo(Palabra palabra){
-    return this.palabra.compareTo(palabra.getPalabra());
+  public int compareTo(Palabra compPalabra){
+    return this.palabra.compareTo(compPalabra.palabra);
   }
 
+  @Override
+  public boolean equals(Object compObject){
+    if(!(compObject instanceof Palabra))
+      return false;
+
+    Palabra compPalabra=(Palabra)compObject;
+    
+    return this.palabra.equalsIgnoreCase(compPalabra.palabra);
+  }
 
 }
