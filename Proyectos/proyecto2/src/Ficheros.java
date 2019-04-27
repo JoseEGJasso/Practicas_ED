@@ -12,10 +12,15 @@ import java.io.BufferedReader;
  * @author Dozal Magnani Diego
  * 
  */
-public class Ficheros{
+public class Ficheros implements Comparable<Ficheros>{
     private ArbolRojinegro<Palabra> palabras;
     private Path ruta;
     private StringBuilder contenido;
+    private int contPalabras;
+    private double[] tf;
+    private double[] tf_idf;
+    private double similitud;
+
 
     public Ficheros(String ruta){
         this.ruta=Paths.get(ruta);
@@ -42,6 +47,20 @@ public class Ficheros{
         }catch(IOException e){
             contenido=null;
         }
+    }
+
+    public char verificarFichero(){
+        if(this.contenido==null)
+            return 'N';
+        for(int i=0;i<contenido.length();i++){
+            if(contenido.charAt(i)!=' ')
+                return 'B';
+        }
+        return 'N';
+    }
+
+    public void setSimilitud(double similitud){
+        this.similitud=similitud;
     }
 
     public String getContenido(){
@@ -102,6 +121,8 @@ public class Ficheros{
                 if(!nuevaPalabra.equals("")){
                     Palabra igual=palabras.busca(new Palabra(nuevaPalabra));
 
+                    contPalabras++;
+
                     if(igual==null)
                         palabras.agrega(new Palabra(nuevaPalabra));
                     else{
@@ -119,6 +140,8 @@ public class Ficheros{
         if(!nuevaPalabra.equals("")){
             Palabra igual=palabras.busca(new Palabra(nuevaPalabra));
 
+            contPalabras++;
+
             if(igual==null)
                 palabras.agrega(new Palabra(nuevaPalabra));
             else{
@@ -127,24 +150,75 @@ public class Ficheros{
         }
     }
 
+    public int getcontPalabras(){
+        return contPalabras;
+    }
+
+    public void obtenerTF(Lista<Palabra> busquedaDePalabras){
+        tf=new double[busquedaDePalabras.getLongitud()];
+
+        for(int i=0;i<busquedaDePalabras.getLongitud();i++){
+            Palabra palabraIterada=palabras.busca(new Palabra(busquedaDePalabras.get(i).getPalabra()));
+
+            if(palabraIterada!=null){
+                tf[i]=palabraIterada.calculaTF();
+            }else
+                tf[i]=0;
+        }
+    }
+
+    public void productoTF_IDF(Lista<Palabra> palabrasDeBusqueda){
+        tf_idf=new double[palabrasDeBusqueda.getLongitud()];
+
+        for(int i=0;i<palabrasDeBusqueda.getLongitud();i++){
+            tf_idf[i]=tf[i]*palabrasDeBusqueda.get(i).getIDF();
+        }
+    }
+
+    public void asignarSimilitud(){
+        double suma=0;
+
+        for(double elemento:tf_idf)
+            suma+=elemento;
+        
+        if(this.contPalabras==0){
+            this.similitud=0;
+        }else
+            this.similitud=suma/this.contPalabras;
+    }
+
+    public double getSimilitud(){
+        return similitud;
+    }
+
+    @Override
+    public int compareTo(Ficheros archivo){
+        if(this.similitud<archivo.similitud)
+            return -1;
+        if(archivo.similitud<this.similitud)
+            return 1;
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(!(obj instanceof Ficheros))
+            return false;
+
+        Ficheros archivo=(Ficheros)obj;
+
+        return this.ruta.equals(archivo.ruta);
+    }
     public static void main(String[] args) {
         Ficheros fichero=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
-        Ficheros fichero1=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
         Ficheros fichero2=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
-        Ficheros fichero3=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
+        // Ficheros fichero2=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
+        // Ficheros fichero3=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
 
         fichero.eliminarAcentosYEspeciales();
         fichero.dividirPalabras();
         fichero.palabras.bfs(t -> System.out.print(t.getRecurrencia()+", "));
         System.out.println("\n"+fichero.getNombre()+"\n");
 
-        fichero1.eliminarAcentosYEspeciales();
-        fichero1.dividirPalabras();
-
-        fichero2.eliminarAcentosYEspeciales();
-        fichero2.dividirPalabras();
-
-        fichero3.eliminarAcentosYEspeciales();
-        fichero3.dividirPalabras();
     }
 }
