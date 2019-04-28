@@ -118,7 +118,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T>{
      * @param verticeNuevo
      */
     private void auxAgrega(Vertice v,Vertice verticeNuevo){
-        if(verticeNuevo.elemento.compareTo(v.elemento)<=0){
+        if(verticeNuevo.elemento.compareTo(v.elemento)<0){
             if(v.izquierdo==null){
                 v.izquierdo=verticeNuevo;
                 v.izquierdo.padre=v;
@@ -309,18 +309,18 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBinarioBusqueda<T>{
     }
 
     public static void main(String[] args) {
-        Integer[] avl={11,2,20,10,12,22,23,9};
+        Integer[] avl={11,8,20,39,9,9,9,9,9,9,9,9,9,9};
         ArbolAVL<Integer> arbolAvl=new ArbolAVL<>(avl);
 
-        arbolAvl.elimina(1);
+        // arbolAvl.elimina(1);
 
-        arbolAvl.elimina(3);
+        // arbolAvl.elimina(3);
 
-        arbolAvl.elimina(9);
+        // arbolAvl.elimina(9);
 
-        arbolAvl.elimina(21);
+        // arbolAvl.elimina(21);
 
-        arbolAvl.agrega(2);
+        // arbolAvl.agrega(2);
 
         System.out.println(arbolAvl.toString());
         arbolAvl.bfs(t->{

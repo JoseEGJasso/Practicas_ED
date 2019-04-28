@@ -262,11 +262,11 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
      * @param v
      */
     private void casoCuatroRebalanceaAgrega(Vertice v){
-            if(v.padre==v.padre.padre.izquierdo){
-                this.giraIzquierdo(v.padre);
-            } else{
-                this.giraDerecha(v.padre);
-            }
+        if (v.padre == v.padre.padre.izquierdo) {
+            this.giraIzquierdo(v.padre);
+        } else {
+            this.giraDerecha(v.padre);
+        }
     }
 
     /**
