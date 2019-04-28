@@ -3,7 +3,7 @@ package proyecto2;
 /**
  * @author González Jasso José Eduardo
  * @author Dozal Magnani Diego
- * 
+ *
  *
  */
 public class Busqueda{
@@ -72,7 +72,7 @@ public class Busqueda{
     }
 
 
-    private Ficheros[] ordenarFicheros(){
+    public Ficheros[] ordenarFicheros(){
         Object[] ficheros=archivos.toArray();
         Ficheros[] temp=new Ficheros[ficheros.length];
 
