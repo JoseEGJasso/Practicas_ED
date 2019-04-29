@@ -24,6 +24,8 @@ public class GUIProyecto2 {
    private Busqueda busqueda=new Busqueda();
    private String ruta="";
 
+   private JPanel panelPrincipal;
+
    private JButton buttonSearch;
    private JButton buttonAdd;
 
@@ -44,9 +46,11 @@ public class GUIProyecto2 {
 
      super();
      configurarVentana();
+     inicializarPaneles();
      inicializarBotones();
      inicializarCajas();
      inicializarAreasDeTexto();
+     inicializarEtiquetas();
      //inicializarScroll();
 
      interaccionAgrega();
@@ -54,7 +58,7 @@ public class GUIProyecto2 {
 
    }
 
-   public void configurarVentana(){
+   private void configurarVentana(){
      this.setSize(500, 350);
      this.setLocationRelativeTo(null);
      this.setLayout(null);
@@ -62,19 +66,27 @@ public class GUIProyecto2 {
      this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 
-   public void inicializarBotones(){
+   private void inicializarPaneles(){
+     panelPrincipal = new JPanel();
+     panelPrincipal.setSize(500,350);
+     panelPrincipal.setLayout(null);
+     this.add(panelPrincipal);
+
+   }
+
+   private void inicializarBotones(){
 
      buttonSearch = new JButton();
      buttonSearch.setText("Buscar");
      buttonSearch.setSize(150, 35);
      buttonSearch.setLocation(50,25);
-     this.add(buttonSearch);
+     panelPrincipal.add(buttonSearch);
 
      buttonAdd = new JButton();
      buttonAdd.setText("Agregar Fichero");
      buttonAdd.setSize(150, 35);
      buttonAdd.setLocation(50,70);
-     this.add(buttonAdd);
+     panelPrincipal.add(buttonAdd);
    }
 
    //Se agregan las cajas de texto a la ventana
@@ -83,32 +95,46 @@ public class GUIProyecto2 {
      boxSearch = new JTextField();
      boxSearch.setSize(200, 35);
      boxSearch.setLocation(250,25);
-     this.add(boxSearch);
+     panelPrincipal.add(boxSearch);
 
 
      boxAdd = new JTextField();
      boxAdd.setSize(200, 35);
      boxAdd.setLocation(250,70);
-     this.add(boxAdd);
+     panelPrincipal.add(boxAdd);
    }
 
    // Aquí es donde hay que inicir el JTextArea
    public void inicializarAreasDeTexto(){
-     resultArea = new JTextArea("Resultados:\n");
+     resultArea = new JTextArea();
      resultArea.setLineWrap(true);
-     resultArea.setSize(250,150);
-     resultArea.setLocation(50,120);
+     resultArea.setSize(250,160);
+     resultArea.setLocation(50,150);
      resultArea.setEditable(false);
-     this.add(resultArea);
+     panelPrincipal.add(resultArea);
 
-     ultimoArchivoAgregado = new JTextArea("Agregado:\t");
+     ultimoArchivoAgregado = new JTextArea();
      ultimoArchivoAgregado.setSize(180,20);
-     ultimoArchivoAgregado.setLocation(300,120);
+     ultimoArchivoAgregado.setLocation(310,150);
      ultimoArchivoAgregado.setEditable(false);
-     this.add(ultimoArchivoAgregado);
+     panelPrincipal.add(ultimoArchivoAgregado);
 
+    }
 
-        }
+    private void inicializarEtiquetas(){
+
+      JLabel etiquetaResultados = new JLabel();
+      etiquetaResultados.setText("RESULTADOS");//Agregar
+      etiquetaResultados.setSize(100,20);
+      etiquetaResultados.setLocation(130,130);
+      panelPrincipal.add(etiquetaResultados);
+
+      JLabel etiquetaAgregados = new JLabel();
+      etiquetaAgregados.setText("AGREGADO");
+      etiquetaAgregados.setSize(100,20);
+      etiquetaAgregados.setLocation(360,130);
+      panelPrincipal.add(etiquetaAgregados);
+    }
 
   //Inicializar Scroll de la caja. El scroll aún no jala
   public void inicializarScroll(){
@@ -134,7 +160,7 @@ public class GUIProyecto2 {
           ultimoArchivoAgregado.append(nuevoFichero.getNombre());
           ruta = "";
         } else{
-          JOptionPane.showMessageDialog(boxAdd, "El archivo está vacío o la ruta está mal escrita");          
+          JOptionPane.showMessageDialog(boxAdd, "El archivo está vacío o la ruta está mal escrita");
         }
        }
      };
@@ -147,10 +173,12 @@ public class GUIProyecto2 {
 
        public void actionPerformed(ActionEvent e){
 
+         resultArea.setText(null);
          String aBuscar = boxSearch.getText();
 
          if(busqueda.getNumFicheros() == 0){
            JOptionPane.showMessageDialog(boxSearch,"No hay archivos añadidos");
+           boxSearch.setText(null);
            return;
          }
 
@@ -165,10 +193,12 @@ public class GUIProyecto2 {
            Ficheros[] ficherosOrdenados = busqueda.ordenarFicheros();
            for(int i=ficherosOrdenados.length-1;i>=0;i--){
                if(ficherosOrdenados[i].getSimilitud()==0)
-                   continue;
+                   break;
+
                resultArea.append(ficherosOrdenados[i].getNombre());
                resultArea.append("\n");
            }
+           boxSearch.setText(null);
          }
 
        }
