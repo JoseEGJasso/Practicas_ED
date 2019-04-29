@@ -283,7 +283,9 @@ import java.util.NoSuchElementException;
     *
     */
     public void limpia(){
-        cabeza=null;
+        for (int i=0;i<this.getLongitud();i++) {
+            this.eliminaUltimo();
+        }
         longitud=0;
     }
 
