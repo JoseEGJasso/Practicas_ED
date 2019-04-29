@@ -6,12 +6,12 @@ package proyecto2;
 public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqueda<T>{
 
     protected class VerticeRojinegro extends Vertice{
-	
+
         public VerticeRojinegro(T elemento){
             super(elemento);
             color=Color.NEGRO;
         }
-        
+
         public Color color;
     }
 
@@ -39,7 +39,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
             return;
         }
 
-        if(v instanceof ArbolRojinegro.VerticeRojinegro){        
+        if(v instanceof ArbolRojinegro.VerticeRojinegro){
             VerticeRojinegro vrj=(VerticeRojinegro)v;
 
             vrj.color=c;
@@ -73,7 +73,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
         }
         return colores;
     }
-    
+
     @Override
     public void agrega(T elemento){
         Vertice nuevoVertice=new VerticeRojinegro(elemento);
@@ -122,7 +122,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
             return;
 
         }else{
-            if(getColor(v.padre) == Color.ROJO){ 
+            if(getColor(v.padre) == Color.ROJO){
                 if(buscaTio(v)!=null){
                     if(getColor(buscaTio(v))==Color.ROJO){
                         casoTresRebalanceaAgrega(v);
@@ -209,7 +209,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
                 giraDerecha(v.padre.padre);
             else
                 giraIzquierdo(v.padre.padre);
-        }   
+        }
     }
 
     @Override
@@ -243,7 +243,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
 
         }if (actual.derecho == null && actual.izquierdo == null) {
             if(getColor(actual)==Color.ROJO){
-                
+
                 if(actual.padre.izquierdo==actual)
                     actual.padre.izquierdo=null;
                 else
@@ -378,7 +378,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
         if (u==u.padre.izquierdo)
             this.giraIzquierdo(u.padre);
         else
-            this.giraDerecha(u.padre);  
+            this.giraDerecha(u.padre);
     }
 
     private void casoCincoRebalanceaElimina(Vertice u){
@@ -442,6 +442,7 @@ public class ArbolRojinegro<T extends Comparable<T>> extends ArbolBinarioBusqued
         arbol1.bfs(t->{
             System.out.print(t+", ");
         });
+
 
         System.out.println("\n"+arbol1.toString());
     }

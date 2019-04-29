@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 /**
  * @author González Jasso José Eduardo
  * @author Dozal Magnani Diego
- * 
+ *
  */
 public class Ficheros implements Comparable<Ficheros>{
     private ArbolRojinegro<Palabra> palabras;
@@ -26,7 +26,9 @@ public class Ficheros implements Comparable<Ficheros>{
         this.ruta=Paths.get(ruta);
         leerFichero();
         palabras=new ArbolRojinegro<>();
+
     }
+
 
     private void leerFichero(){
         try{
@@ -34,7 +36,7 @@ public class Ficheros implements Comparable<Ficheros>{
 
             String lectorDeLineas=buffer.readLine();
             contenido=new StringBuilder();
-            
+
             while(lectorDeLineas!=null){
                 contenido.append(lectorDeLineas);
                 lectorDeLineas=buffer.readLine();
@@ -76,7 +78,7 @@ public class Ficheros implements Comparable<Ficheros>{
     }
 
     public void eliminarAcentosYEspeciales(){
-        
+
         for(int i=0;i<contenido.length();i++){
 
             if((int)(contenido.charAt(i))>=224 && (int)(contenido.charAt(i))<230 || (int)(contenido.charAt(i))>=192 && (int)(contenido.charAt(i))<198){
@@ -158,12 +160,12 @@ public class Ficheros implements Comparable<Ficheros>{
         tf=new double[busquedaDePalabras.getLongitud()];
 
         for(int i=0;i<busquedaDePalabras.getLongitud();i++){
-            Palabra palabraIterada=palabras.busca(new Palabra(busquedaDePalabras.get(i).getPalabra()));
+            Palabra palabraIterada=palabras.busca(busquedaDePalabras.get(i));
 
             if(palabraIterada!=null){
                 tf[i]=palabraIterada.calculaTF();
             }else
-                tf[i]=0;
+                tf[i]=0.0;
         }
     }
 
@@ -180,11 +182,16 @@ public class Ficheros implements Comparable<Ficheros>{
 
         for(double elemento:tf_idf)
             suma+=elemento;
-        
+
         if(this.contPalabras==0){
             this.similitud=0;
         }else
             this.similitud=suma/this.contPalabras;
+    }
+
+    public void limpiar(){
+    	tf_idf=null;
+    	tf=null;
     }
 
     public double getSimilitud(){

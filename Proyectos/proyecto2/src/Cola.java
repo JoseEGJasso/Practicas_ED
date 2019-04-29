@@ -116,7 +116,7 @@ public class Cola<T> implements Iterable<T>{
     @Override
     public boolean equals(Object o){
 
-      if(o==null)  
+      if(o==null)
         return false;
 
       boolean estado=false;

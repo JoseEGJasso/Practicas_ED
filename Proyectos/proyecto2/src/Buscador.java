@@ -3,8 +3,8 @@ package proyecto2;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 /**
- * 
- * 
+ *
+ *
  */
 
 public class Buscador{
@@ -13,9 +13,7 @@ public class Buscador{
             return false;
 
         for (int i = 0; i < busqueda.length(); i++) {
-            if(busqueda.charAt(i)!=',' || busqueda.charAt(i)!='?' || busqueda.charAt(i)!='¿' || busqueda.charAt(i)!='!' || busqueda.charAt(i)!='¡')
-                return true;
-            if(busqueda.charAt(i)!='.' || busqueda.charAt(i)!=' ' || busqueda.charAt(i)!=':' || busqueda.charAt(i)!=';')
+            if(busqueda.charAt(i)!=',' && busqueda.charAt(i)!='?' && busqueda.charAt(i)!='¿' && busqueda.charAt(i)!='!' && busqueda.charAt(i)!='¡' && (int)(busqueda.charAt(i))!=46 && busqueda.charAt(i)!=' ' && busqueda.charAt(i)!=':' && busqueda.charAt(i)!=';')
                 return true;
         }
 
@@ -42,7 +40,7 @@ public class Buscador{
         System.out.println("- Primero tendrás que indicar el número de archivos que vas a introducir");
         System.out.println("- Después insertaras la RUTA ABSOLUTA de cada archivo. Si el archivo no existe o está vacío, la ruta está mal escrita o el archivo no es del formato especificado.\n   El programa le pedirá que ingrese de nuevo la ruta");
         System.out.println("- Por ultimo ingresarás la búsqueda tomando en cuenta las reglas mencionadas anteriormente y se imprimirá en pantalla el nombre de cada archivo de acuerdo a su simiitud\n   con la búsqueda (si el archivo tiene similitud 0 no se mostrará)\n");
-        
+
         System.out.println("[PRESIONE ENTER PARA CONTINUAR]");
         in.nextLine();
 
@@ -62,18 +60,21 @@ public class Buscador{
                 try {
                     System.out.print("Cuantos archivos quieres ingresar? >: ");
                     numArchivos = in.nextInt();
-                    if(numArchivos==0)
+                    if(numArchivos==0){
                         estado=false;
-                    else
+                        System.out.println("Debes introducir un número entero distinto de cero. Intenta de nuevo\n");
+                    }else
                         estado = true;
                 } catch (InputMismatchException e) {
                     System.out.println("Debes introducir un número entero distinto de cero. Intenta de nuevo\n");
+                    estado=false;
+                    in.nextLine();
                 }
             }
-    
+
             estado=false;
             in.nextLine();
-    
+
             for (int i = 0; i < numArchivos; i++) {
                 Ficheros nuevoFichero;
                 do{
@@ -81,9 +82,9 @@ public class Buscador{
                     System.out.println("NOTA: La ruta del archivo a leer debe estar bien escrita y el archivo (obviamente) debe de existir. No puedes agregar archivos que ya haz agregado");
                     System.out.print("Ingresa la ruta absoluta del archivo numero "+(i+1)+"\n>:");
                     ruta=in.nextLine();
-    
+
                     nuevoFichero=new Ficheros(ruta);
-    
+
                 }while(nuevoFichero.verificarFichero()=='N' || busqueda.yaSeAgrego(nuevoFichero));
                 busqueda.agregarFicheros(nuevoFichero);
                 ruta="";
@@ -102,21 +103,20 @@ public class Buscador{
                 System.out.print("Ingresa tu busqueda >: ");
                 aBuscar=in.nextLine();
             }while(!verificaBusqueda(aBuscar));
-    
+
             busqueda.procesarBusqueda(aBuscar);
-    
-            busqueda.procesarFicheros();
-    
+
             busqueda.calcularSimilitud();
-    
+
             System.out.println();
-    
+
             System.out.println("[PRESIONA ENTER PARA CONTINUAR]\n");
-    
+
             System.out.println("**********RESULTADO DE LA BUSQUEDA**********");
-    
+
             busqueda.imprimirResultados();
-    
+
+            System.out.println("[PRESIONA ENTER PARA CONTINUAR]");
             in.nextLine();
 
             default:

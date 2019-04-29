@@ -274,7 +274,7 @@ import java.util.NoSuchElementException;
                     return true;
                 }
                 actual=actual.siguiente;
-            }        
+            }
         }
         return false;
     }
@@ -283,9 +283,7 @@ import java.util.NoSuchElementException;
     *
     */
     public void limpia(){
-        for (int i=0;i<this.getLongitud();i++) {
-            this.eliminaUltimo();
-        }
+        cabeza = null;
         longitud=0;
     }
 
@@ -442,7 +440,7 @@ import java.util.NoSuchElementException;
     @Override
     public boolean equals(Object o){
 
-      if(o==null)  
+      if(o==null)
         return false;
 
       boolean estado=false;

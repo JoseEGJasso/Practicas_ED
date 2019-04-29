@@ -44,7 +44,7 @@ public abstract class ArbolBinario<T>{
      * @param arreglo; arreglo del cual se va a crear un arbol binario
      */
     public ArbolBinario(T[] arreglo){
-        if (arreglo.length!=0) {            
+        if (arreglo.length!=0) {
             for(int i=0;i<arreglo.length;i++)
                 agrega(arreglo[i]);
         }
@@ -126,7 +126,7 @@ public abstract class ArbolBinario<T>{
             auxPost(raiz,funcion);
             break;
             default:
-            throw new IllegalArgumentException("Sólo puedes ingresar un número entre 1 y 3!");  
+            throw new IllegalArgumentException("Sólo puedes ingresar un número entre 1 y 3!");
         }
     }
     /**
@@ -236,7 +236,7 @@ public abstract class ArbolBinario<T>{
             u.izquierdo.padre=u.padre;
             u.padre=u.izquierdo;
 
-            
+
             if(u.padre.derecho!=null){
                 Vertice aux=u.padre.derecho;
 
