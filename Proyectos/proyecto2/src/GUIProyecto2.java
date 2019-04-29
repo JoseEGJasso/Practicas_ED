@@ -128,24 +128,14 @@ public class GUIProyecto2 {
          ruta = boxAdd.getText();
          nuevoFichero = new Ficheros(ruta);
 
-          if(nuevoFichero.verificarFichero() == 'N'){
-            JOptionPane.showMessageDialog(boxAdd,"El archivo está vacío o la ruta está mal escrita");
-            return;
-          } else{
-            ultimoArchivoAgregado.setText(null);
-            busqueda.agregarFicheros(nuevoFichero);
-            ultimoArchivoAgregado.append(nuevoFichero.getNombre());
-            ruta = "";
-          }
-          if(!busqueda.yaSeAgrego(nuevoFichero)){
-            ultimoArchivoAgregado.setText(null);
-            busqueda.agregarFicheros(nuevoFichero);
-            ultimoArchivoAgregado.append(nuevoFichero.getNombre());
-            ruta = "";
-          } else{
-            JOptionPane.showMessageDialog(boxAdd,"El archivo ya se agregó o la ruta está mal escrita");
-            return;
-          }
+         if(nuevoFichero.verificarFichero()=='B' && !busqueda.yaSeAgrego(nuevoFichero)){
+          ultimoArchivoAgregado.setText(null);
+          busqueda.agregarFicheros(nuevoFichero);
+          ultimoArchivoAgregado.append(nuevoFichero.getNombre());
+          ruta = "";
+        } else{
+          JOptionPane.showMessageDialog(boxAdd, "El archivo está vacío o la ruta está mal escrita");          
+        }
        }
      };
 
@@ -192,10 +182,8 @@ public class GUIProyecto2 {
            return false;
 
        for (int i = 0; i < busqueda.length(); i++) {
-           if(busqueda.charAt(i)!=',' || busqueda.charAt(i)!='?' || busqueda.charAt(i)!='¿' || busqueda.charAt(i)!='!' || busqueda.charAt(i)!='¡')
-               return true;
-           if(busqueda.charAt(i)!='.' || busqueda.charAt(i)!=' ' || busqueda.charAt(i)!=':' || busqueda.charAt(i)!=';')
-               return true;
+        if (busqueda.charAt(i)!=',' && busqueda.charAt(i)!='?' && busqueda.charAt(i)!='¿' && busqueda.charAt(i)!='!' && busqueda.charAt(i)!='¡' && (int)(busqueda.charAt(i))!=46 && busqueda.charAt(i)!=' ' && busqueda.charAt(i)!=':' && busqueda.charAt(i)!=';' && busqueda.charAt(i)!='\u0000')
+          return true;
        }
 
        return false;
