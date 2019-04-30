@@ -1,21 +1,37 @@
 package proyecto2;
-
-import java.util.function.Consumer;
 /**
  * Clase que representa un árbol binario de búsqueda.
+ *
  * @author Dozal Magnani Diego
  * @author González Jasso José Eduardo
  */
 public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<T>{
 
+    /**
+     * Constructor de un árbol binario de búsqueda vacío
+     *
+     *
+     */
     public ArbolBinarioBusqueda(){
         elementos=0;
     }
 
+    /**
+     * Constructor de un árbol binario de búsqueda a partir de una arreglo
+     * @param a
+     *
+     */
     public ArbolBinarioBusqueda(T[] a){
         super(a);
     }
 
+    /**
+     * Método para agregar vértices al árbol binario de búsqueda. Recibe un elemento
+     * y después crea un vértice que tiene "adentro" al elemento, después lo agrega al
+     * árbol siguiendo los criterios de un árbol binario de búsqueda.
+     *
+     * @param elemento
+     */
     @Override
     public void agrega(T elemento){
         if (elemento!=null) {
@@ -30,7 +46,7 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             boolean yaAgrego=false;
 
             while(!yaAgrego){
-                if(elemento.compareTo(actual.elemento)<=0){
+                if(elemento.compareTo(actual.elemento)<0){
                     if(actual.izquierdo==null){
                         actual.izquierdo=nuevoVertice;
                         actual.izquierdo.padre=actual;
@@ -50,6 +66,14 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         }
     }
 
+    /**
+     * Implementación del método abstracto "contiene" de árbol binario .
+     * Recibe un elemento genérico y regresa un boolean "true" si el vértice
+     * contiene al elemento y en caso contrario un "false".
+     *
+     * @param elemento
+     * @return boolean
+     */
     @Override
     public boolean contiene(T elemento){
         if(elemento==null)
@@ -61,19 +85,28 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         return true;
     }
 
+    /**
+     * Implementación del método abstracto "elimina" de árbol binario.
+     * Recibe un elemento a eliminar, después si no lo encuentra el método termina. En caso
+     * de que encuentre el elemento, elimina el vértice que lo contiene y reordena el árbo
+     * respetando las propiedades de un árbol binario de búsqueda.
+     *
+     * @param elemento
+     * @return boolean
+     */
     @Override
     public boolean elimina(T elemento){
-        Vertice actual = buscaVertice(elemento);
-
         if (elemento == null)
             return false;
 
         if (raiz == null)
             return false;
 
-        if (actual == null){
+        if (buscaVertice(elemento) == null){
             return false;
         }
+
+        Vertice actual = buscaVertice(elemento);
 
         elementos--;
 
@@ -113,10 +146,10 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
             if (actual.padre != null) {
                 actual.izquierdo.padre = actual.padre;
 
-                if (actual.padre.izquierdo == actual)
-                    actual.padre.izquierdo = actual.izquierdo;
-                else
-                    actual.padre.derecho = actual.izquierdo;
+                    if (actual.padre.izquierdo==actual)
+                        actual.padre.izquierdo = actual.izquierdo;
+                    else
+                        actual.padre.derecho = actual.izquierdo;
             } else {
                 actual.izquierdo.padre = null;
                 raiz = actual.izquierdo;
@@ -126,7 +159,14 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         return true;
     }
 
-    public Vertice buscaVertice(T elemento){
+    /**
+     * Método protegido para poder buscar un vértice que contenga al elemento genérico.
+     * Si lo encuentra regresa el vértice.
+     *
+     * @param elemento
+     * @return Vertice
+     */
+    protected Vertice buscaVertice(T elemento){
         Vertice actual=raiz;
 
         while(actual!=null){
@@ -150,6 +190,11 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         return null;
     }
 
+    /**
+     * Busca en el arbol una coincidencia con el elemento que recibe como parámetro
+     *
+     * @return T; elemento que se busó
+     */
     public T busca(T elemento){
         Vertice busqueda=buscaVertice(elemento);
 
@@ -158,6 +203,14 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         return null;
     }
 
+    /**
+     * Método protegido que nos permite saber cuál es el mayor elemento del subárbol izquierdo
+     * de un árbol binario de búsqueda, será utilizado en elimina para hacer el intercambio
+     * de vértices cuando uno sea eliminado.
+     *
+     * @param u
+     * @return Vertice
+     */
     protected Vertice mayorDerecho(Vertice u){
         Vertice actual=u.izquierdo;
 
@@ -166,19 +219,5 @@ public class ArbolBinarioBusqueda<T extends Comparable<T>> extends ArbolBinario<
         }
 
         return actual;
-    }
-
-    public static void main(String[] args) {
-        Integer[] a={311,87,524,65,211,480,666,444};
-        Consumer<Integer> l=t -> {
-            System.out.print(t+", ");
-        };
-
-        ArbolBinarioBusqueda<Integer> arbol=new ArbolBinarioBusqueda<>(a);
-        // arbol.giraDerecha(arbol.raiz.derecho);
-        System.out.println(arbol.elimina(311));
-        arbol.bfs(l);
-        // System.out.println(arbol.elimina(5));
-        // arbol.bfs(l);
     }
 }

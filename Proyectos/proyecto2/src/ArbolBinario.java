@@ -163,7 +163,7 @@ public abstract class ArbolBinario<T>{
             return;
         auxIn(u.izquierdo,funcion);
         funcion.accept(u.elemento);
-        auxPre(u.derecho,funcion);
+        auxIn(u.derecho,funcion);
     }
     /**
      * Regresa el número de elementos dentro del árbol.

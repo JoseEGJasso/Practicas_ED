@@ -329,16 +329,4 @@ public class Ficheros implements Comparable<Ficheros>{
 
         return this.ruta.equals(archivo.ruta);
     }
-    public static void main(String[] args) {
-        Ficheros fichero=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
-        Ficheros fichero2=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
-        // Ficheros fichero2=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
-        // Ficheros fichero3=new Ficheros("/home/josejasso2000/Escritorio/Estructuras de Datos/PruebasBasicas.txt");
-
-        fichero.eliminarAcentosYEspeciales();
-        fichero.dividirPalabras();
-        fichero.palabras.bfs(t -> System.out.print(t.getRecurrencia()+", "));
-        System.out.println("\n"+fichero.getNombre()+"\n");
-
-    }
 }

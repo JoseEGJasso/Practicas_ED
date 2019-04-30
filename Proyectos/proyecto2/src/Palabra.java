@@ -73,7 +73,7 @@ public class Palabra implements Comparable<Palabra>{
     return coincidencia;
   }
   /**
-   *
+   * Calcula el número de coincidencias con la lista Fichetos y posteriormente calcula el IDF
    * @param listaFicheros
    */
   public void calculaIDF(Lista<Ficheros> listaFicheros){
@@ -83,21 +83,21 @@ public class Palabra implements Comparable<Palabra>{
       idf=Math.log10((((double)listaFicheros.getLongitud()+1)/(double)obtenerCoincidencias(listaFicheros)))/Math.log10(2);
   }
   /**
-   *
+   * Regresa el valor IDF propio de cada Palabra
    * @return
    */
   public double getIDF(){
     return idf;
   }
   /**
-   *
+   * Compara dos objetos de tipo Palabra, basándose en su atributo palabra
    */
   @Override
   public int compareTo(Palabra compPalabra){
     return this.palabra.compareTo(compPalabra.palabra);
   }
   /**
-   *
+   * Verifica si dos objetos de tipo Palabra son iguales, de acuerdo a su atributo palabra
    */
   @Override
   public boolean equals(Object compObject){
