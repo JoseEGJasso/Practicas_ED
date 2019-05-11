@@ -224,6 +224,19 @@ public class Ordenamientos{
         }
     }
 
+  /**
+   * Implementación del algoritmo de ordenamiento en arreglos de enteros Heap
+   * Sort, que utiliza un mónticuo para ordenar los elementos del arreglo.
+   * 
+   * @param a
+   */
+  public static void heapSort(int[] a) {
+    Monticulo aux = new Monticulo(a);
+
+    for (int i = 0; i < a.length; i++)
+      a[i] = aux.elimina();
+  }
+
     /**
      * Implementacion del algoritmo de ordenamiento selectionSort.
      * Se establece un mínimo en el arreglo de entre todos los elementos
