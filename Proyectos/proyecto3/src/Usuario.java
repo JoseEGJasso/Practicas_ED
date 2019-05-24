@@ -1,5 +1,6 @@
 package proyecto3;
 
+
 /**
  * 
  * 
@@ -20,7 +21,7 @@ public class Usuario{
     }
 
     public boolean aumentaSaldo(double saldo){
-        if(dinero<=0.0)
+        if(saldo<=0.0)
             return false;
         this.saldo+=saldo;
         return true;
@@ -33,7 +34,7 @@ public class Usuario{
     }
 
     public void agregaMovimiento(String movimiento){
-        historial+="\n"+"(Falta fecha)- "+movimiento;
+        
     }
 
     public String obtenerHistorial(){

@@ -1,5 +1,8 @@
 package proyecto3;
 
+
+import java.io.*;
+
 /**
  *
  *
@@ -30,12 +33,13 @@ public class Registros{
             try{
                 ObjectInputStream datosRecuperados= new ObjectInputStream(new FileInputStream(datos));
 
-                registros=(TablaDeDispersion<String,Usuario>) datosRecuperados.readObject();
+                @SuppressWarnings("unchecked")                
+                TablaDeDispersion<String,Usuario> registros=(TablaDeDispersion<String,Usuario>) datosRecuperados.readObject();
 
                 datosRecuperados.close();
             }catch(IOException e){
                 System.out.println("Ha sucedido un error al leer los datos");
-            }
+            }catch(ClassNotFoundException e1){}
         }
     }
 

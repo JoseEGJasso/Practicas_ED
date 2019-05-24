@@ -1,5 +1,6 @@
 package proyecto3;
 
+//OJO FALTA LA IMPLEMENTACION DE AGREGAR MOVIMIENTOS AL HISTORIAL
 /**
  *
  *
@@ -9,12 +10,10 @@ package proyecto3;
 public class SistemaDeApuestas{
 
     private Registros registros;
-    private int apuesta;
     private Usuario apostador;
 
     public SistemaDeApuestas(){
         registros=new Registros();
-        apuesta=0;
     }
 
     public char iniciarSesion(String nombreDeUsuario,String contraseña){
@@ -40,10 +39,16 @@ public class SistemaDeApuestas{
         return true;
     }
 
-    
+    public void guardar(){
+        registros.actualizarRegistros();
+    }
 
+    public void apostar(Pelea partida,Peleador peleador,double montoApostar){
+        partida.asignarElegido(peleador);
 
-
-     
-
+        if(partida.getElegido()==partida.getP1())
+            apostador.disminuyeSaldo(montoApostar+partida.getCuotaP1());
+        else
+            apostador.disminuyeSaldo(montoApostar+partida.getCuotaP2());
+    }
 }
