@@ -36,7 +36,7 @@ public class LogicaTorneo{
     private void iniciaRondas(){
         Lista<Thread> hilos=new Lista<>();
 
-        for(int i=0;i<participantes.getLongitud()-1;i+=2)
+        for(int i=0;i<participantes.getLongitud();i+=2)
             peleas.agregaFinal(new Pelea(participantes.get(i),participantes.get(i+1)));
 
         for(Pelea e:peleas){
@@ -45,13 +45,9 @@ public class LogicaTorneo{
             hilos.agregaFinal(new Thread(r));
         }
 
-        for(Thread partida:hilos){
+        for(Thread partida:hilos)
             partida.start();
-            /*try {
-            Thread.sleep(15000);
-            } catch (Exception e) {}*/
-        }
-            
+
         for(Pelea e:peleas){
             participantes.elimina(e.getPerdedor());
             if(e.getElegido()==e.getGanador()){
@@ -77,14 +73,14 @@ public class LogicaTorneo{
 
     //Método que inicia el torneo y las partidas se empiezan a ejecutar
     public void comenzarTorneo(){
-     //   while(true){
+        while(true){
             generaParticipantes();
             //Este ciclo siempre se repite 4 veces, lo que genera una constante en la complejidad evitando que sea cuadrático
             while(participantes.getLongitud()>1){
                 iniciaRondas();
             }
             participantes.limpia();
-       //s }
+        }
 
     }
 }

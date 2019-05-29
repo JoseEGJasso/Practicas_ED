@@ -1,7 +1,7 @@
 package sistema;
 
 
-public class Pelea implements Runnable{
+public class Pelea{
 
     private Peleador peleador1;
     private Peleador peleador2;
@@ -14,22 +14,6 @@ public class Pelea implements Runnable{
         this.peleador2=peleador2;
         elegido=null;
         ganador=null;
-    }
-
-    @Override
-    public void run(){
-        
-        java.util.Random azar=new java.util.Random();
-
-        int probP1=(int)peleador1.getProbabilidad(peleador2)*100;
-        int probP2=(int)peleador1.getProbabilidad(peleador2)*100;
-        int numRandom=azar.nextInt(99);
-
-        if(numRandom<=probP1)
-            ganador=peleador1;
-
-        else
-            ganador=peleador2;
     }
 
     public void asignarApuesta(double apuesta){
@@ -59,7 +43,7 @@ public class Pelea implements Runnable{
     }
 
     public double getCuotaP1(){
-        return (double)(1/peleador1.getProbabilidad(peleador2));
+        return 1/peleador1.getProbabilidad(peleador2);
     }
 
     public Peleador getP1(){
@@ -71,6 +55,6 @@ public class Pelea implements Runnable{
     }
 
     public double getCuotaP2(){
-        return (double)(1/peleador2.getProbabilidad(peleador1));
+        return 1/peleador2.getProbabilidad(peleador1);
     }
 }
