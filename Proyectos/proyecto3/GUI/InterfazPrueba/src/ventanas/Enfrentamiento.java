@@ -39,6 +39,10 @@ public class Enfrentamiento extends javax.swing.JFrame {
         jButtonPeleador2 = new javax.swing.JButton();
         jLabelPeleador1 = new javax.swing.JLabel();
         jLabelPeleador2 = new javax.swing.JLabel();
+        jTextFieldApuestaP1 = new javax.swing.JTextField();
+        jTextFieldApuestaP2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -49,7 +53,7 @@ public class Enfrentamiento extends javax.swing.JFrame {
                 jButtonPeleador1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        getContentPane().add(jButtonPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 100, -1));
 
         jButtonPeleador2.setText("Apostar");
         jButtonPeleador2.addActionListener(new java.awt.event.ActionListener() {
@@ -57,13 +61,29 @@ public class Enfrentamiento extends javax.swing.JFrame {
                 jButtonPeleador2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        getContentPane().add(jButtonPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 100, -1));
 
         jLabelPeleador1.setText("Info del peleador");
-        getContentPane().add(jLabelPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 90));
+        getContentPane().add(jLabelPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 110, 70));
 
         jLabelPeleador2.setText("Info del peleador");
-        getContentPane().add(jLabelPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 110, 90));
+        getContentPane().add(jLabelPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 110, 70));
+
+        jTextFieldApuestaP1.setText("jTextField1");
+        getContentPane().add(jTextFieldApuestaP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        jTextFieldApuestaP2.setText("jTextField2");
+        getContentPane().add(jTextFieldApuestaP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("STIXGeneral", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setText("$");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 20, 30));
+
+        jLabel2.setFont(new java.awt.Font("STIXGeneral", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel2.setText("$");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 20, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -80,7 +100,11 @@ public class Enfrentamiento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPeleador1;
     private javax.swing.JButton jButtonPeleador2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelPeleador1;
     private javax.swing.JLabel jLabelPeleador2;
+    private javax.swing.JTextField jTextFieldApuestaP1;
+    private javax.swing.JTextField jTextFieldApuestaP2;
     // End of variables declaration//GEN-END:variables
 }

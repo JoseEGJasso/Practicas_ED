@@ -20,7 +20,7 @@ public class Peleador {
     }
 
     public double getProbabilidad(Peleador oponente) {
-        return habilidad / (habilidad + oponente.getHabilidad());
+        return habilidad / (double)(habilidad + oponente.getHabilidad());
     }
 
 }

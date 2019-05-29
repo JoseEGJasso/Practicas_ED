@@ -18,9 +18,7 @@ public class Pelea implements Runnable{
 
     @Override
     public void run(){
-        try {
-            Thread.sleep(15000);
-        } catch (Exception e) {}
+        
         java.util.Random azar=new java.util.Random();
 
         int probP1=(int)peleador1.getProbabilidad(peleador2)*100;
@@ -61,7 +59,7 @@ public class Pelea implements Runnable{
     }
 
     public double getCuotaP1(){
-        return 1/peleador1.getProbabilidad(peleador2);
+        return (double)(1/peleador1.getProbabilidad(peleador2));
     }
 
     public Peleador getP1(){
@@ -73,6 +71,6 @@ public class Pelea implements Runnable{
     }
 
     public double getCuotaP2(){
-        return 1/peleador2.getProbabilidad(peleador1);
+        return (double)(1/peleador2.getProbabilidad(peleador1));
     }
 }
