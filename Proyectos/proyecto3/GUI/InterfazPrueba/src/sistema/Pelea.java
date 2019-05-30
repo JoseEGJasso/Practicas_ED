@@ -16,6 +16,21 @@ public class Pelea{
         ganador=null;
     }
 
+    public void determinarGanador(){
+                
+        java.util.Random azar=new java.util.Random();
+
+        int probP1=(int)peleador1.getProbabilidad(peleador2)*100;
+        int probP2=(int)peleador1.getProbabilidad(peleador2)*100;
+        int numRandom=azar.nextInt(99);
+
+        if(numRandom<=probP1)
+            ganador=peleador1;
+
+        else
+            ganador=peleador2;
+    }
+
     public void asignarApuesta(double apuesta){
         this.apuesta=apuesta;
     }
@@ -43,7 +58,7 @@ public class Pelea{
     }
 
     public double getCuotaP1(){
-        return 1/peleador1.getProbabilidad(peleador2);
+        return (double)(1/peleador1.getProbabilidad(peleador2));
     }
 
     public Peleador getP1(){
@@ -55,6 +70,6 @@ public class Pelea{
     }
 
     public double getCuotaP2(){
-        return 1/peleador2.getProbabilidad(peleador1);
+        return (double)(1/peleador2.getProbabilidad(peleador1));
     }
 }

@@ -9,7 +9,7 @@ import java.util.Random;
  *
  */
 
-public class LogicaTorneo{
+public class LogicaTorneo implements Runnable{
 
     private Lista<Peleador> participantes;
     private Lista<Pelea> peleas;
@@ -34,20 +34,10 @@ public class LogicaTorneo{
     }
 
     private void iniciaRondas(){
-        Lista<Thread> hilos=new Lista<>();
-
-        for(int i=0;i<participantes.getLongitud();i+=2)
-            peleas.agregaFinal(new Pelea(participantes.get(i),participantes.get(i+1)));
-
-        for(Pelea e:peleas){
-            Runnable r= (Runnable)e;
-
-            hilos.agregaFinal(new Thread(r));
-        }
-
-        for(Thread partida:hilos)
-            partida.start();
-
+        
+        for(Pelea e:peleas)
+            e.determinarGanador();
+            
         for(Pelea e:peleas){
             participantes.elimina(e.getPerdedor());
             if(e.getElegido()==e.getGanador()){
@@ -58,7 +48,6 @@ public class LogicaTorneo{
                     apostador.aumentaSaldo(e.getApuesta()*e.getCuotaP2());
             }
         }
-
     }
 
     //ESte metodo es para controlar desde la interfaz el transcurso de las rondas comprendidas de 4, 2 y 1 pelea. 
@@ -70,17 +59,27 @@ public class LogicaTorneo{
     public int getNumPeleas(){
         return peleas.getLongitud();
     }
-
-    //Método que inicia el torneo y las partidas se empiezan a ejecutar
-    public void comenzarTorneo(){
-        while(true){
+    
+    @Override
+    public void run(){
+        while(!Thread.interrupted()){
+            
             generaParticipantes();
-            //Este ciclo siempre se repite 4 veces, lo que genera una constante en la complejidad evitando que sea cuadrático
+            
+            System.out.println("QUe rayos!!!!!");
             while(participantes.getLongitud()>1){
+                for(int i=0;i<participantes.getLongitud()-1;i+=2)
+                    peleas.agregaFinal(new Pelea(participantes.get(i),participantes.get(i+1)));
+           
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                }
+                
                 iniciaRondas();
             }
+            peleas.limpia();
             participantes.limpia();
         }
-
     }
 }

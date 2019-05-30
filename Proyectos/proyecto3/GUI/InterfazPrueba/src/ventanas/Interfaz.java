@@ -16,6 +16,7 @@ public class Interfaz extends javax.swing.JFrame {
     Torneo torneo;
     LogicaTorneo logicaTorneo;
     SistemaDeApuestas sistema;
+    Thread inicioTorneo;
  
     /**
      * Creates new form interfaz
@@ -161,6 +162,8 @@ public class Interfaz extends javax.swing.JFrame {
       }
       
       logicaTorneo=new LogicaTorneo(sistema.getApostador());
+      inicioTorneo=new Thread(logicaTorneo);
+      inicioTorneo.start();
       this.setVisible(false);
       torneo.setVisible(true);
     }//GEN-LAST:event_jButtonInicioSesionActionPerformed
@@ -385,13 +388,6 @@ public class Interfaz extends javax.swing.JFrame {
         jLabelFondo = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         
-        pelea1 = new Enfrentamiento();
-        pelea2 = new Enfrentamiento();
-        pelea3 = new Enfrentamiento();
-        pelea4 = new Enfrentamiento();
-        pelea5 = new Enfrentamiento();
-        pelea6 = new Enfrentamiento();
-        peleaFinal = new Enfrentamiento();
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -479,7 +475,10 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            pelea5.setPeleaAsociada(logicaTorneo.obtenerPelea(5));
+            pelea5 = new Enfrentamiento(logicaTorneo.obtenerPelea(4));
+            pelea5.setVisible(true);
+            pelea5.setAlwaysOnTop(true);
+            this.setEnabled(false);
             
         }                                        
 
@@ -489,7 +488,10 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            pelea1.setPeleaAsociada(logicaTorneo.obtenerPelea(1));
+            pelea1 = new Enfrentamiento(logicaTorneo.obtenerPelea(0));
+            pelea1.setVisible(true);
+            pelea1.setAlwaysOnTop(true);
+            this.setEnabled(false);
         }                                        
 
         private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -498,7 +500,10 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            pelea4.setPeleaAsociada(logicaTorneo.obtenerPelea(4));
+            pelea4 = new Enfrentamiento(logicaTorneo.obtenerPelea(3));
+            pelea4.setVisible(true);
+            pelea4.setAlwaysOnTop(true);
+            this.setEnabled(false);
         }                                        
 
         private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {                                         
@@ -507,7 +512,10 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            pelea6.setPeleaAsociada(logicaTorneo.obtenerPelea(6));
+            pelea6 = new Enfrentamiento(logicaTorneo.obtenerPelea(5));
+            pelea6.setVisible(true);
+            pelea6.setAlwaysOnTop(true);
+            this.setEnabled(false);
         }                                        
 
         private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -516,16 +524,23 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            pelea2.setPeleaAsociada(logicaTorneo.obtenerPelea(2));
+            pelea2 = new Enfrentamiento(logicaTorneo.obtenerPelea(1));
+            pelea2.setVisible(true);
+            pelea2.setAlwaysOnTop(true);
+            this.setEnabled(false);
         }                                        
 
         private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+           
             if(logicaTorneo.getNumPeleas()<3){
                 JOptionPane.showMessageDialog(null, "Esta pelea está indefinida! Intenta más tarde");
                 return;
             }
             
-            pelea3.setPeleaAsociada(logicaTorneo.obtenerPelea(3));
+            pelea3 = new Enfrentamiento(logicaTorneo.obtenerPelea(2));
+            pelea3.setVisible(true);
+            pelea3.setAlwaysOnTop(true);
+            this.setEnabled(false);
         }                                        
 
         private void jButtonFinalActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -534,12 +549,16 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
             
-            peleaFinal.setPeleaAsociada(logicaTorneo.obtenerPelea(3));
+            peleaFinal = new Enfrentamiento(logicaTorneo.obtenerPelea(6));
+            peleaFinal.setVisible(true);
+            peleaFinal.setAlwaysOnTop(true);
+            this.setEnabled(false);
         }                                            
 
         private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {                                            
             this.setVisible(false);
             sistema.guardar();
+            inicioTorneo.interrupt();
             Interfaz.this.setVisible(true);
         }
         
@@ -565,7 +584,9 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     class Enfrentamiento extends javax.swing.JFrame {
-        public Enfrentamiento() {
+        public Enfrentamiento(Pelea pelea) {
+        
+            peleaAsociada = pelea;
             initComponents();
             this.setLocationRelativeTo(null);
         }
@@ -576,7 +597,19 @@ public class Interfaz extends javax.swing.JFrame {
         jButtonPeleador2 = new javax.swing.JButton();
         jLabelPeleador1 = new javax.swing.JLabel();
         jLabelPeleador2 = new javax.swing.JLabel();
+        jTextFieldApuestaP1 = new javax.swing.JTextField();
+        jTextFieldApuestaP2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         
+        
+        
+        jLabelPeleador1.setText(peleaAsociada.getP1().getNombre()+"\t"+"$"+String.format("%.2f", peleaAsociada.getCuotaP1()));
+        jLabelPeleador2.setText(peleaAsociada.getP2().getNombre()+"\t"+"$"+String.format("%.2f", peleaAsociada.getCuotaP2()));
+        
+        
+        
+        //jLabelPeleador1.setText("Apostar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -588,7 +621,7 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonPeleador1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        getContentPane().add(jButtonPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 100, -1));
 
         jButtonPeleador2.setText("Apostar");
         jButtonPeleador2.addActionListener(new java.awt.event.ActionListener() {
@@ -596,13 +629,29 @@ public class Interfaz extends javax.swing.JFrame {
                 jButtonPeleador2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        getContentPane().add(jButtonPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 100, -1));
 
-        jLabelPeleador1.setText("hola que hace");
-        getContentPane().add(jLabelPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, 90));
+        //jLabelPeleador1.setText("Info del peleador");
+        getContentPane().add(jLabelPeleador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 110, 70));
 
-        jLabelPeleador2.setText("Info del peleador");
-        getContentPane().add(jLabelPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 110, 90));
+        //jLabelPeleador2.setText("Info del peleador");
+        getContentPane().add(jLabelPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 110, 70));
+
+        //jTextFieldApuestaP1.setText("jTextField1");
+        getContentPane().add(jTextFieldApuestaP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+
+        //jTextFieldApuestaP2.setText("jTextField2");
+        getContentPane().add(jTextFieldApuestaP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("STIXGeneral", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel1.setText("$");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 20, 30));
+
+        jLabel2.setFont(new java.awt.Font("STIXGeneral", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 0));
+        jLabel2.setText("$");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 20, 30));
 
         pack();
         }
@@ -624,7 +673,11 @@ public class Interfaz extends javax.swing.JFrame {
         private javax.swing.JButton jButtonPeleador2;
         private javax.swing.JLabel jLabelPeleador1;
         private javax.swing.JLabel jLabelPeleador2;
-        private Pelea peleaAsociada;
+        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JTextField jTextFieldApuestaP1;
+        private javax.swing.JTextField jTextFieldApuestaP2;
+        public  Pelea peleaAsociada;
     }
     
     
@@ -661,6 +714,8 @@ public class Interfaz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interfaz().setVisible(true);
+                
+                System.out.println("hilo 1");
             }
         });
         
