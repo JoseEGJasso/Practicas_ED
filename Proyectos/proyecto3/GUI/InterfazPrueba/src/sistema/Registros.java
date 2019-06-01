@@ -1,20 +1,13 @@
 package sistema;
 
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.IOException;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -70,6 +63,10 @@ public class Registros{
             ObjectOutputStream escritura=new ObjectOutputStream(new FileOutputStream("registros.dat"));
             
             Lista<Usuario> usuarios=registros.getValores();
+            
+            for(Usuario e:usuarios){
+                System.out.println(e.getSaldo());
+            }
             
             if(usuarios==null)
                 return;

@@ -35,6 +35,8 @@ public class Enfrentamiento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelNombreGanador = new javax.swing.JLabel();
+        jLabelFondoGanador = new javax.swing.JLabel();
         jButtonPeleador1 = new javax.swing.JButton();
         jButtonPeleador2 = new javax.swing.JButton();
         jLabelPeleador1 = new javax.swing.JLabel();
@@ -43,9 +45,19 @@ public class Enfrentamiento extends javax.swing.JFrame {
         jTextFieldApuestaP2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButtonCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelNombreGanador.setFont(new java.awt.Font("TeXGyreCursor", 3, 23)); // NOI18N
+        jLabelNombreGanador.setForeground(new java.awt.Color(155, 107, 10));
+        jLabelNombreGanador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabelNombreGanador, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, 40));
+
+        jLabelFondoGanador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelFondoGanador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/win.png"))); // NOI18N
+        getContentPane().add(jLabelFondoGanador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 300, 130));
 
         jButtonPeleador1.setText("Apostar");
         jButtonPeleador1.addActionListener(new java.awt.event.ActionListener() {
@@ -69,11 +81,13 @@ public class Enfrentamiento extends javax.swing.JFrame {
         jLabelPeleador2.setText("Info del peleador");
         getContentPane().add(jLabelPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 110, 70));
 
-        jTextFieldApuestaP1.setText("jTextField1");
-        getContentPane().add(jTextFieldApuestaP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        jTextFieldApuestaP2.setText("jTextField2");
-        getContentPane().add(jTextFieldApuestaP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
+        jTextFieldApuestaP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldApuestaP1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jTextFieldApuestaP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 90, -1));
+        getContentPane().add(jTextFieldApuestaP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 90, -1));
 
         jLabel1.setFont(new java.awt.Font("STIXGeneral", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 0));
@@ -84,6 +98,15 @@ public class Enfrentamiento extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 102, 0));
         jLabel2.setText("$");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 20, 30));
+
+        jButtonCerrar.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        jButtonCerrar.setText("X");
+        jButtonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 0, 30, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -96,12 +119,23 @@ public class Enfrentamiento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonPeleador2ActionPerformed
 
+    private void jTextFieldApuestaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldApuestaP1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldApuestaP1ActionPerformed
+
+    private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCerrarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCerrar;
     private javax.swing.JButton jButtonPeleador1;
     private javax.swing.JButton jButtonPeleador2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelFondoGanador;
+    private javax.swing.JLabel jLabelNombreGanador;
     private javax.swing.JLabel jLabelPeleador1;
     private javax.swing.JLabel jLabelPeleador2;
     private javax.swing.JTextField jTextFieldApuestaP1;

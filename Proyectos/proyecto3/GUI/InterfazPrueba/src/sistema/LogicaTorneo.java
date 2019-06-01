@@ -33,21 +33,35 @@ public class LogicaTorneo implements Runnable{
         
     }
 
-    private void iniciaRondas(){
+    private void iniciaRondas(int inicio,int ultimo){
         
-        for(Pelea e:peleas)
-            e.determinarGanador();
+        for(int i=inicio;i<ultimo;i++)
+            peleas.get(i).determinarGanador();
             
-        for(Pelea e:peleas){
-            participantes.elimina(e.getPerdedor());
-            if(e.getElegido()==e.getGanador()){
+        for(int i=inicio;i<ultimo;i++){
+            participantes.elimina(peleas.get(i).getPerdedor());
+            
+            if(peleas.get(i).getElegido()==null)
+                continue;
+            
+            if(peleas.get(i).getElegido()==peleas.get(i).getGanador()){
 
-                if(e.getGanador()==e.getP1())
-                    apostador.aumentaSaldo(e.getApuesta()*e.getCuotaP1());
+                if(peleas.get(i).getGanador()==peleas.get(i).getP1()){
+                    apostador.setSaldo(apostador.getSaldo()+peleas.get(i).getApuesta()*peleas.get(i).getCuotaP1());
+                    apostador.agregaMovimiento('G',peleas.get(i).getApuesta()*peleas.get(i).getCuotaP1(), peleas.get(i));
+                }else{
+                    apostador.setSaldo(apostador.getSaldo()+peleas.get(i).getApuesta()*peleas.get(i).getCuotaP2());
+                    apostador.agregaMovimiento('G',peleas.get(i).getApuesta()*peleas.get(i).getCuotaP2(), peleas.get(i));
+                }  
+            }else{
+                if(peleas.get(i).getPerdedor()==peleas.get(i).getP1())
+                    apostador.agregaMovimiento('G',apostador.getSaldo()-(peleas.get(i).getApuesta()+peleas.get(i).getCuotaP1()), peleas.get(i));
                 else
-                    apostador.aumentaSaldo(e.getApuesta()*e.getCuotaP2());
+                    apostador.agregaMovimiento('G',apostador.getSaldo()-(peleas.get(i).getApuesta()+peleas.get(i).getCuotaP2()), peleas.get(i));
             }
         }
+        
+        
     }
 
     //ESte metodo es para controlar desde la interfaz el transcurso de las rondas comprendidas de 4, 2 y 1 pelea. 
@@ -64,19 +78,32 @@ public class LogicaTorneo implements Runnable{
     public void run(){
         while(!Thread.interrupted()){
             
+            int indice=0;
             generaParticipantes();
             
             System.out.println("QUe rayos!!!!!");
-            while(participantes.getLongitud()>1){
+            
+            while(participantes.getLongitud()>2){
                 for(int i=0;i<participantes.getLongitud()-1;i+=2)
                     peleas.agregaFinal(new Pelea(participantes.get(i),participantes.get(i+1)));
            
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(15000);
                 } catch (InterruptedException ex) {
                 }
                 
-                iniciaRondas();
+                System.out.println(participantes.getLongitud());
+                
+                if(indice==0)
+                    iniciaRondas(0,4);
+                else if(indice==1)
+                    iniciaRondas(4,6);
+                else if(indice==2)
+                    iniciaRondas(6,7);
+                
+                System.out.println(participantes.getLongitud());
+                
+                indice++;
             }
             peleas.limpia();
             participantes.limpia();

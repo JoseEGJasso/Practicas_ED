@@ -19,17 +19,15 @@ public class Torneo extends javax.swing.JFrame {
     public Torneo() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jScrollPane1.setVisible(false);
+        jButtonCerrarHisto.setVisible(false);
+        jTextAreaHistorial.setEditable(false);
+        jTextAreaHistorial.setFocusable(false);
+        jTextAreaHistorial.setLineWrap(true);
+        jTextAreaHistorial.setText("BIENVENIDO A TU HISTORIAL, \nJOSE EDUARDO :\n"+"-------------------------------------------------------------------\nSe depositaron $10000 a la cuenta\n"+"-------------------------------------------------------------------\nPrimitivo vs Maximiliano. \nGanó Maximiliano\nApostaste por Primitivo perdiste $4000.45");
+        
     }
-    
-    /*public void ventanaEnfrentamientos(Pelea pelea ){
-        Enfrentamiento pelea = new Enfrentamiento();
-        pelea.setVisible(true);
-    }*/   
-    
-    public void ventanaEnfrentamientos(){
-        Enfrentamiento pelea = new Enfrentamiento();
-        pelea.setVisible(true);
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,75 +39,207 @@ public class Torneo extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jLabel1Ganador = new javax.swing.JLabel();
+        jLabel1P = new javax.swing.JLabel();
+        jLabel1P2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jLabel2Ganador = new javax.swing.JLabel();
+        jLabel2P1 = new javax.swing.JLabel();
+        jLabel2P2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel3Ganador = new javax.swing.JLabel();
+        jLabel3P1 = new javax.swing.JLabel();
+        jLabel3P2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jLabel4Ganador = new javax.swing.JLabel();
+        jLabel4P1 = new javax.swing.JLabel();
+        jLabel4P2 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        jLabel5Ganador = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
+        jLabel6Ganador = new javax.swing.JLabel();
         jButtonFinal = new javax.swing.JButton();
+        jLabelFGanador = new javax.swing.JLabel();
+        jButtonCerrarHisto = new javax.swing.JButton();
+        jButtonHistorial = new javax.swing.JButton();
         jButtonExit = new javax.swing.JButton();
+        jLabelRonda = new javax.swing.JLabel();
+        jLabelSigno = new javax.swing.JLabel();
+        jLabelDeposito = new javax.swing.JLabel();
+        jTextFieldDeposito = new javax.swing.JTextField();
+        jButtonAceptarDep = new javax.swing.JButton();
+        jLabelContRonda = new javax.swing.JLabel();
+        jLabelContTorneo = new javax.swing.JLabel();
+        jLabelTimeTorneo = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaHistorial = new javax.swing.JTextArea();
         jLabelFondo = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jLabelFondoTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setBackground(new java.awt.Color(177, 177, 177));
+        jButton1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton1.setText("PELEA 1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 100, 40));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 100, 40));
 
+        jLabel1Ganador.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel1Ganador.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel1Ganador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel1Ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, 120, 20));
+
+        jLabel1P.setBackground(new java.awt.Color(229, 164, 1));
+        jLabel1P.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel1P.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel1P.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1P.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        getContentPane().add(jLabel1P, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 120, 30));
+
+        jLabel1P2.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel1P2.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel1P2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel1P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 120, 20));
+
+        jButton2.setBackground(new java.awt.Color(177, 177, 177));
+        jButton2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton2.setText("PELEA 2");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 90, 40));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 100, 40));
 
+        jLabel2Ganador.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel2Ganador.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel2Ganador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel2Ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 120, 30));
+
+        jLabel2P1.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel2P1.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel2P1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel2P1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 307, 120, 20));
+
+        jLabel2P2.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel2P2.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel2P2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2P2.setText("GKHUIOUIO");
+        getContentPane().add(jLabel2P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 460, 120, 20));
+
+        jButton3.setBackground(new java.awt.Color(177, 177, 177));
+        jButton3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton3.setText("PELEA 3");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 90, 40));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 370, 100, 40));
 
+        jLabel3Ganador.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel3Ganador.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel3Ganador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel3Ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 120, 30));
+
+        jLabel3P1.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel3P1.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel3P1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel3P1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 307, 120, 20));
+
+        jLabel3P2.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel3P2.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel3P2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel3P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 460, 120, 20));
+
+        jButton4.setBackground(new java.awt.Color(177, 177, 177));
+        jButton4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton4.setText("PELEA 4");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 100, 40));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 100, 100, 40));
 
+        jLabel4Ganador.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel4Ganador.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel4Ganador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel4Ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 100, 120, 20));
+
+        jLabel4P1.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel4P1.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel4P1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel4P1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 30, 120, 30));
+
+        jLabel4P2.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel4P2.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel4P2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel4P2, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 190, 120, 20));
+
+        jButton5.setBackground(new java.awt.Color(177, 177, 177));
+        jButton5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton5.setText("PELEA 5");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 90, 40));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 200, 100, 40));
 
+        jLabel5Ganador.setFont(new java.awt.Font("Noto Sans Mono CJK SC Bold", 0, 16)); // NOI18N
+        jLabel5Ganador.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel5Ganador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel5Ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 200, 110, 20));
+
+        jButton6.setBackground(new java.awt.Color(177, 177, 177));
+        jButton6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButton6.setText("PELEA 6");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 80, 40));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 270, 100, 40));
 
+        jLabel6Ganador.setFont(new java.awt.Font("Noto Sans Mono CJK KR Bold", 0, 16)); // NOI18N
+        jLabel6Ganador.setForeground(new java.awt.Color(255, 155, 151));
+        jLabel6Ganador.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel6Ganador, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 270, 110, 20));
+
+        jButtonFinal.setBackground(new java.awt.Color(177, 177, 177));
+        jButtonFinal.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jButtonFinal.setText("FINAL");
         jButtonFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFinalActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 160, 50));
+        getContentPane().add(jButtonFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 160, 50));
+        getContentPane().add(jLabelFGanador, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 420, 160, 50));
+
+        jButtonCerrarHisto.setText("X");
+        jButtonCerrarHisto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCerrarHistoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonCerrarHisto, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 40, 20));
+
+        jButtonHistorial.setFont(new java.awt.Font("Te X Gyre Heros", 1, 15)); // NOI18N
+        jButtonHistorial.setText("Historial");
+        jButtonHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHistorialActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 100, -1));
 
         jButtonExit.setText("Exit");
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
@@ -117,50 +247,147 @@ public class Torneo extends javax.swing.JFrame {
                 jButtonExitActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 0, -1, -1));
+        getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
-        jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Torneo.jpg"))); // NOI18N
+        jLabelRonda.setFont(new java.awt.Font("Uroob", 0, 22)); // NOI18N
+        jLabelRonda.setForeground(new java.awt.Color(237, 214, 96));
+        jLabelRonda.setText("La siguiente ronda empieza en...");
+        getContentPane().add(jLabelRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 230, 30));
+
+        jLabelSigno.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
+        jLabelSigno.setForeground(new java.awt.Color(27, 185, 0));
+        jLabelSigno.setText("$");
+        getContentPane().add(jLabelSigno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 20, 30));
+
+        jLabelDeposito.setBackground(new java.awt.Color(210, 210, 210));
+        jLabelDeposito.setFont(new java.awt.Font("Ubuntu Light", 1, 20)); // NOI18N
+        jLabelDeposito.setForeground(new java.awt.Color(211, 211, 211));
+        jLabelDeposito.setText("Deposito");
+        getContentPane().add(jLabelDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 90, 30));
+        getContentPane().add(jTextFieldDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 120, -1));
+
+        jButtonAceptarDep.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
+        jButtonAceptarDep.setText("Aceptar");
+        jButtonAceptarDep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarDepActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonAceptarDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 70, 30));
+
+        jLabelContRonda.setFont(new java.awt.Font("UnDotum", 1, 18)); // NOI18N
+        jLabelContRonda.setForeground(new java.awt.Color(174, 17, 20));
+        jLabelContRonda.setText("00 : 00");
+        getContentPane().add(jLabelContRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, -1, -1));
+
+        jLabelContTorneo.setFont(new java.awt.Font("UnYetgul", 0, 18)); // NOI18N
+        jLabelContTorneo.setForeground(new java.awt.Color(174, 17, 20));
+        jLabelContTorneo.setText("00 : 00");
+        getContentPane().add(jLabelContTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 53, 60, 20));
+
+        jLabelTimeTorneo.setFont(new java.awt.Font("Uroob", 0, 22)); // NOI18N
+        jLabelTimeTorneo.setForeground(new java.awt.Color(248, 232, 119));
+        jLabelTimeTorneo.setText("El siguiente torneo empieza en...");
+        getContentPane().add(jLabelTimeTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 230, 30));
+
+        jTextAreaHistorial.setColumns(20);
+        jTextAreaHistorial.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaHistorial);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 290, 320));
+
+        jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/TorneoColor.png"))); // NOI18N
         jLabelFondo.setText("jLabel1");
-        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 694, -1));
+        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, 640, 470));
 
-        jRadioButton1.setText("jRadioButton1");
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
+        jLabelFondoTotal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/VerdeCasino.jpg"))); // NOI18N
+        getContentPane().add(jLabelFondoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        ventanaEnfrentamientos();
+
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ventanaEnfrentamientos();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ventanaEnfrentamientos();
+       
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        ventanaEnfrentamientos();
+        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ventanaEnfrentamientos();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        ventanaEnfrentamientos();
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButtonFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinalActionPerformed
-        ventanaEnfrentamientos();
+       
     }//GEN-LAST:event_jButtonFinalActionPerformed
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButtonExitActionPerformed
 
+    private void jButtonHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHistorialActionPerformed
+        jScrollPane1.setVisible(true);
+        jButtonCerrarHisto.setVisible(true);
+    }//GEN-LAST:event_jButtonHistorialActionPerformed
+
+    private void jButtonCerrarHistoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarHistoActionPerformed
+        jScrollPane1.setVisible(false);
+        jButtonCerrarHisto.setVisible(false);
+        
+    }//GEN-LAST:event_jButtonCerrarHistoActionPerformed
+
+    private void jButtonAceptarDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarDepActionPerformed
+        //sistema.depositar()jTextFieldDeposito.get
+    }//GEN-LAST:event_jButtonAceptarDepActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+  
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Torneo().setVisible(true);
+                
+            }
+        });
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -169,9 +396,36 @@ public class Torneo extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonAceptarDep;
+    private javax.swing.JButton jButtonCerrarHisto;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonFinal;
+    private javax.swing.JButton jButtonHistorial;
+    private javax.swing.JLabel jLabel1Ganador;
+    private javax.swing.JLabel jLabel1P;
+    private javax.swing.JLabel jLabel1P2;
+    private javax.swing.JLabel jLabel2Ganador;
+    private javax.swing.JLabel jLabel2P1;
+    private javax.swing.JLabel jLabel2P2;
+    private javax.swing.JLabel jLabel3Ganador;
+    private javax.swing.JLabel jLabel3P1;
+    private javax.swing.JLabel jLabel3P2;
+    private javax.swing.JLabel jLabel4Ganador;
+    private javax.swing.JLabel jLabel4P1;
+    private javax.swing.JLabel jLabel4P2;
+    private javax.swing.JLabel jLabel5Ganador;
+    private javax.swing.JLabel jLabel6Ganador;
+    private javax.swing.JLabel jLabelContRonda;
+    private javax.swing.JLabel jLabelContTorneo;
+    private javax.swing.JLabel jLabelDeposito;
+    private javax.swing.JLabel jLabelFGanador;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JLabel jLabelFondoTotal;
+    private javax.swing.JLabel jLabelRonda;
+    private javax.swing.JLabel jLabelSigno;
+    private javax.swing.JLabel jLabelTimeTorneo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaHistorial;
+    private javax.swing.JTextField jTextFieldDeposito;
     // End of variables declaration//GEN-END:variables
 }

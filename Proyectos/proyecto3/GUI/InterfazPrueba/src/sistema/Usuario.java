@@ -22,32 +22,33 @@ public class Usuario implements Serializable{
         this.contraseña=contraseña;
         this.nombreDeUsuario=nombreDeUsuario;
         saldo=0;
-        historial="BIENVENIDO A TU HISTORIAL, "+nombre.toUpperCase()+" :\n";
+        historial="BIENVENIDO A TU HISTORIAL,\n"+nombre.toUpperCase()+" :\n";
     }
 
-    public boolean aumentaSaldo(double saldo){
-        if(saldo<=0.0)
-            return false;
-        this.saldo+=saldo;
-        return true;
-    }
-
-    public void disminuyeSaldo(double monto){
-        if(saldo<monto)
-            saldo=0.0;
-        saldo-=monto;
-    }
-
-    public void agregaMovimiento(String movimiento){
+    public void setSaldo(double nuevoSaldo){
+        saldo=nuevoSaldo;
         
+        if(saldo<0.0)
+            saldo=0.0;
+         
+    }
+    
+    public double getSaldo(){
+        return saldo;
+    }
+
+    public void agregaMovimiento(char movimiento,double montoAfectado,Pelea pelea){
+        if(movimiento=='D'){
+            historial+="-------------------------------------------------------------------\nSe depositaron $"+montoAfectado+" a la cuenta\n";
+        } else if(movimiento=='G'){
+            historial+="-------------------------------------------------------------------\n"+pelea.getP1().getNombre()+" vs "+pelea.getP2().getNombre()+".\nGanó "+pelea.getGanador().getNombre()+"\nApostaste por "+pelea.getElegido().getNombre()+" obtuviste $"+String.format("%.1f", montoAfectado)+"\n";
+        } else{
+            historial+="-------------------------------------------------------------------\n"+pelea.getP1().getNombre()+" vs "+pelea.getP2().getNombre()+".\nGanó "+pelea.getGanador().getNombre()+"\nApostaste por "+pelea.getElegido().getNombre()+" perdiste $"+String.format("%.1f", montoAfectado)+"\n";
+        }
     }
 
     public String obtenerHistorial(){
         return historial;
-    }
-
-    public double obtenerSaldo(){
-        return saldo;
     }
 
     public String getContraseña(){

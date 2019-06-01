@@ -45,11 +45,17 @@ public class SistemaDeApuestas{
 
     public void apostar(Pelea partida,Peleador peleador,double montoApostar){
         partida.asignarElegido(peleador);
+        partida.asignarApuesta(montoApostar);
 
         if(partida.getElegido()==partida.getP1())
-            apostador.disminuyeSaldo(montoApostar+partida.getCuotaP1());
+            apostador.setSaldo(apostador.getSaldo()-(montoApostar+partida.getCuotaP1()));
         else
-            apostador.disminuyeSaldo(montoApostar+partida.getCuotaP2());
+            apostador.setSaldo(apostador.getSaldo()-(montoApostar+partida.getCuotaP2()));
+        
+    }
+    
+    public void depositar(double deposito){
+        apostador.setSaldo(apostador.getSaldo()+deposito);
     }
     
     public Usuario getApostador(){
