@@ -10,7 +10,7 @@ public class TablaDeDispersion<K, V>{
 
 
     /**
-     * Clase interna que modela la entrada para una función Hash.
+     * Clase interna que modela los elementos de una TablaDeDispersion.
      * Tiene dos atributos, la llave K y el valor V, ambos genéricos.
      */
     private class Entrada{
