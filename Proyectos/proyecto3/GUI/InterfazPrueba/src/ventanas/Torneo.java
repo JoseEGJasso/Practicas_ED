@@ -71,6 +71,8 @@ public class Torneo extends javax.swing.JFrame {
         jLabelContRonda = new javax.swing.JLabel();
         jLabelContTorneo = new javax.swing.JLabel();
         jLabelTimeTorneo = new javax.swing.JLabel();
+        jLabelSaldoDisponible = new javax.swing.JLabel();
+        jLabelSaldoNumero = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaHistorial = new javax.swing.JTextArea();
         jLabelFondo = new javax.swing.JLabel();
@@ -249,10 +251,10 @@ public class Torneo extends javax.swing.JFrame {
         });
         getContentPane().add(jButtonExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, -1, -1));
 
-        jLabelRonda.setFont(new java.awt.Font("Uroob", 0, 22)); // NOI18N
+        jLabelRonda.setFont(new java.awt.Font("Uroob", 0, 20)); // NOI18N
         jLabelRonda.setForeground(new java.awt.Color(237, 214, 96));
-        jLabelRonda.setText("La siguiente ronda empieza en...");
-        getContentPane().add(jLabelRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, 230, 30));
+        jLabelRonda.setText("Siguiente ronda en : ");
+        getContentPane().add(jLabelRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 230, 30));
 
         jLabelSigno.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabelSigno.setForeground(new java.awt.Color(27, 185, 0));
@@ -260,10 +262,10 @@ public class Torneo extends javax.swing.JFrame {
         getContentPane().add(jLabelSigno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 20, 30));
 
         jLabelDeposito.setBackground(new java.awt.Color(210, 210, 210));
-        jLabelDeposito.setFont(new java.awt.Font("Ubuntu Light", 1, 20)); // NOI18N
-        jLabelDeposito.setForeground(new java.awt.Color(211, 211, 211));
-        jLabelDeposito.setText("Deposito");
-        getContentPane().add(jLabelDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 90, 30));
+        jLabelDeposito.setFont(new java.awt.Font("Ubuntu Light", 1, 18)); // NOI18N
+        jLabelDeposito.setForeground(new java.awt.Color(255, 255, 51));
+        jLabelDeposito.setText("Depositar");
+        getContentPane().add(jLabelDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 120, 30));
         getContentPane().add(jTextFieldDeposito, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 120, -1));
 
         jButtonAceptarDep.setFont(new java.awt.Font("Ubuntu", 0, 11)); // NOI18N
@@ -278,17 +280,26 @@ public class Torneo extends javax.swing.JFrame {
         jLabelContRonda.setFont(new java.awt.Font("UnDotum", 1, 18)); // NOI18N
         jLabelContRonda.setForeground(new java.awt.Color(174, 17, 20));
         jLabelContRonda.setText("00 : 00");
-        getContentPane().add(jLabelContRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, -1, -1));
+        getContentPane().add(jLabelContRonda, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, 30));
 
         jLabelContTorneo.setFont(new java.awt.Font("UnYetgul", 0, 18)); // NOI18N
         jLabelContTorneo.setForeground(new java.awt.Color(174, 17, 20));
         jLabelContTorneo.setText("00 : 00");
-        getContentPane().add(jLabelContTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 53, 60, 20));
+        getContentPane().add(jLabelContTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 50, 70, 30));
 
-        jLabelTimeTorneo.setFont(new java.awt.Font("Uroob", 0, 22)); // NOI18N
+        jLabelTimeTorneo.setFont(new java.awt.Font("Uroob", 0, 20)); // NOI18N
         jLabelTimeTorneo.setForeground(new java.awt.Color(248, 232, 119));
-        jLabelTimeTorneo.setText("El siguiente torneo empieza en...");
-        getContentPane().add(jLabelTimeTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 230, 30));
+        jLabelTimeTorneo.setText("Siguiente Torneo en: ");
+        getContentPane().add(jLabelTimeTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 240, 30));
+
+        jLabelSaldoDisponible.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jLabelSaldoDisponible.setForeground(new java.awt.Color(255, 255, 0));
+        jLabelSaldoDisponible.setText("Saldo disponible:  $");
+        getContentPane().add(jLabelSaldoDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
+
+        jLabelSaldoNumero.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
+        jLabelSaldoNumero.setForeground(new java.awt.Color(255, 255, 0));
+        getContentPane().add(jLabelSaldoNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, 20));
 
         jTextAreaHistorial.setColumns(20);
         jTextAreaHistorial.setRows(5);
@@ -422,6 +433,8 @@ public class Torneo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JLabel jLabelFondoTotal;
     private javax.swing.JLabel jLabelRonda;
+    private javax.swing.JLabel jLabelSaldoDisponible;
+    private javax.swing.JLabel jLabelSaldoNumero;
     private javax.swing.JLabel jLabelSigno;
     private javax.swing.JLabel jLabelTimeTorneo;
     private javax.swing.JScrollPane jScrollPane1;
