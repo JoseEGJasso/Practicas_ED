@@ -46,7 +46,6 @@ public class Registros{
         if(!datos.exists()){
             try{
                 datos.createNewFile();
-                System.out.println("Creo?");
             }catch(IOException e){
                 System.out.println("Ha sucedido un error al crear el archivo");
             }
@@ -81,10 +80,6 @@ public class Registros{
             ObjectOutputStream escritura=new ObjectOutputStream(new FileOutputStream("registros.dat"));
 
             Lista<Usuario> usuarios=registros.getValores();
-
-            for(Usuario e:usuarios){
-                System.out.println(e.getSaldo());
-            }
 
             if(usuarios==null)
                 return;

@@ -73,8 +73,10 @@ import java.util.Random;
      */
     private void iniciaRondas(int inicio,int ultimo){
 
-        for(int i=inicio;i<ultimo;i++)
+        for(int i=inicio;i<ultimo;i++){
+            peleas.get(i).setYaExpiro(true);
             peleas.get(i).determinarGanador();
+        }
 
         for(int i=inicio;i<ultimo;i++){
             participantes.elimina(peleas.get(i).getPerdedor());
@@ -93,9 +95,9 @@ import java.util.Random;
                 }
             }else{
                 if(peleas.get(i).getPerdedor()==peleas.get(i).getP1())
-                    apostador.agregaMovimiento('G',apostador.getSaldo()-(peleas.get(i).getApuesta()+peleas.get(i).getCuotaP1()), peleas.get(i));
+                    apostador.agregaMovimiento('P',peleas.get(i).getApuesta()+peleas.get(i).getCuotaP1(), peleas.get(i));
                 else
-                    apostador.agregaMovimiento('G',apostador.getSaldo()-(peleas.get(i).getApuesta()+peleas.get(i).getCuotaP2()), peleas.get(i));
+                    apostador.agregaMovimiento('P',peleas.get(i).getApuesta()+peleas.get(i).getCuotaP2(), peleas.get(i));
             }
         }
 
@@ -140,8 +142,6 @@ import java.util.Random;
             int indice=0;
             generaParticipantes();
 
-            System.out.println("QUe rayos!!!!!");
-
             while(participantes.getLongitud()>2){
                 for(int i=0;i<participantes.getLongitud()-1;i+=2)
                     peleas.agregaFinal(new Pelea(participantes.get(i),participantes.get(i+1)));
@@ -151,8 +151,6 @@ import java.util.Random;
                 } catch (InterruptedException ex) {
                 }
 
-                System.out.println(participantes.getLongitud());
-
                 if(indice==0)
                     iniciaRondas(0,4);
                 else if(indice==1)
@@ -160,7 +158,6 @@ import java.util.Random;
                 else if(indice==2)
                     iniciaRondas(6,7);
 
-                System.out.println(participantes.getLongitud());
 
                 indice++;
             }

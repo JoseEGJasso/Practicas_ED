@@ -1,9 +1,5 @@
 package ventanas;
 
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import sistema.*;
 
@@ -78,22 +74,9 @@ public class Interfaz extends javax.swing.JFrame {
         jLabelPass.setFont(new java.awt.Font("Telugu MN", 1, 18)); // NOI18N
         jLabelPass.setForeground(new java.awt.Color(255, 255, 255));
         jLabelPass.setText("Contraseña: ");
+        
         getContentPane().add(jLabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-
-        jTextFieldUsuario.setBackground(new java.awt.Color(204, 204, 204));
-        jTextFieldUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUsuarioActionPerformed(evt);
-            }
-        });
         getContentPane().add(jTextFieldUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 180, -1));
-
-        jPasswordField.setBackground(new java.awt.Color(204, 204, 204));
-        jPasswordField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordFieldActionPerformed(evt);
-            }
-        });
         getContentPane().add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 180, -1));
 
         jButtonInicioSesion.setBackground(new java.awt.Color(255, 255, 255));
@@ -126,14 +109,6 @@ public class Interfaz extends javax.swing.JFrame {
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         System.exit(0); /// Boton para salir 
     }//GEN-LAST:event_jButtonSalirActionPerformed
-
-    private void jPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordFieldActionPerformed
-
-    private void jTextFieldUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldUsuarioActionPerformed
 
     private void jButtonRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistroActionPerformed
         this.setVisible(false);
@@ -169,6 +144,7 @@ public class Interfaz extends javax.swing.JFrame {
         inicioTorneo.start();
         contadores.start();
         this.setVisible(false);
+        torneo.jLabelSaldoNumero.setText(" " + String.format("%.2f", sistema.getApostador().getSaldo()));
         torneo.setVisible(true);
     }//GEN-LAST:event_jButtonInicioSesionActionPerformed
 
@@ -237,12 +213,6 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             });
             getContentPane().add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, 120, 30));
-
-            jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jTextFieldNombreActionPerformed(evt);
-                }
-            });
             getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 190, -1));
 
             jLabelNombre.setFont(new java.awt.Font("Telugu MN", 0, 14)); // NOI18N
@@ -260,27 +230,17 @@ public class Interfaz extends javax.swing.JFrame {
             jLabel1.setForeground(new java.awt.Color(254, 254, 254));
             jLabel1.setText("Confirma tu contraseña");
             getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 190, 20));
-
-            jTextField1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jTextField1ActionPerformed(evt);
-                }
-            });
             getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 190, -1));
 
             jLabel2.setForeground(new java.awt.Color(254, 254, 254));
             jLabel2.setText("Nombre de usuario");
             getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 190, 20));
 
-            jPasswordFieldContraseña.setText("jPasswordField1");
-            jPasswordFieldContraseña.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jPasswordFieldContraseñaActionPerformed(evt);
-                }
-            });
+            jPasswordFieldContraseña.setText("");
+
             getContentPane().add(jPasswordFieldContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 190, -1));
 
-            jPasswordFieldConfirmacion.setText("jPasswordField1");
+            jPasswordFieldConfirmacion.setText("");
             getContentPane().add(jPasswordFieldConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 190, -1));
 
             jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/VerdeCasino.jpg"))); // NOI18N
@@ -340,18 +300,6 @@ public class Interfaz extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Ese nombre de usuario ya está en uso, intenta con otro");
             }
 
-        }
-
-        private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO add your handling code here:
-        }
-
-        private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO add your handling code here:
-        }
-
-        private void jPasswordFieldContraseñaActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO add your handling code here:
         }
 
         // Variables declaration - do not modify                     
@@ -566,12 +514,12 @@ public class Interfaz extends javax.swing.JFrame {
             jLabelTimeTorneo.setForeground(new java.awt.Color(248, 232, 119));
             jLabelTimeTorneo.setText("Siguiente Torneo en: ");
             getContentPane().add(jLabelTimeTorneo, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 240, 30));
-            
+
             jLabelSaldoDisponible.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
             jLabelSaldoDisponible.setForeground(new java.awt.Color(255, 255, 0));
             jLabelSaldoDisponible.setText("Saldo disponible:  $");
             getContentPane().add(jLabelSaldoDisponible, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, 20));
-            
+
             jLabelSaldoNumero.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
             jLabelSaldoNumero.setForeground(new java.awt.Color(255, 255, 0));
             getContentPane().add(jLabelSaldoNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 90, 20));
@@ -698,8 +646,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         private void jButtonAceptarDepActionPerformed(java.awt.event.ActionEvent evt) {
             String valor = jTextFieldDeposito.getText();
-            
-            
+
             if (valor.equals("")) {
                 JOptionPane.showMessageDialog(null, "Valor inválido! intente de nuevo");
                 return;
@@ -723,7 +670,7 @@ public class Interfaz extends javax.swing.JFrame {
 
             sistema.depositar(deposito);
             sistema.getApostador().agregaMovimiento('D', deposito, null);
-            jLabelSaldoNumero.setText(" "+ String.format("%02f", sistema.getApostador().getSaldo()));                
+            jLabelSaldoNumero.setText(" " + String.format("%.2f", sistema.getApostador().getSaldo()));
             jTextFieldDeposito.setText("");
         }
 
@@ -734,19 +681,17 @@ public class Interfaz extends javax.swing.JFrame {
             while (!Thread.interrupted()) {
 
                 int contTorneoSeg = 45;
-                int contLabel = 0;
 
                 while (contTorneoSeg > 0) {
 
                     if (contRondas >= 1) {
                         jLabelContRonda.setText("00" + " : " + String.format("%02d", contRondas));
+                        jLabelSaldoNumero.setText(" " + String.format("%.2f", sistema.getApostador().getSaldo()));
+                        jTextAreaHistorial.setText(sistema.getApostador().obtenerHistorial());
                         contRondas--;
-
+                        
                         if (contRondas == 0) {
                             contRondas = 15;
-                            if(sistema.getApostador().getSaldo() >= 0.0){
-                             jLabelSaldoNumero.setText(" "+ String.format("%02f", sistema.getApostador().getSaldo()));   
-                            }
                         }
                     }
 
@@ -756,8 +701,8 @@ public class Interfaz extends javax.swing.JFrame {
 
                     try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                    }
+                    } catch (InterruptedException ex) {}
+                    
 
                 }
             }
@@ -786,10 +731,10 @@ public class Interfaz extends javax.swing.JFrame {
         private javax.swing.JLabel jLabelSigno;
         private javax.swing.JLabel jLabelTimeTorneo;
         private javax.swing.JLabel jLabelSaldoDisponible;
-        private javax.swing.JLabel jLabelSaldoNumero;
         private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JTextArea jTextAreaHistorial;
         private javax.swing.JTextField jTextFieldDeposito;
+        private javax.swing.JLabel jLabelSaldoNumero;
 
         private Enfrentamiento pelea1;
         private Enfrentamiento pelea2;
@@ -802,17 +747,6 @@ public class Interfaz extends javax.swing.JFrame {
 
     public class Enfrentamiento extends javax.swing.JFrame {
 
-        /**
-         * Creates new form Enfrentamiento
-         */
-        //Hay que revisar los argumentos del presunto constructor de Enfrentamiento 
-        /*public Enfrentamiento(Pelea enfrentamiento) {
-        initComponents();
-        // Código para mostrar la información del peleador en los labes 
-        // Muestra el nombre, la habilidad, etc. 
-        // Cuando pique el boton hay que desaparecerlo para que ya no apueste o hacer ineditable el btón 
-        // O cuando ya haya apostado mandar un mensaje 
-    }*/
         public Enfrentamiento(Pelea peleaAsociada) {
             this.peleaAsociada = peleaAsociada;
             initComponents();
@@ -896,11 +830,6 @@ public class Interfaz extends javax.swing.JFrame {
 
             getContentPane().add(jLabelPeleador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 110, 70));
 
-            jTextFieldApuestaP1.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jTextFieldApuestaP1ActionPerformed(evt);
-                }
-            });
             getContentPane().add(jTextFieldApuestaP1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 90, -1));
             getContentPane().add(jTextFieldApuestaP2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 90, -1));
 
@@ -927,22 +856,8 @@ public class Interfaz extends javax.swing.JFrame {
         }// </editor-fold>                        
 
         private void jButtonPeleador1ActionPerformed(java.awt.event.ActionEvent evt) {
-            
-            String ApuestaP1 = jTextFieldApuestaP1.getText();
-            
-            if(sistema.getApostador().getSaldo() >= 0.0){
-                             torneo.jLabelSaldoNumero.setText(" "+ String.format("%02f", sistema.getApostador().getSaldo()));   
-               }
-            
-            for (int i = 0; i < ApuestaP1.length(); i++) {
-                if ((int)(ApuestaP1.charAt(i)) < 48 | (int) (ApuestaP1.charAt(i)) > 57) {
-                    JOptionPane.showMessageDialog(null, "Valor inválido! intente de nuevo");
-                    jTextFieldApuestaP1.setText("");
-                    return;
-                }
-            }
-            
-            if (peleaAsociada.getP1() != p1) {
+
+            if (peleaAsociada.getYaExpiro()) {
                 this.setAlwaysOnTop(false);
                 JOptionPane.showMessageDialog(null, "La pelea ha expirado x.x");
                 this.setVisible(false);
@@ -950,7 +865,25 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
 
-            if (ApuestaP1.equals("                  ") || ApuestaP1.equals("")) {
+            if (peleaAsociada.getElegido() != null) {
+                this.setAlwaysOnTop(false);
+                JOptionPane.showMessageDialog(null, "Ya haz apostado en esta pelea!");
+                this.setVisible(false);
+                torneo.setEnabled(true);
+                return;
+            }
+
+            String apuestaP1 = jTextFieldApuestaP1.getText();
+
+            for (int i = 0; i < apuestaP1.length(); i++) {
+                if ((int) (apuestaP1.charAt(i)) < 48 | (int) (apuestaP1.charAt(i)) > 57) {
+                    JOptionPane.showMessageDialog(null, "Valor inválido! intente de nuevo");
+                    jTextFieldApuestaP1.setText("");
+                    return;
+                }
+            }
+
+            if (apuestaP1.equals("                  ") | apuestaP1.equals("")) {
                 this.setAlwaysOnTop(false);
                 JOptionPane.showMessageDialog(null, "Monto inválido! intenta de nuevo");
                 this.setAlwaysOnTop(true);
@@ -963,8 +896,8 @@ public class Interfaz extends javax.swing.JFrame {
                 this.setAlwaysOnTop(true);
                 return;
             }
-            
-            double montoApostado = Double.parseDouble(ApuestaP1);
+
+            double montoApostado = Double.parseDouble(apuestaP1);
 
             if (montoApostado == 0.0) {
                 this.setAlwaysOnTop(false);
@@ -973,31 +906,24 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
 
+            if (montoApostado > sistema.getApostador().getSaldo()) {
+                this.setAlwaysOnTop(false);
+                JOptionPane.showMessageDialog(null, "El monto ingresado supera el saldo! intenta de nuevo");
+                this.setAlwaysOnTop(true);
+                return;
+            }
+
             sistema.apostar(peleaAsociada, peleaAsociada.getP1(), montoApostado);
+            torneo.jLabelSaldoNumero.setText(" " + String.format("%.2f", sistema.getApostador().getSaldo()));
             sistema.guardar();
-            
+
             this.setVisible(false);
             torneo.setEnabled(true);
         }
 
         private void jButtonPeleador2ActionPerformed(java.awt.event.ActionEvent evt) {
-            
-            String ApuestaP2 = jTextFieldApuestaP2.getText();
-         
-            
-            if(sistema.getApostador().getSaldo() >= 0.0){
-                             torneo.jLabelSaldoNumero.setText(" "+ String.format("%02f", sistema.getApostador().getSaldo()));   
-               }
-            
-            for (int i = 0; i < ApuestaP2.length(); i++) {
-                if ((int)(ApuestaP2.charAt(i)) < 48 | (int) (ApuestaP2.charAt(i)) > 57) {
-                    JOptionPane.showMessageDialog(null, "Valor inválido! intente de nuevo");
-                    jTextFieldApuestaP2.setText("");
-                    return;
-                }
-            }
-            
-            if (peleaAsociada.getP2() != p2) {
+
+            if (peleaAsociada.getYaExpiro()) {
                 this.setAlwaysOnTop(false);
                 JOptionPane.showMessageDialog(null, "La pelea ha expirado x.x");
                 this.setVisible(false);
@@ -1005,11 +931,31 @@ public class Interfaz extends javax.swing.JFrame {
                 return;
             }
 
-            if (ApuestaP2.equals("                  ") || ApuestaP2.equals("")) {
+            if (peleaAsociada.getElegido() != null) {
+                this.setAlwaysOnTop(false);
+                JOptionPane.showMessageDialog(null, "Ya haz apostado en esta pelea!");
+                this.setVisible(false);
+                torneo.setEnabled(true);
+                return;
+            }
+
+            String apuestaP2 = jTextFieldApuestaP2.getText();
+
+            if (apuestaP2.equals("                  ") | apuestaP2.equals("")) {
                 this.setAlwaysOnTop(false);
                 JOptionPane.showMessageDialog(null, "Monto inválido! intenta de nuevo");
                 this.setAlwaysOnTop(true);
                 return;
+            }
+
+            for (int i = 0; i < apuestaP2.length(); i++) {
+                if ((int) (apuestaP2.charAt(i)) < 48 | (int) (apuestaP2.charAt(i)) > 57) {
+                    this.setAlwaysOnTop(false);
+                    JOptionPane.showMessageDialog(null, "Valor inválido! intente de nuevo");
+                    this.setAlwaysOnTop(true);
+                    jTextFieldApuestaP2.setText("");
+                    return;
+                }
             }
 
             if (peleaAsociada.getCuotaP2() > sistema.getApostador().getSaldo()) {
@@ -1018,10 +964,8 @@ public class Interfaz extends javax.swing.JFrame {
                 this.setAlwaysOnTop(true);
                 return;
             }
-            
-            
 
-            double montoApostado = Double.parseDouble(ApuestaP2);
+            double montoApostado = Double.parseDouble(apuestaP2);
 
             if (montoApostado == 0.0) {
                 this.setAlwaysOnTop(false);
@@ -1031,14 +975,11 @@ public class Interfaz extends javax.swing.JFrame {
             }
 
             sistema.apostar(peleaAsociada, peleaAsociada.getP2(), montoApostado);
+            torneo.jLabelSaldoNumero.setText(" " + String.format("%.2f", sistema.getApostador().getSaldo()));
             sistema.guardar();
 
             this.setVisible(false);
             torneo.setEnabled(true);
-        }
-
-        private void jTextFieldApuestaP1ActionPerformed(java.awt.event.ActionEvent evt) {
-            // TODO add your handling code here:
         }
 
         private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1095,8 +1036,6 @@ public class Interfaz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Interfaz().setVisible(true);
-
-                System.out.println("hilo 1");
             }
         });
 
@@ -1111,7 +1050,5 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelUsuario;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldUsuario;
-
-    private boolean yaAposto;
     // End of variables declaration//GEN-END:variables
 }

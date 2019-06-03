@@ -67,11 +67,11 @@ public class Usuario implements Serializable{
      */
     public void agregaMovimiento(char movimiento,double montoAfectado,Pelea pelea){
         if(movimiento=='D'){
-            historial+="-------------------------------------------------------------------\nSe depositaron $"+montoAfectado+" a la cuenta\n";
+            historial+="----------------------------------------------------------------\nSe depositaron $"+montoAfectado+" a la cuenta\n";
         } else if(movimiento=='G'){
-            historial+="-------------------------------------------------------------------\n"+pelea.getP1().getNombre()+" vs "+pelea.getP2().getNombre()+".\nGanó "+pelea.getGanador().getNombre()+"\nApostaste por "+pelea.getElegido().getNombre()+" obtuviste $"+String.format("%.1f", montoAfectado)+"\n";
-        } else{
-            historial+="-------------------------------------------------------------------\n"+pelea.getP1().getNombre()+" vs "+pelea.getP2().getNombre()+".\nGanó "+pelea.getGanador().getNombre()+"\nApostaste por "+pelea.getElegido().getNombre()+" perdiste $"+String.format("%.1f", montoAfectado)+"\n";
+            historial+="----------------------------------------------------------------\n"+pelea.getP1().getNombre()+" vs "+pelea.getP2().getNombre()+".\nGanó "+pelea.getGanador().getNombre()+"\nApostaste por "+pelea.getElegido().getNombre()+" obtuviste $"+String.format("%.1f", montoAfectado)+"\n";
+        } else if(movimiento=='P'){
+            historial+="----------------------------------------------------------------\n"+pelea.getP1().getNombre()+" vs "+pelea.getP2().getNombre()+".\nGanó "+pelea.getGanador().getNombre()+"\nApostaste por "+pelea.getElegido().getNombre()+" perdiste $"+String.format("%.1f", montoAfectado)+"\n";
         }
     }
 

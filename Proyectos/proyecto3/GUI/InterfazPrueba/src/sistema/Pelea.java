@@ -14,6 +14,7 @@ public class Pelea{
     private Peleador peleador2;
     private Peleador elegido;
     private Peleador ganador;
+    private boolean yaExpiro;
     private double apuesta;
 
     /**
@@ -27,6 +28,7 @@ public class Pelea{
     public Pelea(Peleador peleador1,Peleador peleador2){
         this.peleador1=peleador1;
         this.peleador2=peleador2;
+        yaExpiro=false;
         elegido=null;
         ganador=null;
     }
@@ -59,6 +61,15 @@ public class Pelea{
     public void asignarApuesta(double apuesta){
         this.apuesta=apuesta;
     }
+    
+    /**
+     * Método para asignar el estado de la pelea
+     * 
+     * @param estado 
+     */
+    public void setYaExpiro(boolean estado){
+        yaExpiro=estado;
+    }
 
     /**
      * Método getter para la apuesta.
@@ -67,6 +78,15 @@ public class Pelea{
      */
     public double getApuesta(){
         return apuesta;
+    }
+    
+    /**
+     * Método getter para el estado de la pela.
+     * 
+     * @return yaExpiro
+     */
+    public boolean getYaExpiro(){
+        return yaExpiro;
     }
 
     /**
